@@ -1,0 +1,15 @@
+#ekipamendua {
+    margin: auto;
+    margin-top: 10%;
+    justify-content: center;
+}
+
+#ekipamendua td {
+    border: 1px solid #CAF0F8;
+}
+
+#ekipamendua th {
+    padding: 0;
+    background-color: #CAF0F8;
+
+}
