@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${kat.id}</td>
                     <td>${kat.izena}</td>
                     <td>
-                        <button class="edit-btn">✏️</button>
-                        <button class="delete-btn">🗑️</button>
+                        <button id="kudeaketa-icon"><img class="nav-img" src="img/lapiz.png" alt="Menú"></button>
+                        <button id="kudeaketa-icon"><img class="nav-img" src="img/tacho-de-reciclaje.png" alt="Menú"></button>
                     </td>
                 `;
                 tbody.appendChild(tr);

@@ -16,16 +16,6 @@
     include 'konponenteak/header.php';
     ?>
     <div class="tabla-wrapper">
-        <div class="filter-container">
-            <button><img src="img/plus-pequeno.png" alt="Añadir" class="filter-icon" id="plus-icon"></button>
-            <span>|</span>
-            <button><img src="img/filtrar.png" alt="Filtros" class="filter-icon" id="boton-filtro"></button>
-
-            <div class="filter-list" id="filter-list" style="display:none;">
-                <p>Ez dago filtrorik</p>
-            </div>
-        </div>
-
         <table id="ekipamendua">
             <thead>
                 <tr>
