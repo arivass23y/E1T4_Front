@@ -5,47 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kategoriak</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos/styles.css">
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav>
-        <div class="nav-left">
-            <img class="nav-img" src="img/barra-de-menus.png" alt="Menú" id="menu-icon">
-            <span class="nav-text">Ekipamendua</span>
-        </div>
-
-        <div class="nav-center">
-            <div class="search-wrapper">
-                <input type="text" placeholder="Kategoria izena..." class="nav-search">
-                <img src="img/lupa.png" class="search-icon" alt="Buscar">
-            </div>
-        </div>
-
-        <div class="nav-right">
-            <a href="saioa-hasi.php"><img class="nav-img" src="img/usuario.png" alt="Usuario"></a>
-            <button class="nav-btn">Saioa itxi</button>
-        </div>
-
-        <!-- 🔽 mueve aquí el menú móvil -->
-        <div class="mobile-menu" id="mobile-menu">
-            <div>
-                <img src="img/inventario-disponible.png" alt="">
-                <h3>Biltegia</h3>
-            </div>
-            <a href="index.html">Kategoriak</a>
-            <a href="ekipamendua.html">Ekipamendua</a>
-            <a href="#">Inbentarioa</a>
-            <div>
-                <img src="img/avatar.png" alt="Parametrizazioa">
-                <h3>Parametrizazioa</h3>
-            </div>
-            <a href="">Profila</a>
-            <a href="">Erabiltzaileak</a>
-        </div>
-    </nav>
-
+    <?php 
+    $pageTitle = "Kategoriak";
+    include 'konponenteak/header.php'; 
+    ?>
 
     <!-- Contenedor principal de categorías -->
 
@@ -59,7 +27,7 @@
             <div class="category-column">
                 <div class="category">
                     <img src="img/ordenador-personal.png" class="category-icon" alt="">
-                    <span>Ekipamendua</span>
+                    <a href="ekipamendua.php">Ekipamendua</a>
                 </div>
                 <div class="category">
                     <img src="img/categorizacion.png" class="category-icon" alt="">

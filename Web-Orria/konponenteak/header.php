@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="eus">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ekipamenduak</title>
-    <link rel="stylesheet" href="estilos/styles.css" href="estilos/ekipamendua.css">
-    <link rel="stylesheet" href="estilos/ekipamendua.css">
-</head>
-
-<body>
-    <nav>
+<nav>
         <div class="nav-left">
             <img class="nav-img" src="img/barra-de-menus.png" alt="Menú" id="menu-icon">
-            <span class="nav-text">Biltegia</span>
+            <span class="nav-text"><?= $pageTitle ?? 'Orria' ?></span>
         </div>
 
         <div class="nav-center">
@@ -34,8 +22,8 @@
                 <img src="img/inventario-disponible.png" alt="">
                 <h3>Biltegia</h3>
             </div>
-            <a href="index.html">Kategoriak</a>
-            <a href="ekipamendua.html">Ekipamendua</a>
+            <a href="index.php">Kategoriak</a>
+            <a href="ekipamendua.php">Ekipamendua</a>
             <a href="#">Inbentarioa</a>
             <div>
                 <img src="img/avatar.png" alt="Parametrizazioa">
@@ -46,23 +34,4 @@
         </div>
     </nav>
 
-    <table id="ekipamendua">
-        <tr>
-            <th>Ekipamendua</th>
-            <th>Marka</th>
-            <th>Modeloa</th>
-            <th>Kokalekua</th>
-            <th>Stock</th>
-            <th>Kudeaketak</th>
-        </tr>
-        <tr>
-            <td>pp</td>
-            <td>pp</td>
-        </tr>
-    </table>
-
-
-    <script src="script/menu.js"></script>
-</body>
-
-</html>
+    <a href="index.php"><img id="botoi-atzera" src="img/flecha-izquierda.png" alt="Atzera"></a>
