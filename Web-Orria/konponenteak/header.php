@@ -23,7 +23,7 @@
                 <h3>Biltegia</h3>
             </div>
             <a href="index.php">Kategoriak</a>
-            <a href="ekipamendua.php">Ekipamendua</a>
+            <a href="ekipamendua_orria.php">Ekipamendua</a>
             <a href="#">Inbentarioa</a>
             <div>
                 <img src="img/avatar.png" alt="Parametrizazioa">

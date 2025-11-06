@@ -27,7 +27,7 @@
             <div class="category-column">
                 <div class="category">
                     <img src="img/ordenador-personal.png" class="category-icon" alt="">
-                    <a href="ekipamendua.php">Ekipamendua</a>
+                    <a href="ekipamendua_orria.php">Ekipamendua</a>
                 </div>
                 <div class="category">
                     <img src="img/categorizacion.png" class="category-icon" alt="">

@@ -1,105 +1,70 @@
-<!DOCTYPE html>
-<html lang="eus">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ekipamenduak</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="estilos/styles.css">
-    <link rel="stylesheet" href="estilos/ekipamendua.css">
-</head>
+class Ekipamendua {
+    private $db;
 
-<body>
-    <?php 
-    $pageTitle = "Ekipamendua";
-    include 'konponenteak/header.php'; 
-    ?>
+    public function __construct($db) {
+        $this->db = $db;
+    }
 
-    <div class="filter-container">
-        <button><img src="img/plus-pequeno.png" alt="Añadir" class="filter-icon" id="plus-icon"></button>
-        <span>|</span>
-        <button><img src="img/filtrar.png" alt="Filtros" class="filter-icon"></button>
+    public function getEkipamenduak() {
+        $emaitza = $this->db->getKonexioa()->query("SELECT * FROM ekipamendua");
+       if (!$emaitza) { //Emaitzarik ez badago
+            echo 'ERROREA: Ezin izan dira datuak eskuratu.';
+            die();
+        }
+        else{
+            $taldeak = [];
+            while ($row = $emaitza->fetch_assoc()) {$taldeak[] = $row;} // Emaitzaren lerroak array-ean sartu
+            return $taldeak;
+        }
+    }
 
-        <div class="filter-list" id="filter-list">
-            <?php
-            // Ejemplo: filtros activos desde GET
-            $filtros = [];
+    public function getEkipamendua($id){
+        $stmt = $this->db->getKonexioa()->prepare("SELECT * FROM ekipamendua WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $emaitza = $stmt->get_result();
+        if (!$emaitza) { //Emaitzarik ez badago
+            echo 'ERROREA: Ezin izan dira datuak eskuratu.';
+            die();
+        }
+        else{
+            $taldeak = [];
+            while ($row = $emaitza->fetch_assoc()) {$taldeak[] = $row;} // Emaitzaren lerroak array-ean sartu
+            return $taldeak;
+        }
+    }
 
-            if (isset($_GET['categoria'])) {
-                $filtros[] = "Kategoria: " . htmlspecialchars($_GET['categoria']);
-            }
+    public function createEkipamendua($izena,$deskribapena,$marka,$modelo,$stock,$idKategoria) {
+        $stmt = $this->db->getKonexioa()->prepare("INSERT INTO ekipamendua(izena,deskribapena,marka,modelo,stock,idKategoria) VALUES (?,?,?,?,?,?)");
+        $stmt->bind_param("sssssi", $izena, $deskribapena, $marka, $modelo, $stock, $idKategoria);
+        $emaitza = $stmt->execute();
+        $stmt->close();
+        return $emaitza;
+    }
 
-            if (isset($_GET['egoera'])) {
-                $filtros[] = "Egoera: " . htmlspecialchars($_GET['egoera']);
-            }
+    public function updateEkipamendua($id,$izena,$deskribapena,$marka,$modelo,$stock,$idKategoria){
+        $stmt = $this->db->getKonexioa()->prepare("UPDATE ekipamendua SET izena=?, deskribapena=?, marka=?, modelo=?, stock=?, idKategoria=? WHERE id=?");
+        $stmt->bind_param("ssssssi", $izena,$deskribapena,$marka,$modelo,$stock,$idKategoria,$id);
+        $emaitza = $stmt->execute();
+        $stmt->close();
+        return $emaitza;
+    }
 
-            if (isset($_GET['data'])) {
-                $filtros[] = "Data: " . htmlspecialchars($_GET['data']);
-            }
+    public function updateEkipamenduaStock($id,$stock){
+        $stmt = $this->db->getKonexioa()->prepare("UPDATE ekipamendua SET stock=? WHERE id=?");
+        $stmt->bind_param("si", $stock,$id);
+        $emaitza = $stmt->execute();
+        $stmt->close();
+        return $emaitza;
+    }
 
-            // Mostrar los filtros aplicados o mensaje si no hay ninguno
-            if (!empty($filtros)) {
-                echo "<ul>";
-                foreach ($filtros as $filtro) {
-                    echo "<li>$filtro</li>";
-                }
-                echo "</ul>";
-            } else {
-                echo "<p>Ez dago filtrorik</p>"; // "No hay filtros"
-            }
-            ?>
-        </div>
-    </div>
-
-    <table id="ekipamendua">
-        <tr>
-            <th>ID</th>
-            <th>Izena</th>
-            <th>Kategoria</th>
-            <th>Deskribapena</th>
-            <th>Marka</th>
-            <th>Modeloa</th>
-            <th>Kokalekua</th>
-            <th>Stock</th>
-            <th>Kudeaketak</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Ejemplo</td>
-            <td>Ejemplo</td>
-            <td>EjemploEjemploEjemploEjemploEjemploEjemploEjemplo</td>
-            <td>Ejemplo</td>
-            <td>Ejemplo</td>
-            <td>Ejemplo</td>
-            <td>Ejemplo</td>
-            <td>Ejemplo</td>
-
-        </tr>
-    </table>
-
-
-    <script src="script/menu.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const plusIcon = document.getElementById("plus-icon");
-            const filterList = document.getElementById("filter-list");
-
-            // Cuando se haga clic en el icono
-            plusIcon.addEventListener("click", function(event) {
-                event.stopPropagation(); // evita que se cierre inmediatamente
-                filterList.style.display =
-                    filterList.style.display === "block" ? "none" : "block";
-            });
-
-            // Si haces clic fuera, se cierra el menú
-            document.addEventListener("click", function(event) {
-                if (!filterList.contains(event.target) && event.target !== plusIcon) {
-                    filterList.style.display = "none";
-                }
-            });
-        });
-    </script>
-</body>
-
-</html>
+    public function deleteEkipamendua($id){
+        $stmt = $this->db->getKonexioa()->prepare("DELETE FROM ekipamendua WHERE id=?");
+        $stmt->bind_param("i", $id);
+        $emaitza = $stmt->execute();
+        $stmt->close();
+        return $emaitza;
+    }
+}

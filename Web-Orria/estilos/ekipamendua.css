@@ -4,7 +4,7 @@
     border-collapse: collapse;
 }
 
-tr:nth-of-type(1) > th {
+tr:nth-of-type(1)>th {
     background-color: #CAF0F8;
 }
 
@@ -24,23 +24,43 @@ tr:nth-of-type(1) > th {
 
 }
 
+.tabla-wrapper {
+    position: relative;
+    /* 🔹 el contenedor será la referencia */
+    width: fit-content;
+    margin: auto;
+}
+
 .filter-container {
+    position: absolute;
+    top: -55px;
+    /* ajusta según lo que necesites */
+    right: 0;
     display: flex;
-    justify-content: flex-end;
-    gap: 8px; /* separación entre iconos */
+    gap: 8px;
     align-items: center;
-    width: fit-content; /* 🔹 Solo ocupa el ancho del contenido */
-    margin-left: auto;  /* 🔹 Empuja el contenedor hacia la derecha */
-    margin-right: 10px;
-    margin-top: 15px;
     border: 1px solid #0077B6;
     border-radius: 5px;
     padding: 8px;
-    background-color: white; /* opcional, si quieres que destaque */
-    position: relative;
-    justify-content: end;
-    align-items: center;
-    gap: 8px;
+    background-color: white;
+    width: fit-content;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.filter-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.filter-list li:hover {
+  background-color: #f0f0f0;
 }
 
 .filter-container span {
@@ -76,7 +96,7 @@ tr:nth-of-type(1) > th {
     background-color: white;
     border: 1px solid #0077B6;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     padding: 10px 15px;
     min-width: 200px;
     z-index: 1000;
@@ -100,6 +120,25 @@ tr:nth-of-type(1) > th {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#kudeaketa-icon {
+    width: 30px;
+    padding: 3px;
+    background-color: white;
+    border: none;
+    margin-left: 10px;
+}
+
+#kudeaketa-icon img {
+    width: 20px;
 }
