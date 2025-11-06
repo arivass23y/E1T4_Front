@@ -22,7 +22,7 @@
                 <img src="img/inventario-disponible.png" alt="">
                 <h3>Biltegia</h3>
             </div>
-            <a href="index.php">Kategoriak</a>
+            <a href="kategoriak_orria.php">Kategoriak</a>
             <a href="ekipamendua_orria.php">Ekipamendua</a>
             <a href="inbentarioa_orria.php">Inbentarioa</a>
             <div>

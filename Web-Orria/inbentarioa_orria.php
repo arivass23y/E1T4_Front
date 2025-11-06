@@ -52,38 +52,7 @@
     <script src="script/menu.js"></script>
     <script src="script/filtros.js"></script>
 
-    <script>
-    async function kargatuInbentarioa() {
-        try {
-            const response = await fetch("get_inbentarioa.php");
-            const datuak = await response.json();
-
-            const tbody = document.getElementById("inbentarioa-body");
-            tbody.innerHTML = "";
-
-            datuak.forEach(d => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td>${d.etiketa}</td>
-                    <td>${d.ekipamenduIzena}</td>
-                    <td>${d.erosketaData}</td>
-                    <td>${d.hasieraData}</td>
-                    <td>${d.amaieraData}</td>
-                    <td>${d.gela}</td>
-                    <td>
-                        <button class="edit-btn">✏️</button>
-                        <button class="delete-btn">🗑️</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        } catch (err) {
-            console.error("Errorea datuak kargatzean:", err);
-        }
-    }
-
-    kargatuInbentarioa();
-    </script>
+    
 </body>
 
 </html>

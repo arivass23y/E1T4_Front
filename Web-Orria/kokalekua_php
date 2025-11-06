@@ -1,0 +1,27 @@
+<?php
+class Kokalekua {
+    private $db;
+
+    public function __construct($db) {
+        $this->db = $db;
+    }
+
+    public function getKokalekuak() {
+        $sql = "SELECT k.id, k.izena, g.izena AS gelaIzena
+                FROM kokalekua k
+                LEFT JOIN gela g ON k.idGela = g.id";
+        $result = $this->db->getKonexioa()->query($sql);
+
+        if (!$result) {
+            echo 'ERROREA: ezin izan dira kokalekuak eskuratu.';
+            die();
+        } else {
+            $kokalekuak = [];
+            while ($row = $result->fetch_assoc()) {
+                $kokalekuak[] = $row;
+            }
+            return $kokalekuak;
+        }
+    }
+}
+?>

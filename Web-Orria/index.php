@@ -11,7 +11,7 @@
 
 <body>
     <?php 
-    $pageTitle = "Kategoriak";
+    $pageTitle = "Biltegia";
     include 'konponenteak/header.php'; 
     ?>
 

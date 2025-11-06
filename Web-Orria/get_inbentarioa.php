@@ -1,47 +1,39 @@
 <?php
-require_once 'DB.php';
-require_once 'inbentarioa.php';
-require_once 'ekipamendua.php';
-require_once 'kokaleku.php';
-require_once 'gela.php';
+header('Content-Type: application/json');
+include_once 'db.php';
+include_once 'inbentarioa.php';
+include_once 'ekipamendua.php';
+include_once 'kokalekua.php';
+include_once 'gela.php';
 
-header('Content-Type: application/json; charset=utf-8');
+$db = new DB();
+$inbObj = new Inbentarioa($db);
+$ekipObj = new Ekipamendua($db);
+$kokObj  = new Kokalekua($db);
+$gelaObj = new Gela($db);
 
-try {
-    $db = new DB();
-    $db->konektatu();
+// Consulta unida: obtenemos todo con los nombres correspondientes
+$sql = "SELECT 
+            i.etiketa, 
+            e.izena AS ekipamenduIzena, 
+            i.erosketaData, 
+            k.hasieraData, 
+            k.amaieraData, 
+            g.izena AS gelaIzena
+        FROM inbentarioa i
+        LEFT JOIN ekipamendua e ON i.idEkipamendua = e.id
+        LEFT JOIN kokalekua k ON i.etiketa = k.etiketa
+        LEFT JOIN gela g ON k.idGela = g.id";
 
-    $inbObj = new Inbentarioa($db);
-    $ekipObj = new Ekipamendua($db);
-    $kokObj  = new Kokalekua($db);
-    $gelaObj = new Gela($db);
+$result = $db->getKonexioa()->query($sql);
+$data = [];
 
-    // 1️⃣ Lortu inbentario guztiak
-    $inbentarioak = $inbObj->getInbentarioak();
-
-    // 2️⃣ Gehitu ekipamendu, kokalekua eta gela informazioa
-    foreach ($inbentarioak as &$inb) {
-        // Ekipamendua
-        $ekip = $ekipObj->getEkipamendua($inb['idEkipamendua']);
-        $inb['ekipamenduIzena'] = $ekip[0]['izena'] ?? '-';
-
-        // Kokalekua (bilatu etiketa bidez)
-        $kokalekua = $db->getKonexioa()->query("SELECT * FROM kokalekua WHERE etiketa = '".$inb['etiketa']."'")->fetch_assoc();
-        if ($kokalekua) {
-            $inb['hasieraData'] = $kokalekua['hasieraData'];
-            $inb['amaieraData'] = $kokalekua['amaieraData'];
-
-            // Gela
-            $gela = $gelaObj->getGela($kokalekua['idGela']);
-            $inb['gela'] = $gela[0]['izena'] ?? '-';
-        } else {
-            $inb['hasieraData'] = '-';
-            $inb['amaieraData'] = '-';
-            $inb['gela'] = '-';
-        }
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
     }
-
-    echo json_encode($inbentarioak);
-} catch (Exception $e) {
-    echo json_encode(["errorea" => $e->getMessage()]);
 }
+
+echo json_encode($data);
+?>
+
