@@ -11,8 +11,8 @@ class DB {
     {
         $this->user = "root";
         $this->host = "localhost";
-        $this->pass = "ikasle123";
-        $this->db = "3wag2e1";
+        $this->pass = "root123";
+        $this->db = "santurtzibd";
     }
 
     public function konektatu() {

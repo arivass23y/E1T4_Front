@@ -16,7 +16,6 @@
             <button class="nav-btn">Saioa itxi</button>
         </div>
 
-        <!-- 🔽 mueve aquí el menú móvil -->
         <div class="mobile-menu" id="mobile-menu">
             <div>
                 <img src="img/inventario-disponible.png" alt="">
