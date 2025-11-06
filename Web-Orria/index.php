@@ -38,7 +38,7 @@
             <div class="category-column">
                 <div class="category">
                     <img src="img/listas-de-control.png" class="category-icon" alt="">
-                    <span>Inbentarioa</span>
+                    <a href="inbentarioa_orria.php">Inbentarioa</a>
                 </div>
                 <div class="category">
                     <img src="img/avatar.png" class="category-icon" alt="">

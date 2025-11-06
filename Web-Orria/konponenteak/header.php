@@ -24,7 +24,7 @@
             </div>
             <a href="index.php">Kategoriak</a>
             <a href="ekipamendua_orria.php">Ekipamendua</a>
-            <a href="#">Inbentarioa</a>
+            <a href="inbentarioa_orria.php">Inbentarioa</a>
             <div>
                 <img src="img/avatar.png" alt="Parametrizazioa">
                 <h3>Parametrizazioa</h3>
