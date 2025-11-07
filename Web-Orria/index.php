@@ -15,46 +15,44 @@
     include 'components/header-no-search.php';
     ?>
 
-    <!-- Contenedor principal de categorías -->
-
-    <div id="div-principal">
-        <div class="principal-header">
+    <!-- Contenido principal -->
+    <main id="div-principal">
+        <header class="principal-header">
             <img src="img/inventario-disponible.png" alt="Biltegia" class="principal-icon">
             <h2 class="kategoriak-titulo">Biltegia</h2>
-        </div>
+        </header>
 
-        <div id="Kategoriak">
-            <div class="category-column">
-                <div class="category">
+        <section id="Kategoriak">
+            <section class="category-column">
+                <article class="category">
                     <img src="img/computer.png" class="category-icon" alt="">
                     <a href="ekipamenduak.php">Ekipamendua</a>
-                </div>
-                <div class="category">
+                </article>
+                <article class="category">
                     <img src="img/write.png" class="category-icon" alt="">
                     <a href="inbentarioa_orria.php">Inbentarioa</a>
-                </div>
-            </div>
+                </article>
+            </section>
 
-            <div class="category-column">
-                <div class="category">
+            <section class="category-column">
+                <article class="category">
                     <img src="img/categorizacion.png" class="category-icon" alt="">
                     <span>Kategoriak</span>
-                </div>
-                <div class="category">
+                </article>
+                <article class="category">
                     <img src="img/pizarra.png" class="category-icon" alt="">
                     <a href="inbentarioa_orria.php">Gelak</a>
-                </div>
+                </article>
+            </section>
 
-            </div>
-            <div class="category-column">
-                <div class="category">
+            <section class="category-column">
+                <article class="category">
                     <img src="img/avatar.png" class="category-icon" alt="">
                     <span>Erabiltzaileak</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
+                </article>
+            </section>
+        </section>
+    </main>
 
     <script src="script/menu.js"></script>
 </body>
