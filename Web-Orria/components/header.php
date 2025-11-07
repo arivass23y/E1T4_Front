@@ -6,8 +6,8 @@
 
         <div class="nav-center">
             <div class="search-wrapper">
-                <input type="text" placeholder="Ekipamendu izena..." class="nav-search">
-                <img src="../img/lupa.png" class="search-icon" alt="Buscar">
+                <input type="text" placeholder="<?= $searchLabel ?? 'Bilaketa...' ?>" class="nav-search">
+                <img src="../img/search.png" class="search-icon" alt="Buscar">
             </div>
         </div>
 
