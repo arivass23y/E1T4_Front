@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="eu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saioa Hasi</title>
     <link rel="stylesheet" href="../styles/saioa-hasi.css">
 </head>
+
 <body>
     <img class="nav-img" src="../img/Logo vertical.png" alt="Usuario">
 
@@ -22,4 +24,5 @@
     </div>
 
 </body>
+
 </html>

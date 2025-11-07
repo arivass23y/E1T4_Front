@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <?php 
+    <?php
     $pageTitle = "Biltegia";
-    include 'components/header-no-search.php'; 
+    include 'components/header-no-search.php';
     ?>
 
     <!-- Contenedor principal de categorías -->
@@ -26,29 +26,30 @@
         <div id="Kategoriak">
             <div class="category-column">
                 <div class="category">
-                    <img src="img/ordenador-personal.png" class="category-icon" alt="">
-                    <a href="ekipamendua_orria.php">Ekipamendua</a>
+                    <img src="img/computer.png" class="category-icon" alt="">
+                    <a href="ekipamenduak.php">Ekipamendua</a>
                 </div>
                 <div class="category">
-                    <img src="img/categorizacion.png" class="category-icon" alt="">
-                    <span>Kategoriak eta Gelak</span>
+                    <img src="img/write.png" class="category-icon" alt="">
+                    <a href="inbentarioa_orria.php">Inbentarioa</a>
                 </div>
             </div>
 
             <div class="category-column">
                 <div class="category">
-                    <img src="img/listas-de-control.png" class="category-icon" alt="">
-                    <a href="inbentarioa_orria.php">Inbentarioa</a>
+                    <img src="img/categorizacion.png" class="category-icon" alt="">
+                    <span>Kategoriak</span>
                 </div>
+                <div class="category">
+                    <img src="img/pizarra.png" class="category-icon" alt="">
+                    <a href="inbentarioa_orria.php">Gelak</a>
+                </div>
+
+            </div>
+            <div class="category-column">
                 <div class="category">
                     <img src="img/avatar.png" class="category-icon" alt="">
                     <span>Erabiltzaileak</span>
-                </div>
-            </div>
-                        <div class="category-column">
-                <div class="category">
-                    <img src="img/listas-de-control.png" class="category-icon" alt="">
-                    <a href="inbentarioa_orria.php">Inbentarioa</a>
                 </div>
             </div>
         </div>
