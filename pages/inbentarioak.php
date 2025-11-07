@@ -20,11 +20,11 @@
     <main class="tabla-wrapper">
         <header class="filter-container">
             <button>
-                <img src="../img/plus-pequeno.png" alt="Añadir" class="filter-icon" id="plus-icon">
+                <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
             </button>
             <span>|</span>
             <button>
-                <img src="../img/filtrar.png" alt="Filtros" class="filter-icon" id="boton-filtro">
+                <img src="../img/general/filtroa.png" alt="Filtros" class="filter-icon" id="boton-filtro">
             </button>
 
             <aside class="filter-list" id="filter-list" style="display:none;">

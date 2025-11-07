@@ -1,28 +1,38 @@
+<head>
+    <link rel="stylesheet" href="styles/navbar.css">
+</head>
+
 <nav>
-    <div class="nav-left">
-        <img class="nav-img" src="img/barra-de-menus.png" alt="Menú" id="menu-icon">
+    <section class="nav-left">
+        <img class="nav-img" src="img/navbar/menua.png" alt="Menú" id="menu-icon">
         <span class="nav-text"><?= $pageTitle ?? 'Orria' ?></span>
-    </div>
+    </section>
 
-    <div class="nav-right">
-        <a href="saioa-hasi.php"><img class="nav-img" src="img/usuario.png" alt="Usuario"></a>
-        <button class="nav-btn">Saioa itxi</button>
-    </div>
+    <section class="nav-right">
+        <a href="pages/profila.php">
+            <img class="nav-img" src="img/navbar/profila.png" alt="Profila">
+        </a>
+        <a href="pages/saioa-hasi.php" class="nav-btn">Saioa itxi</a>
+    </section>
 
-    <div class="mobile-menu" id="mobile-menu">
-        <div>
-            <img src="img/inventario-disponible.png" alt="">
+    <section class="mobile-menu" id="mobile-menu">
+        <header>
+            <img src="img/navbar/biltegia.png" alt="">
             <h3>Biltegia</h3>
-        </div>
-        <a href="pages/ekipamenduak.php">Ekipamendua</a>
-        <a href="pages/kategoriak.php">Kategoriak</a>
-        <a href="pages/inbentarioak.php">Inbentarioa</a>
-        <a href="pages/gelak.php">Gelak</a>
-        <div>
-            <img src="img/avatar.png" alt="Parametrizazioa">
+        </header>
+        <ul>
+            <li><a href="pages/ekipamenduak.php">Ekipamendua</a></li>
+            <li><a href="pages/kategoriak.php">Kategoriak</a></li>
+            <li><a href="pages/inbentarioak.php">Inbentarioa</a></li>
+            <li><a href="pages/gelak.php">Gelak</a></li>
+        </ul>
+        <header>
+            <img src="img/navbar/avatar.png" alt="Parametrizazioa">
             <h3>Parametrizazioa</h3>
-        </div>
-        <a href="pages/profila.php">Profila</a>
-        <a href="pages/erabiltzaileak.php">Erabiltzaileak</a>
-    </div>
+        </header>
+        <ul>
+            <li><a href="pages/profila.php">Profila</a></li>
+            <li><a href="pages/erabiltzaileak.php">Erabiltzaileak</a></li>
+        </ul>
+    </section>
 </nav>

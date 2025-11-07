@@ -17,33 +17,33 @@
 
     <main id="div-principal">
         <header class="principal-header">
-            <img src="img/inventario-disponible.png" alt="Biltegia" class="principal-icon">
+            <img src="img/navbar/biltegia.png" alt="Biltegia" class="principal-icon">
             <h2 class="kategoriak-titulo">Biltegia</h2>
         </header>
 
         <section id="Kategoriak">
             <section class="category-column">
                 <a href="pages/ekipamenduak.php" class="category">
-                    <img src="img/computer.png" class="category-icon" alt="">
+                    <img src="img/index/ekipamendua.png" class="category-icon" alt="">
                     Ekipamendua
                 </a>
                 <a href="pages/inbentarioak.php" class="category">
-                    <img src="img/write.png" class="category-icon" alt="">
+                    <img src="img/index/inbentarioa.png" class="category-icon" alt="">
                     Inbentarioa
                 </a>
                 <a href="pages/erabiltzaileak.php" class="category">
-                    <img src="img/avatar.png" class="category-icon" alt="">
+                    <img src="img/navbar/avatar.png" class="category-icon" alt="">
                     Erabiltzaileak
                 </a>
             </section>
 
             <section class="category-column">
                 <a href="pages/kategoriak.php" class="category">
-                    <img src="img/categorizacion.png" class="category-icon" alt="">
+                    <img src="img/index/kategoriak.png" class="category-icon" alt="">
                     Kategoriak
                 </a>
                 <a href="pages/gelak.php" class="category">
-                    <img src="img/pizarra.png" class="category-icon" alt="">
+                    <img src="img/index/gelak.png" class="category-icon" alt="">
                     Gelak
                 </a>
             </section>

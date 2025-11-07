@@ -83,7 +83,6 @@ tr:nth-of-type(1)>th {
 }
 
 #plus-icon {
-    border: 1px solid black;
     border-radius: 5px;
     padding: -2px;
 }
