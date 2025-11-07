@@ -13,13 +13,6 @@ $emaitza=$ErabiltzaileaDB->getErabiltzaileaByCredentials($apiKey);
 $method = $_SERVER['REQUEST_METHOD'];
 $metodo = $_POST['_method'] ?? $method; 
 
-
-if (!$emaitza && $metodo !== 'POST') {
-    echo 'ERROREA: Ez daukazu gaitasunak, mesedez .';
-    die();
-}
-
-
 $nan=Utils::stringValidazioa($_POST['nan'] ?? null);
 $izena=Utils::stringValidazioa($_POST['izena'] ?? null);
 $abizena=Utils::stringValidazioa($_POST['abizena'] ?? null);

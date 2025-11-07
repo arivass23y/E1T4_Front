@@ -10,9 +10,10 @@
     <img class="nav-img" src="../img/Logo vertical.png" alt="Usuario">
 
     <div id="div-hasi">
-        <form method="login" action="../Kontrolagailuak/erabiltzailea-controller.php">
+        <form method="post" action="../Kontrolagailuak/erabiltzailea-controller.php">
             <label for="Erabiltzailea">Erabiltzailea</label><br>
             <input type="text" id="erabiltzailea" name="erabiltzailea"><br>
+            <input type="hidden" name="_method" value="LOGIN">
 
             <label for="pasahitza">Pasahitza</label><br>
             <input type="password" id="pasahitza" name="pasahitza">
