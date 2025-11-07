@@ -15,7 +15,6 @@
     include 'components/header-no-search.php';
     ?>
 
-    <!-- Contenido principal -->
     <main id="div-principal">
         <header class="principal-header">
             <img src="img/inventario-disponible.png" alt="Biltegia" class="principal-icon">
@@ -24,32 +23,29 @@
 
         <section id="Kategoriak">
             <section class="category-column">
-                <article class="category">
+                <a href="pages/ekipamenduak.php" class="category">
                     <img src="img/computer.png" class="category-icon" alt="">
-                    <a href="ekipamenduak.php">Ekipamendua</a>
-                </article>
-                <article class="category">
+                    Ekipamendua
+                </a>
+                <a href="pages/inbentarioak.php" class="category">
                     <img src="img/write.png" class="category-icon" alt="">
-                    <a href="inbentarioa_orria.php">Inbentarioa</a>
-                </article>
-            </section>
-
-            <section class="category-column">
-                <article class="category">
-                    <img src="img/categorizacion.png" class="category-icon" alt="">
-                    <span>Kategoriak</span>
-                </article>
-                <article class="category">
-                    <img src="img/pizarra.png" class="category-icon" alt="">
-                    <a href="inbentarioa_orria.php">Gelak</a>
-                </article>
-            </section>
-
-            <section class="category-column">
-                <article class="category">
+                    Inbentarioa
+                </a>
+                <a href="pages/erabiltzaileak.php" class="category">
                     <img src="img/avatar.png" class="category-icon" alt="">
-                    <span>Erabiltzaileak</span>
-                </article>
+                    Erabiltzaileak
+                </a>
+            </section>
+
+            <section class="category-column">
+                <a href="pages/kategoriak.php" class="category">
+                    <img src="img/categorizacion.png" class="category-icon" alt="">
+                    Kategoriak
+                </a>
+                <a href="pages/gelak.php" class="category">
+                    <img src="img/pizarra.png" class="category-icon" alt="">
+                    Gelak
+                </a>
             </section>
         </section>
     </main>
