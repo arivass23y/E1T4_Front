@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="eus">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekipamendua</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/ekipamendua.css">
+</head>
+
+<body>
+    <?php
+    $pageTitle = "Ekipamendua";
+    $searchLabel = "Ekipamendu izena...";
+    include '../components/header.php';
+    ?>
+
+    <main class="tabla-wrapper">
+        <header class="filter-container">
+            <button>
+                <img src="../img/plus-pequeno.png" alt="Añadir" class="filter-icon" id="plus-icon">
+            </button>
+            <span>|</span>
+            <button>
+                <img src="../img/filtrar.png" alt="Filtros" class="filter-icon" id="boton-filtro">
+            </button>
+
+            <aside class="filter-list" id="filter-list" style="display:none;">
+                <p>Ez dago filtrorik</p>
+            </aside>
+        </header>
+
+        <section>
+            <table id="ekipamendua">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Izena</th>
+                        <th>Kategoria</th>
+                        <th>Deskribapena</th>
+                        <th>Marka</th>
+                        <th>Modeloa</th>
+                        <th>Stock</th>
+                        <th>Kudeaketak</th>
+                    </tr>
+                </thead>
+                <tbody id="ekipamendua-body">
+                    
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="script/menu.js"></script>
+    <script src="script/filtros.js"></script>
+</body>
+
+</html>
