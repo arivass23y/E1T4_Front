@@ -68,55 +68,34 @@ nav {
     cursor: pointer;
 }
 
-.mobile-menu {
+.sidebar {
     display: none;
-    position: absolute;
-    top: 100%; /* justo debajo del nav */
+    position: fixed;
+    top: 0;
     left: 0;
-    width: 20%;
-    height: 1330%;
+    width: 250px; /* ancho del sidebar */
+    height: 100vh;
     flex-direction: column;
     background-color: #0077B6;
-    z-index: 9999; /* se asegura de estar encima de todo */
+    z-index: 9999;
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 
-.mobile-menu.show {
+.sidebar.show {
     display: flex;
 }
 
-.mobile-menu a, .mobile-menu h3, .mobile-menu li {
+.sidebar a, .mobile-menu h3, .mobile-menu li {
     color: white;
     text-decoration: none;
     padding: 12px 13px;
     border-top: 1px solid rgba(255,255,255,0.2);
 }
 
-.mobile-menu div {
-    display: flex;
-    width: 100%;
-    justify-content: flex-start;
-    text-align: start;
-    border-top: 1px solid rgba(255,255,255,0.2);
-}
-
-.mobile-menu img {
+.sidebar img {
     width: 30px;
     height: 30px;
     margin-top: 10px;
     margin-left: 5px;
 }
 
-#botoi-atzera {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #0077B6;
-    border-radius: 10px;
-    margin: 5px;
-    padding: 3px;
-    background-color: white;
-}
-
-#botoi-atzera:hover {
-    background-color: #F0F0F0;
-}
