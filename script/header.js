@@ -22,39 +22,39 @@ fetch('../components/header.html')
     const searchWrapper = document.getElementById('search-wrapper');
 
     const pagesConfig = {
-        "index.html": {
-            title: "Biltegia",
+        "profila.html": {
+            titulua: "Profila",
             search: false
         },
-        "profila.html": {
-            title: "Profila",
+        "erabiltzaileak.html": {
+            titulua: "Erabiltzaileak",
             search: false
         },
         "ekipamenduak.html": {
-            title: "Ekipamendua",
+            titulua: "Ekipamendua",
             search: true,
             searchPlaceholder: "Equipamenduaren izena..."
         },
         "kategoriak.html": {
-            title: "Kategoriak",
+            titulua: "Kategoriak",
             search: true,
             searchPlaceholder: "Kategoriaren izena..."
         },
         "inbentarioak.html": {
-            title: "Inbentarioa",
+            titulua: "Inbentarioa",
             search: true,
             searchPlaceholder: "Inbentarioren etiketa..."
         },
         "gelak.html": {
-            title: "Gelak",
+            titulua: "Gelak",
             search: true,
             searchPlaceholder: "Gelaren izena..."
         }
     };
 
-    const config = pagesConfig[page] || { title: "Biltegia", search: true };
+    const config = pagesConfig[page] || { titulua: "Biltegia", search: true };
 
-    navText.textContent = config.title;
+    navText.textContent = config.titulua;
 
     if (config.search) {
         searchWrapper.style.display = "flex";

@@ -11,12 +11,10 @@
 </head>
 
 <body>
-    <?php
-    $pageTitle = "Inbentarioa";
-    $searchLabel = "Inbentarioa billatu...";
-    include '../components/header.php';
-    ?>
-
+    <section id="header"></section>
+    <a href="../index.html">
+        <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
+    </a>
     <main class="tabla-wrapper">
         <header class="filter-container">
             <button>    
@@ -52,8 +50,8 @@
         </section>
     </main>
 
-    <script src="script/menu.js"></script>
-    <script src="script/filtros.js"></script>
+    <script src="../script/filtros.js"></script>
+    <script src="../script/header.js"></script>
 
     <script>
         async function kargatuInbentarioa() {
