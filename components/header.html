@@ -5,42 +5,41 @@
 <nav>
     <section class="nav-left">
         <img class="nav-img" src="../img/navbar/menua.png" alt="Menú" id="menu-icon">
-        <span class="nav-text"><?= $pageTitle ?? 'Orria' ?></span>
+        <span id="nav-text" class="nav-text"></span>
     </section>
 
     <section class="nav-center">
-        <form class="search-wrapper" role="search">
-            <input type="text" placeholder="<?= $searchLabel ?? 'Bilaketa...' ?>" class="nav-search">
+        <form class="search-wrapper" role="search"> 
+            <input type="text" placeholder="" class="nav-search">
             <img src="../img/navbar/search.png" class="search-icon" alt="Buscar">
         </form>
     </section>
 
     <section class="nav-right">
-        <a href="../pages/profila.php">
+        <a href="pages/profila.html">
             <img class="nav-img" src="../img/navbar/profila.png" alt="Profila">
         </a>
-        <a href="../pages/saioa-hasi.php" class="nav-btn">Saioa itxi</a>
+        <a href="pages/saioa-hasi.html" class="nav-btn">Saioa itxi</a>
     </section>
 
-    <section class="mobile-menu" id="mobile-menu">
+    <section class="sidebar" id="sidebar">
         <header>
-            <img src="img/inventario-disponible.png" alt="">
+            <img src="../img/navbar/biltegia.png" alt="">
             <h3>Biltegia</h3>
         </header>
         <ul>
-            <li><a href="ekipamenduak.php">Ekipamendua</a></li>
-            <li><a href="kategoriak.php">Kategoriak</a></li>
-            <li><a href="inbentarioak.php">Inbentarioa</a></li>
-            <li><a href="gelak.php">Gelak</a></li>
+            <li><a href="ekipamenduak.html">Ekipamendua</a></li>
+            <li><a href="kategoriak.html">Kategoriak</a></li>
+            <li><a href="inbentarioak.html">Inbentarioa</a></li>
+            <li><a href="gelak.html">Gelak</a></li>
         </ul>
-
         <header>
-            <img src="img/avatar.png" alt="Parametrizazioa">
+            <img src="../img/navbar/avatar.png" alt="Parametrizazioa">
             <h3>Parametrizazioa</h3>
         </header>
         <ul>
-            <li><a href="profila.php">Profila</a></li>
-            <li><a href="erabiltzaileak.php">Erabiltzaileak</a></li>
+            <li><a href="profila.html">Profila</a></li>
+            <li><a href="erabiltzaileak.html">Erabiltzaileak</a></li>
         </ul>
     </section>
 </nav>
