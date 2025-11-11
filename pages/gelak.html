@@ -19,7 +19,7 @@
     <main class="tabla-wrapper">
 
         <header class="filter-container">
-            <button>
+            <button class="filtroBotoia" onclick="document.getElementById('sortuGela').showModal()">
                 <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
             </button>
         </header>
@@ -39,13 +39,13 @@
                 </tbody>
             </table>
         </section>
-        <dialog id="sortuGela">
+        <dialog class="popup" id="sortuGela">
             <form>
                 <a onclick="document.getElementById('sortuGela').close()" class="close-btn">
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
                 </a>
                 <h4>Gela izena</h4>
-                <input class="datuakInput" type="text" id="ekipamenduIzena">
+                <input class="datuakInput" type="text" id="gelaIzena">
                 <h4>Taldea</h4>
                 <input class="datuakInput" type="text" id="modeloa">
                 <button id="botoia" onclick="">Gela sortu</button>
