@@ -17,13 +17,12 @@
         <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
     </a>
     <main class="tabla-wrapper">
-
         <header class="filter-container">
-            <button onclick="document.getElementById('sortuEkipamendua').showModal()">
+            <button class="filtroBotoia" onclick="document.getElementById('sortuEkipamendua').showModal()">
                 <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
             </button>
             <span>|</span>
-            <button>
+            <button class="filtroBotoia">
                 <img src="../img/general/filtroa.png" alt="Filtros" class="filter-icon" id="boton-filtro">
             </button>
 
@@ -53,15 +52,24 @@
         </section>
     </main>
     <dialog id="sortuEkipamendua">
-        <h4>Izena</h4>
-        <input type="text" id="userName" placeholder="Tu nombre">
-        <h4>Kategoria</h4>
-        <input type="text" id="userName" placeholder="Tu nombre">
-        <h4>Marka</h4>
-        <input type="text" id="userName" placeholder="Tu nombre">
-        <h4>Modeloa</h4>
-        <input type="text" id="userName" placeholder="Tu nombre">
-        <button onclick="COSO()">Ekipamendua sortu</button>
+        <form>
+            <a  onclick="document.getElementById('sortuEkipamendua').close()" class="close-btn">
+                <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+            </a>
+            <h4>Izena</h4>
+            <input type="text" id="ekipamenduIzena">
+            <h4>Kategoria</h4>
+            <input type="search" id="kategoria">
+            <h4>Deskribapena</h4>
+            <input type="text" id="deskribapena">
+            <h4>Marka</h4>
+            <input type="text" id="marka">
+            <h4>Modeloa</h4>
+            <input type="text" id="modeloa">
+            <h4>Stock</h4>
+            <input type="number" id="stock">
+            <button id="botoia" onclick="COSO()">Ekipamendua sortu</button>
+        </form>
     </dialog>
     <script src="../script/filtros.js"></script>
     <script src="../script/header.js"></script>
