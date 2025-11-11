@@ -1,0 +1,58 @@
+input {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #0077B6;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: #0096C7;
+    box-shadow: 0 0 5px #0096C7;
+}
+
+#botoia {
+    width: 100%;
+    height: 20%;
+    border: 1px solid;
+    border-radius: 8px;
+    background-color: #90E0EF;
+    margin-bottom: 10px;
+}
+
+#botoia:hover {
+    background-color: #0096C7;
+    cursor: pointer;
+}
+
+.close-btn {
+    text-decoration: none;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.close {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+dialog {
+    color: #0077B6;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+h4 {
+    color: black;
+}
+
+#botoia {
+    padding: 8px 12px;
+}
