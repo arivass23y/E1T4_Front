@@ -4,56 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ekipamendua</title>
+    <title>Erabiltzaileak</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/ekipamendua.css">
-    <script src="../script/ekipamenduak.js"></script>
+    <link rel="stylesheet" href="../styles/orriak/ekipamendua.css">
 </head>
 
 <body>
-    <?php
-    $pageTitle = "Ekipamendua";
-    $searchLabel = "Ekipamendu izena...";
-    include '../components/header.php';
-    ?>
-
+    <section id="header"></section>
+    <a href="../index.html">
+        <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
+    </a>
     <main class="tabla-wrapper">
+
         <header class="filter-container">
             <button>
                 <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
             </button>
-            <span>|</span>
-            <button>
-                <img src="../img/general/filtroa.png" alt="Filtros" class="filter-icon" id="boton-filtro">
-            </button>
-
-            <aside class="filter-list" id="filter-list" style="display:none;">
-                <p>Ez dago filtrorik</p>
-            </aside>
         </header>
 
         <section>
             <table id="ekipamendua">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>NAN</th>
                         <th>Izena</th>
-                        <th>Kategoria</th>
-                        <th>Deskribapena</th>
-                        <th>Marka</th>
-                        <th>Modeloa</th>
-                        <th>Stock</th>
+                        <th>Abizena</th>
+                        <th>Erabiltzailea</th>
+                        <th>Pasahitza</th>
+                        <th>Rola</th>
                         <th>Kudeaketak</th>
                     </tr>
                 </thead>
                 <tbody id="ekipamendua-body">
-                    
+
                 </tbody>
             </table>
         </section>
     </main>
-
+    <script src="../script/header.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,51 @@
+.error {
+    display: flex;
+    align-items: flex-start;
+    background-color: #FFF1F1;
+    border: 1px solid #F5C2C2;
+    border-radius: 6px;
+    padding: 10px 15px;
+    max-width: 450px;
+    color: #1a1a1a;
+    position: relative;
+}
+
+.warning {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    margin-top: 2px;
+}
+
+.error-texts {
+    flex: 1;
+}
+
+.erroreTitulua {
+    font-weight: 600;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.erroreMezua {
+    margin: 3px 0 0;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.close-btn {
+    text-decoration: none;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.close {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.close:hover {
+    opacity: 1;
+}

@@ -72,8 +72,8 @@ tr:nth-of-type(1)>th {
     border: none;
 }
 
-.filter-icon:hover {
-    background-color: #0077B6;
+.filtroBotoia:hover {
+    background-color: #F0F0F0;
     border-radius: 5px;
 }
 
@@ -84,7 +84,6 @@ tr:nth-of-type(1)>th {
 
 #plus-icon {
     border-radius: 5px;
-    padding: -2px;
 }
 
 .filter-list {
