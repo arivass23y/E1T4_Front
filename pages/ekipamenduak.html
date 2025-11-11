@@ -50,27 +50,29 @@
                 </tbody>
             </table>
         </section>
+        <dialog id="sortuEkipamendua">
+            <form>
+                <a onclick="document.getElementById('sortuEkipamendua').close()" class="close-btn">
+                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+                </a>
+                <h4>Izena</h4>
+                <input type="text" id="ekipamenduIzena">
+                <h4>Kategoria</h4>
+                <select id="kategoria" aria-placeholder="Aukeratu kategoria">
+                    <option value="" disabled selected>Aukeratu kategoria</option>
+                </select>
+                <h4>Deskribapena</h4>
+                <input type="text" id="deskribapena">
+                <h4>Marka</h4>
+                <input type="text" id="marka">
+                <h4>Modeloa</h4>
+                <input type="text" id="modeloa">
+                <h4>Stock</h4>
+                <input type="number" id="stock">
+                <button id="botoia" onclick="">Ekipamendua sortu</button>
+            </form>
+        </dialog>
     </main>
-    <dialog id="sortuEkipamendua">
-        <form>
-            <a  onclick="document.getElementById('sortuEkipamendua').close()" class="close-btn">
-                <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-            </a>
-            <h4>Izena</h4>
-            <input type="text" id="ekipamenduIzena">
-            <h4>Kategoria</h4>
-            <input type="search" id="kategoria">
-            <h4>Deskribapena</h4>
-            <input type="text" id="deskribapena">
-            <h4>Marka</h4>
-            <input type="text" id="marka">
-            <h4>Modeloa</h4>
-            <input type="text" id="modeloa">
-            <h4>Stock</h4>
-            <input type="number" id="stock">
-            <button id="botoia" onclick="COSO()">Ekipamendua sortu</button>
-        </form>
-    </dialog>
     <script src="../script/filtros.js"></script>
     <script src="../script/header.js"></script>
 </body>
