@@ -1,4 +1,4 @@
-input, select {
+.datuakInput, select {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
@@ -6,7 +6,7 @@ input, select {
     font-size: 1rem;
 }
 
-input:focus, select:focus {
+.datuakInput:focus, select:focus {
     outline: none;
     border-color: #0096C7;
     box-shadow: 0 0 5px #0096C7;
