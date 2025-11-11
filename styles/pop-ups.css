@@ -1,4 +1,4 @@
-input {
+input,select {
     width: 90%;
     padding: 8px;
     margin-bottom: 15px;
@@ -6,7 +6,7 @@ input {
     font-size: 1rem;
 }
 
-input:focus {
+input:focus, select:focus {
     outline: none;
     border-color: #0096C7;
     box-shadow: 0 0 5px #0096C7;
