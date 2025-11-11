@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/ekipamendua.css">
+    <script src="../script/ekipamenduak.js"></script>
 </head>
 
 <body>
@@ -53,8 +54,6 @@
         </section>
     </main>
 
-    <script src="script/menu.js"></script>
-    <script src="script/filtros.js"></script>
 </body>
 
 </html>
