@@ -17,12 +17,12 @@
         <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
     </a>
     <main class="tabla-wrapper">
-        <button href="gelak.html" class="kokalekuak-ikusi">
+        <button class="kokalekuak-ikusi" onclick="document.getElementById('kokalekuAktiboak').showModal()">
             <p>Kokaleku aktiboak</p>
             <img src="../img/kokalekuak.png" alt="Añadir" class="filter-icon" id="plus-icon">
         </button>
         <header class="filter-container">
-            <button class="filtroBotoia" onclick="document.getElementById('sortuEkipamendua').showModal()">
+            <button class="filtroBotoia" onclick="document.getElementById('sortuInbentarioa').showModal()">
                 <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
             </button>
         </header>
@@ -42,9 +42,9 @@
                 </tbody>
             </table>
         </section>
-        <dialog class="popup" id="sortuEkipamendua">
+        <dialog class="popup" id="sortuInbentarioa">
             <form>
-                <a onclick="document.getElementById('sortuEkipamendua').close()" class="close-btn">
+                <a onclick="document.getElementById('sortuInbentarioa').close()" class="close-btn">
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
                 </a>
                 <h4>Etiketa</h4>
@@ -57,6 +57,25 @@
                 <input class="datuakInput" type="date" id="stock">
                 <button id="botoia" onclick="">Inbentarioa sortu</button>
             </form>
+        </dialog>
+        <dialog class="popupTaula" id="kokalekuAktiboak">
+                <a onclick="document.getElementById('kokalekuAktiboak').close()" class="close-btn">
+                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+                </a>
+                <table id="inbentarioa">
+                    <thead>
+                        <tr>
+                            <th>Etiketa</th>
+                            <th>Gela</th>
+                            <th>Hasiera data</th>
+                            <th>Amaiera data</th>
+                            <th>Kudeaketak</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inbentarioa-body">
+                        <!-- Datuak hemen gehituko dira dinamikan -->
+                    </tbody>
+                </table>
         </dialog>
     </main>
 

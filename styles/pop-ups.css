@@ -20,11 +20,6 @@
     background-color: #90E0EF;
 }
 
-#botoia:hover {
-    background-color: #0096C7;
-    cursor: pointer;
-}
-
 .close-btn {
     text-decoration: none;
     margin-left: 10px;
@@ -70,4 +65,22 @@ h4 {
     border: 2px solid #0077B6;
     border-radius: 10px;
     background-color: white;
+}
+
+.popupTaula {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 700px;
+    max-height: 650px;
+    padding: 30px;
+    border: 2px solid #0077B6;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.kokalekuak-ikusi:hover {
+    background-color: #F0F0F0;
+    cursor: pointer;
 }
