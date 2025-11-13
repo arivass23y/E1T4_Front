@@ -7,7 +7,8 @@
     <title>Erabiltzaileak</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/orriak/ekipamendua.css">
+    <link rel="stylesheet" href="../styles/orriak/taulak.css">
+    <link rel="stylesheet" href="../styles/pop-ups.css">
 </head>
 
 <body>
@@ -18,13 +19,13 @@
     <main class="tabla-wrapper">
 
         <header class="filter-container">
-            <button>
+            <button id="sortuBotoia" onclick="document.getElementById('sortuErabiltzailea').showModal()">
                 <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
             </button>
         </header>
 
         <section>
-            <table id="ekipamendua">
+            <table class="taula">
                 <thead>
                     <tr>
                         <th>NAN</th>
@@ -36,11 +37,31 @@
                         <th>Kudeaketak</th>
                     </tr>
                 </thead>
-                <tbody id="ekipamendua-body">
+                <tbody id="erabiltzaileak-body">
 
                 </tbody>
             </table>
         </section>
+        <dialog class="popup" id="sortuErabiltzailea">
+            <form>
+                <a onclick="document.getElementById('sortuErabiltzailea').close()" class="close-btn">
+                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+                </a>
+                <h4>NAN</h4>
+                <input class="datuakInput" type="text" id="gelaIzena">
+                <h4>Izena</h4>
+                <input class="datuakInput" type="text" id="modeloa">
+                <h4>Abizena</h4>
+                <input class="datuakInput" type="text" id="modeloa">
+                <h4>Erabiltzailea</h4>
+                <input class="datuakInput" type="text" id="modeloa">
+                <h4>Pasahitza</h4>
+                <input class="datuakInput" type="text" id="modeloa">
+                <h4>Rola</h4>
+                <input class="datuakInput" type="text" id="modeloa">
+                <button id="botoia" onclick="">Erabiltzailea sortu</button>
+            </form>
+        </dialog>
     </main>
     <script src="../script/header.js"></script>
 </body>
