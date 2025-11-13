@@ -1,4 +1,4 @@
-#ekipamendua, #inbentarioa {
+.taula {
     margin: auto;
     margin-top: 1%;
     border-collapse: collapse;
@@ -8,14 +8,14 @@ tr:nth-of-type(1)>th {
     background-color: #CAF0F8;
 }
 
-#ekipamendua td, #inbentarioa td {
+.taula td {
     border: 1px solid #CAF0F8;
     padding-left: 8px;
     width: 7em;
     height: 2.5em;
 }
 
-#ekipamendua th, #inbentarioa th  {
+.taula th  {
     width: 7em;
     height: 2.5em;
     background-color: #CAF0F8;
@@ -26,16 +26,29 @@ tr:nth-of-type(1)>th {
 
 .tabla-wrapper {
     position: relative;
-    /* 🔹 el contenedor será la referencia */
     width: fit-content;
     margin: auto;
 }
 
-.filter-container {
+.filter-container, .filtroBotoia {
     position: absolute;
     top: -55px;
-    /* ajusta según lo que necesites */
     right: 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border: 1px solid #0077B6;
+    border-radius: 5px;
+    padding: 8px;
+    background-color: white;
+    width: fit-content;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.kokalekuak-ikusi {
+    position: absolute;
+    top: -55px;
+    left: 0;
     display: flex;
     gap: 8px;
     align-items: center;
@@ -72,9 +85,10 @@ tr:nth-of-type(1)>th {
     border: none;
 }
 
-.filtroBotoia:hover {
+.filtroBotoia:hover, .botoi-konjuntuoak:hover {
     background-color: #F0F0F0;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .filter-icon {

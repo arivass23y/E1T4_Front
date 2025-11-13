@@ -7,7 +7,8 @@
     <title>Inbentarioa</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/orriak/ekipamendua.css"> <!-- usa el mismo CSS general -->
+    <link rel="stylesheet" href="../styles/orriak/taulak.css">
+    <link rel="stylesheet" href="../styles/pop-ups.css">
 </head>
 
 <body>
@@ -16,30 +17,21 @@
         <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
     </a>
     <main class="tabla-wrapper">
-        <header class="filter-container">
-            <button>    
-                <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
-            </button>
-            <span>|</span>
-            <button>
-                <img src="../img/general/filtroa.png" alt="Filtros" class="filter-icon" id="boton-filtro">
-            </button>
-
-            <aside class="filter-list" id="filter-list" style="display:none;">
-                <p>Ez dago filtrorik</p>
-            </aside>
-        </header>
+        <button class="kokalekuak-ikusi" onclick="document.getElementById('kokalekuAktiboak').showModal()">
+            <p >Kokaleku aktiboak</p>
+            <img src="../img/kokalekuak.png" alt="Añadir" class="filter-icon" id="plus-icon">
+        </button>
+        <button class="filtroBotoia" onclick="document.getElementById('sortuInbentarioa').showModal()">
+            <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
+        </button>
 
         <section>
-            <table id="inbentarioa">
+            <table class="taula">
                 <thead>
                     <tr>
                         <th>Etiketa</th>
                         <th>Ekipamendua</th>
                         <th>Erosketa data</th>
-                        <th>Hasiera data</th>
-                        <th>Amaiera data</th>
-                        <th>Gela</th>
                         <th>Kudeaketak</th>
                     </tr>
                 </thead>
@@ -48,6 +40,41 @@
                 </tbody>
             </table>
         </section>
+        <dialog class="popup" id="sortuInbentarioa">
+            <form>
+                <a onclick="document.getElementById('sortuInbentarioa').close()" class="close-btn">
+                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+                </a>
+                <h4>Etiketa</h4>
+                <input class="datuakInput" type="text" id="ekipamenduIzena">
+                <h4>Ekipamendua</h4>
+                <select id="kategoria">
+                    <option value="" disabled selected>Aukeratu ekipamendua</option>
+                </select>
+                <h4>Erosketa data</h4>
+                <input class="datuakInput" type="date" id="stock">
+                <button id="botoia" onclick="">Inbentarioa sortu</button>
+            </form>
+        </dialog>
+        <dialog class="popupTaula" id="kokalekuAktiboak">
+            <a onclick="document.getElementById('kokalekuAktiboak').close()" class="close-btn">
+                <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+            </a>
+            <table class="taula">
+                <thead>
+                    <tr>
+                        <th>Etiketa</th>
+                        <th>Gela</th>
+                        <th>Hasiera data</th>
+                        <th>Amaiera data</th>
+                        <th>Kudeaketak</th>
+                    </tr>
+                </thead>
+                <tbody id="kokalekua-body">
+                    <!-- Datuak hemen gehituko dira dinamikan -->
+                </tbody>
+            </table>
+        </dialog>
     </main>
 
     <script src="../script/filtros.js"></script>

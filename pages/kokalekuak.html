@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="eus">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kokalekuak</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/orriak/taulak.css">
+    <link rel="stylesheet" href="../styles/pop-ups.css">
+</head>
+
+<body>
+    <section id="header"></section>
+    <a href="inbentarioak.html">
+        <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
+    </a>
+    <main class="tabla-wrapper">
+        <button class="filtroBotoia" onclick="document.getElementById('sortuKokalekua').showModal()">
+            <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
+        </button>
+
+        <section>
+            <table class="taula">
+                <thead>
+                    <tr>
+                        <th>Etiketa</th>
+                        <th>Gela</th>
+                        <th>Hasiera data</th>
+                        <th>Amaiera data</th>
+                        <th>Kudeaketak</th>
+                    </tr>
+                </thead>
+                <tbody id="kokalekua-body">
+                    <!-- Datuak hemen gehituko dira dinamikan -->
+                </tbody>
+            </table>
+        </section>
+        <dialog class="popup" id="sortuKokalekua">
+            <form>
+                <a onclick="document.getElementById('sortuKokalekua').close()" class="close-btn">
+                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+                </a>
+                <h4>Inbentario etiketa</h4>
+                <select id="etiketa">
+                    <option value="" disabled selected>Aukeratu etiketa</option>
+                </select>
+                <h4>Gela</h4>
+                <select id="gela">
+                    <option value="" disabled selected>Aukeratu gela</option>
+                </select>
+                <h4>Hasiera data</h4>
+                <input class="datuakInput" type="date" id="hasieraData">
+                <h4>Amaiera Data</h4>
+                <input class="datuakInput" type="date" id="amaieraData">
+                <button id="botoia" onclick="">Kokalekua sortu</button>
+            </form>
+        </dialog>
+    </main>
+    <script src="../script/filtros.js"></script>
+    <script src="../script/header.js"></script>
+</body>
+
+</html>

@@ -11,18 +11,17 @@
 <body>
     <img class="nav-img" src="../img/Logo vertical.png" alt="Usuario">
 
-    <div id="div-hasi">
-        <form method="post" action="../../E1T4_Back/Kontrolagailuak/erabiltzailea-controller.php">
+    <section id="div-hasi">
+        <form class="saioaHasiForm">
             <label for="Erabiltzailea">Erabiltzailea</label><br>
-            <input type="text" id="erabiltzailea" name="erabiltzailea"><br>
+            <input type="text" id="erabiltzailea" name="erabiltzailea" required><br>
             <input type="hidden" name="_method" value="LOGIN">
 
             <label for="pasahitza">Pasahitza</label><br>
-            <input type="password" id="pasahitza" name="pasahitza">
+            <input type="password" id="pasahitza" name="pasahitza" required>
             <button id="saioa-botoia" type="submit">Saioa Hasi</button>
         </form>
-    </div>
-
+    </section>
 </body>
 
 </html>

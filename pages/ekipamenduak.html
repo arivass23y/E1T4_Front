@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/pop-ups.css">
-    <link rel="stylesheet" href="../styles/orriak/ekipamendua.css">
+    <link rel="stylesheet" href="../styles/orriak/taulak.css">
 </head>
 
 <body>
@@ -18,11 +18,11 @@
     </a>
     <main class="tabla-wrapper">
         <header class="filter-container">
-            <button class="filtroBotoia" onclick="document.getElementById('sortuEkipamendua').showModal()">
+            <button class="botoi-konjuntuoak" onclick="document.getElementById('sortuEkipamendua').showModal()">
                 <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
             </button>
             <span>|</span>
-            <button class="filtroBotoia">
+            <button class="botoi-konjuntuoak">
                 <img src="../img/general/filtroa.png" alt="Filtros" class="filter-icon" id="boton-filtro">
             </button>
 
@@ -32,7 +32,7 @@
         </header>
 
         <section>
-            <table id="ekipamendua">
+            <table class="taula">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -50,7 +50,7 @@
                 </tbody>
             </table>
         </section>
-        <dialog id="sortuEkipamendua">
+        <dialog class="popup" id="sortuEkipamendua">
             <form>
                 <a onclick="document.getElementById('sortuEkipamendua').close()" class="close-btn">
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
@@ -81,15 +81,15 @@
                 <h4>Izena</h4>
                 <input type="text" id="ekipamenduIzena">
                 <h4>Kategoria</h4>
-                <select id="kategoria" aria-placeholder="Aukeratu kategoria">
+                <select id="kategoria" required>
                     <option value="" disabled selected>Aukeratu kategoria</option>
                 </select>
                 <h4>Deskribapena</h4>
-                <input type="text" id="deskribapena">
+                <input class="datuakInput" type="text" id="deskribapena" required>
                 <h4>Marka</h4>
-                <input type="text" id="marka">
+                <input class="datuakInput" type="text" id="marka">
                 <h4>Modeloa</h4>
-                <input type="text" id="modeloa">
+                <input class="datuakInput" type="text" id="modeloa">
                 <h4>Stock</h4>
                 
                 <input type="number" id="stock">
