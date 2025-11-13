@@ -1,51 +1,56 @@
-.error {
-    display: flex;
-    align-items: flex-start;
+toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
     background-color: #FFF1F1;
-    border: 1px solid #F5C2C2;
-    border-radius: 6px;
-    padding: 10px 15px;
-    max-width: 450px;
-    color: #1a1a1a;
-    position: relative;
+    color: black;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    padding: 16px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(20px);
+    font-family: Arial, sans-serif;
 }
 
-.warning {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    margin-top: 2px;
+toast.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.error-texts {
-    flex: 1;
+toast header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
 
-.erroreTitulua {
-    font-weight: 600;
-    margin: 0;
-    font-size: 0.95rem;
+toast header img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 8px;
 }
 
-.erroreMezua {
-    margin: 3px 0 0;
-    font-size: 0.85rem;
-    color: #555;
-}
-
-.close-btn {
-    text-decoration: none;
-    margin-left: 10px;
+toast header button {
+    background: none;
+    border: none;
+    color: black;
+    font-size: 16px;
     cursor: pointer;
 }
 
-.close {
-    width: 16px;
-    height: 16px;
-    opacity: 0.7;
-    transition: opacity 0.2s;
+toast p {
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
 }
 
-.close:hover {
-    opacity: 1;
+span {
+    display:flex;
+    align-items:center;
 }
