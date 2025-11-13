@@ -18,14 +18,12 @@
     </a>
     <main class="tabla-wrapper">
         <button class="kokalekuak-ikusi" onclick="document.getElementById('kokalekuAktiboak').showModal()">
-            <p>Kokaleku aktiboak</p>
+            <p >Kokaleku aktiboak</p>
             <img src="../img/kokalekuak.png" alt="Añadir" class="filter-icon" id="plus-icon">
         </button>
-        <header class="filter-container">
-            <button class="filtroBotoia" onclick="document.getElementById('sortuInbentarioa').showModal()">
-                <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
-            </button>
-        </header>
+        <button class="filtroBotoia" onclick="document.getElementById('sortuInbentarioa').showModal()">
+            <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
+        </button>
 
         <section>
             <table class="taula">
@@ -59,23 +57,23 @@
             </form>
         </dialog>
         <dialog class="popupTaula" id="kokalekuAktiboak">
-                <a onclick="document.getElementById('kokalekuAktiboak').close()" class="close-btn">
-                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-                </a>
-                <table class="taula">
-                    <thead>
-                        <tr>
-                            <th>Etiketa</th>
-                            <th>Gela</th>
-                            <th>Hasiera data</th>
-                            <th>Amaiera data</th>
-                            <th>Kudeaketak</th>
-                        </tr>
-                    </thead>
-                    <tbody id="kokalekua-body">
-                        <!-- Datuak hemen gehituko dira dinamikan -->
-                    </tbody>
-                </table>
+            <a onclick="document.getElementById('kokalekuAktiboak').close()" class="close-btn">
+                <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+            </a>
+            <table class="taula">
+                <thead>
+                    <tr>
+                        <th>Etiketa</th>
+                        <th>Gela</th>
+                        <th>Hasiera data</th>
+                        <th>Amaiera data</th>
+                        <th>Kudeaketak</th>
+                    </tr>
+                </thead>
+                <tbody id="kokalekua-body">
+                    <!-- Datuak hemen gehituko dira dinamikan -->
+                </tbody>
+            </table>
         </dialog>
     </main>
 

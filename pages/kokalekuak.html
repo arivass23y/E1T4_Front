@@ -17,11 +17,9 @@
         <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
     </a>
     <main class="tabla-wrapper">
-        <header class="filter-container">
-            <button class="filtroBotoia" onclick="document.getElementById('sortuKokalekua').showModal()">
-                <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
-            </button>
-        </header>
+        <button class="filtroBotoia" onclick="document.getElementById('sortuKokalekua').showModal()">
+            <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
+        </button>
 
         <section>
             <table class="taula">
@@ -39,7 +37,7 @@
                 </tbody>
             </table>
         </section>
-                <dialog class="popup" id="sortuKokalekua">
+        <dialog class="popup" id="sortuKokalekua">
             <form>
                 <a onclick="document.getElementById('sortuKokalekua').close()" class="close-btn">
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">

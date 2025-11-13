@@ -30,7 +30,7 @@ tr:nth-of-type(1)>th {
     margin: auto;
 }
 
-.filter-container {
+.filter-container, .filtroBotoia {
     position: absolute;
     top: -55px;
     right: 0;
@@ -85,10 +85,10 @@ tr:nth-of-type(1)>th {
     border: none;
 }
 
-.filtroBotoia:hover {
+.filtroBotoia:hover, .botoi-konjuntuoak:hover {
     background-color: #F0F0F0;
     border-radius: 5px;
-      cursor: pointer;
+    cursor: pointer;
 }
 
 .filter-icon {
