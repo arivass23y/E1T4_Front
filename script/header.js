@@ -45,6 +45,11 @@ fetch('../components/header.html')
             search: true,
             searchPlaceholder: "Inbentarioren etiketa..."
         },
+        "kokalekuak.html": {
+            titulua: "Kokalekuak",
+            search: true,
+            searchPlaceholder: "Gelaren..."
+        },
         "gelak.html": {
             titulua: "Gelak",
             search: true,
