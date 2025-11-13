@@ -18,13 +18,13 @@
     </a>
     <main class="tabla-wrapper">
         <header class="filter-container">
-            <button class="filtroBotoia" onclick="document.getElementById('sortuEkipamendua').showModal()">
+            <button class="filtroBotoia" onclick="document.getElementById('sortuKokalekua').showModal()">
                 <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
             </button>
         </header>
 
         <section>
-            <table id="inbentarioa">
+            <table class="taula">
                 <thead>
                     <tr>
                         <th>Etiketa</th>
@@ -34,14 +34,14 @@
                         <th>Kudeaketak</th>
                     </tr>
                 </thead>
-                <tbody id="inbentarioa-body">
+                <tbody id="kokalekua-body">
                     <!-- Datuak hemen gehituko dira dinamikan -->
                 </tbody>
             </table>
         </section>
-                <dialog class="popup" id="sortuEkipamendua">
+                <dialog class="popup" id="sortuKokalekua">
             <form>
-                <a onclick="document.getElementById('sortuEkipamendua').close()" class="close-btn">
+                <a onclick="document.getElementById('sortuKokalekua').close()" class="close-btn">
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
                 </a>
                 <h4>Inbentario etiketa</h4>

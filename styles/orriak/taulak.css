@@ -1,4 +1,4 @@
-#ekipamendua, #inbentarioa {
+.taula {
     margin: auto;
     margin-top: 1%;
     border-collapse: collapse;
@@ -8,14 +8,14 @@ tr:nth-of-type(1)>th {
     background-color: #CAF0F8;
 }
 
-#ekipamendua td, #inbentarioa td {
+.taula td {
     border: 1px solid #CAF0F8;
     padding-left: 8px;
     width: 7em;
     height: 2.5em;
 }
 
-#ekipamendua th, #inbentarioa th  {
+.taula th  {
     width: 7em;
     height: 2.5em;
     background-color: #CAF0F8;
