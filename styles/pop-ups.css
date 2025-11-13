@@ -18,6 +18,12 @@
     border: 1px solid;
     border-radius: 8px;
     background-color: #90E0EF;
+    padding: 8px 12px;
+}
+
+#botoia:hover {
+    background-color: #7ABFCC;
+    cursor: pointer;
 }
 
 .close-btn {
@@ -48,10 +54,6 @@ dialog {
 
 h4 {
     color: black;
-}
-
-#botoia {
-    padding: 8px 12px;
 }
 
 .popup {
