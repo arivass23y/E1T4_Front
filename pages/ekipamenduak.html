@@ -56,19 +56,20 @@
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
                 </a>
                 <h4>Izena</h4>
-                <input class="datuakInput" type="text" id="ekipamenduIzena">
+                <input class="datuakInput" type="text" id="ekipamenduIzena" required>
                 <h4>Kategoria</h4>
-                <select id="kategoria">
+                <select id="kategoria" required>
                     <option value="" disabled selected>Aukeratu kategoria</option>
+                    <option>a</option>
                 </select>
                 <h4>Deskribapena</h4>
-                <input class="datuakInput" type="text" id="deskribapena">
+                <input class="datuakInput" type="text" id="deskribapena" required>
                 <h4>Marka</h4>
                 <input class="datuakInput" type="text" id="marka">
                 <h4>Modeloa</h4>
                 <input class="datuakInput" type="text" id="modeloa">
                 <h4>Stock</h4>
-                <input class="datuakInput" type="number" id="stock">
+                <input class="datuakInput" type="number" min="0" id="stock" required>
                 <button id="botoia" onclick="">Ekipamendua sortu</button>
             </form>
         </dialog>

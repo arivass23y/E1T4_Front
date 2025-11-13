@@ -106,3 +106,17 @@ nav {
     height: 30px;
     margin-top: 0;
 }
+
+#menu-icon:hover, li:hover{
+    background-color: #005d8f;
+    border-radius: 10px;
+}
+
+.nav-img:hover{
+    background-color: #005d8f;
+    border-radius: 20px;
+}
+
+.nav-btn:hover{
+    background-color: #F0F0F0;
+}
