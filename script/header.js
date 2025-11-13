@@ -48,7 +48,7 @@ fetch('../components/header.html')
         "kokalekuak.html": {
             titulua: "Kokalekuak",
             search: true,
-            searchPlaceholder: "Gelaren..."
+            searchPlaceholder: "Gelaren izena..."
         },
         "gelak.html": {
             titulua: "Gelak",
