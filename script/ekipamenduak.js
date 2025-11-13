@@ -1,38 +1,48 @@
-// Configuración global
 const API_URL = '../../E1T4_Back/Kontrolagailuak/ekipamendua-controller.php';
+const KATEGORIA_API_URL = '../../E1T4_Back/Kontrolagailuak/kategoria-controller.php';
 const API_KEY = '9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1';
 
-// Función auxiliar reutilizable para llamadas a la API
+document.addEventListener('DOMContentLoaded', () => {
+    cargarEkipamenduak();
+    cargarKategorias();
+});
+
+const botonCrear = document.getElementById('botoia');
+
 async function llamarAPI(metodo, datos = {}) {
-    const params = new URLSearchParams();
+    //Bidaliko parametroak prestatu
+    const params = new URLSearchParams(); 
     params.append('_method', metodo);
     params.append('HTTP_APIKEY', API_KEY);
 
+    // Gehitu datuak soilik balioak daudenean
     for (const [key, value] of Object.entries(datos)) {
         if (value !== null && value !== undefined) {
             params.append(key, value);
         }
     }
 
+    // APIra deitu
     const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params.toString()
     });
 
+    // Erantzuna prozesatu
     const text = await response.text();
     let resultado;
     try {
         resultado = JSON.parse(text);
     } catch (err) {
-        // Log completo para depuración: status + texto devuelto por el servidor
-        console.error('Respuesta no-JSON desde la API:', { status: response.status, text });
-        throw new Error(`La API devolvió texto/HTML en lugar de JSON. Estado: ${response.status}. Revisa la consola (Network) y el log.`);
+        // Errorea JSON bihurtzean: status + zerbitzariak itzuli duen testua
+        console.error('API-ko eranztuna ez da JSON:', { status: response.status, text });
+        throw new Error(`APIak testu/HTML itzuli du JSONaren ordez. Egoera: ${response.status}. Begiratu kontsola (Network) eta loga.`);
     }
 
     if (!response.ok) {
-        // Incluir el mensaje de error que devuelva la API (si lo hay)
-        const mensaje = resultado?.error || `Error HTTP ${response.status}`;
+        // APIak itzuli duen errore-mezua barne hartu (badago)
+        const mensaje = resultado?.error || `HTTP errorea ${response.status}`;
         throw new Error(mensaje);
     }
 
@@ -41,7 +51,9 @@ async function llamarAPI(metodo, datos = {}) {
 
 async function cargarEkipamenduak() {
     try {
+        //APIra deitu eta emaitza jaso
         const resultado = await llamarAPI('GET');
+        // Emaitza baliozkoa bada, erakutsi
         if (Array.isArray(resultado) || typeof resultado === 'object') {
             mostrarEkipamenduak(resultado);
         }
@@ -53,9 +65,11 @@ async function cargarEkipamenduak() {
 }
 
 function mostrarEkipamenduak(ekipamenduak) {
+    // Taularen gorputza garbitu
     const tbody = document.getElementById('ekipamendua-body');
     tbody.innerHTML = '';
 
+    // Ekipamenduak taulan gehitu
     ekipamenduak.forEach(ekipamendua => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -66,8 +80,8 @@ function mostrarEkipamenduak(ekipamenduak) {
             <td>${ekipamendua.marka || '-'}</td>
             <td>${ekipamendua.modelo || '-'}</td>
             <td>${ekipamendua.stock}</td>
-            <td>
-                <button onclick="editarEkipamendua(${ekipamendua.id})" class="edit-btn">
+            <td> 
+                <button onclick="dialogPrepared(${ekipamendua.id})" class="edit-btn">
                     <img src="../img/general/editatu.png" alt="Editar">
                 </button>
                 <button onclick="ezabatuEkipamendua(${ekipamendua.id})" class="delete-btn">
@@ -79,40 +93,58 @@ function mostrarEkipamenduak(ekipamenduak) {
     });
 }
 
-function editarEkipamendua(id) {
-    (async () => {
-        try {
-            const current = await llamarAPI('GET', { id });
+async function dialogPrepared(id) {
 
-            const izena = prompt('Nombre:', current.izena);
-            if (izena === null) return;
-            const deskribapena = prompt('Descripción:', current.deskribapena);
-            if (deskribapena === null) return;
-            const marka = prompt('Marca (opcional):', current.marka || '');
-            if (marka === null) return;
-            const modelo = prompt('Modelo (opcional):', current.modelo || '');
-            if (modelo === null) return;
-            const stock = prompt('Stock:', current.stock);
-            if (stock === null) return;
-            const idKategoria = prompt('ID de categoría:', current.idKategoria || current.kategoria_izena || '');
-            if (idKategoria === null) return;
+    const current = await llamarAPI('GET', { id });
 
-            // Validar campos obligatorios
-            if (!izena.trim() || !deskribapena.trim() || !stock.toString().trim() || !idKategoria.toString().trim()) {
-                alert('Izena, deskribapena, stock eta idKategoria derrigorrezkoak dira');
-                return;
-            }
+        // Obtener referencias a los campos del dialog
+        const dialog = document.getElementById('aldatuEkipamendua');
+        const izenaInput = document.getElementById('ekipamenduIzena');
+        const deskribapenaInput = document.getElementById('deskribapena');
+        const markaInput = document.getElementById('marka');
+        const modeloaInput = document.getElementById('modeloa');
+        const stockInput = document.getElementById('stock');
 
-            const result = await llamarAPI('PUT', { id, izena, deskribapena, marka, modelo, stock, idKategoria });
-            if (result.success) {
-                alert('Ekipamendua eguneratuta');
-                await cargarEkipamenduak();
-            }
-        } catch (err) {
-            console.error('Error en editarEkipamendua:', err);
-            alert('Error al actualizar el equipo: ' + err.message);
-        }
-    })();
+        // Rellenar campos con los datos del equipo
+        izenaInput.value = current.izena || '';
+        deskribapenaInput.value = current.deskribapena || '';
+        markaInput.value = current.marka || '';
+        modeloaInput.value = current.modelo || '';
+        stockInput.value = current.stock || '';
+
+        botonCrear.addEventListener('click', () => { 
+            aldatuEkipamendua(id);
+        });
+        document.getElementById('aldatuEkipamendua').showModal()
+}
+
+async function aldatuEkipamendua(id) {
+    try {
+        let izena = document.getElementById('ekipamenduIzena').value;
+        let deskribapena = document.getElementById('deskribapena').value;
+        let marka= document.getElementById('marka').value;
+        let modelo = document.getElementById('modeloa').value;
+        let stock = document.getElementById('stock').value;
+        let idKategoria = document.getElementById('kategoria').value;
+
+        console.log('ID aldatuEkipamendua funtzioan:', id, izena, deskribapena, marka, modelo, stock, idKategoria);
+        
+        result = await llamarAPI('PUT', {
+            id,
+            izena,
+            deskribapena,
+            marka,
+            modelo,
+            stock,
+            idKategoria
+        });
+        const dialog = document.getElementById('aldatuEkipamendua');
+        dialog.close();
+        await cargarEkipamenduak();
+        const data = await result.json();
+    } catch (err) {
+        console.error('Error:', err);
+    }
 }
 
 async function ezabatuEkipamendua(id) {
@@ -130,20 +162,14 @@ async function ezabatuEkipamendua(id) {
     }
 }
 
-// Llamar a la API al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    cargarEkipamenduak();
-});
-
-// Crear nuevo ekipamendua desde el modal
 async function crearEkipamendua() {
     try {
-        const izena = document.getElementById('ekipamenduIzena')?.value ?? '';
-        const idKategoria = document.getElementById('kategoria')?.value ?? '';
-        const deskribapena = document.getElementById('deskribapena')?.value ?? '';
-        const marka = document.getElementById('marka')?.value ?? '';
-        const modelo = document.getElementById('modeloa')?.value ?? '';
-        const stock = document.getElementById('stock')?.value ?? '';
+        const izena = document.getElementById('ekipamenduIzenaSortu')?.value ?? '';
+        const idKategoria = document.getElementById('kategoriaSortu')?.value ?? '';
+        const deskribapena = document.getElementById('deskribapenaSortu')?.value ?? '';
+        const marka = document.getElementById('markaSortu')?.value ?? '';
+        const modelo = document.getElementById('modeloaSortu')?.value ?? '';
+        const stock = document.getElementById('stockSortu')?.value ?? '';
 
         // Validar campos obligatorios
         if (!izena.trim() || !deskribapena.trim() || !stock.toString().trim() || !idKategoria.toString().trim()) {
@@ -159,7 +185,7 @@ async function crearEkipamendua() {
             stock,
             idKategoria
         });
-
+        console.log('Resultado de crearEkipamendua:', result);
         if (result && result.success) {
             // Cerrar modal si existe
             const dialog = document.getElementById('sortuEkipamendua');
@@ -169,6 +195,46 @@ async function crearEkipamendua() {
         }
     } catch (err) {
         console.error('Error al crear ekipamendua:', err);
-        alert('Error al crear el equipo: ' + err.message);
+        alert('Error al crear el ekipamendua: ' + err.message);
+    }
+}
+
+async function cargarKategorias() {
+    try {
+        // Crear parámetros para la solicitud
+        const params = new URLSearchParams();
+        params.append('_method', 'GET');
+        params.append('HTTP_APIKEY', API_KEY);
+
+        // Hacer la petición
+        const response = await fetch(KATEGORIA_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        });
+
+        // Obtener respuesta como texto
+        const text = await response.text();
+
+        // Parsear JSON
+        let categorias = JSON.parse(text);
+
+        // Obtener el select
+        const select = document.getElementById('kategoriaSortu');
+        let selectAldatu = document.getElementById('kategoria');
+
+        // Llenar select con las categorías
+        if (select && Array.isArray(categorias)) {
+            categorias.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat.id;
+                option.textContent = cat.izena;
+                select.appendChild(option);
+                selectAldatu.appendChild(option.cloneNode(true));
+            });
+        }
+
+    } catch (err) {
+        console.error('Error:', err);
     }
 }

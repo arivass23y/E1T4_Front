@@ -56,6 +56,29 @@
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
                 </a>
                 <h4>Izena</h4>
+                <input type="text" id="ekipamenduIzenaSortu">
+                <h4>Kategoria</h4>
+                <select id="kategoriaSortu" aria-placeholder="Aukeratu kategoria">
+                    <option value="" disabled selected>Aukeratu kategoria</option>
+                </select>
+                <h4>Deskribapena</h4>
+                <input type="text" id="deskribapenaSortu">
+                <h4>Marka</h4>
+                <input type="text" id="markaSortu">
+                <h4>Modeloa</h4>
+                <input type="text" id="modeloaSortu">
+                <h4>Stock</h4>
+                
+                <input type="number" id="stockSortu">
+                <button id="botoiaSortu" onclick="crearEkipamendua()">Ekipamendua sortu</button>
+            </form>
+        </dialog>
+        <dialog id="aldatuEkipamendua">
+            <form>
+                <a onclick="document.getElementById('aldatuEkipamendua').close()" class="close-btn">
+                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+                </a>
+                <h4>Izena</h4>
                 <input type="text" id="ekipamenduIzena">
                 <h4>Kategoria</h4>
                 <select id="kategoria" aria-placeholder="Aukeratu kategoria">
@@ -68,10 +91,12 @@
                 <h4>Modeloa</h4>
                 <input type="text" id="modeloa">
                 <h4>Stock</h4>
+                
                 <input type="number" id="stock">
-                <button id="botoia" onclick="">Ekipamendua sortu</button>
+                <button id="botoia">Ekipamendua sortu</button>
             </form>
         </dialog>
+        
     </main>
     <script src="../script/filtros.js"></script>
     <script src="../script/header.js"></script>
