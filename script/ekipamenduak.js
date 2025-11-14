@@ -82,10 +82,10 @@ function mostrarEkipamenduak(ekipamenduak) {
             <td>${ekipamendua.stock}</td>
             <td> 
                 <button onclick="dialogPrepared(${ekipamendua.id})" class="edit-btn">
-                    <img src="../img/general/editatu.png" alt="Editar">
+                    <img src="../img/general/editatu.png" alt="Editar" class="editatu">
                 </button>
                 <button onclick="ezabatuEkipamendua(${ekipamendua.id})" class="delete-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar">
+                    <img src="../img/general/ezabatu.png" alt="Borrar" class="editatu">
                 </button>
             </td>
         `;
