@@ -1,13 +1,12 @@
 const API_URL = '../../E1T4_Back/Kontrolagailuak/ekipamendua-controller.php';
 const KATEGORIA_API_URL = '../../E1T4_Back/Kontrolagailuak/kategoria-controller.php';
 const API_KEY = '9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1';
+const botonCrear = document.getElementById('botoia');
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarEkipamenduak();
     cargarKategorias();
 });
-
-const botonCrear = document.getElementById('botoia');
 
 async function llamarAPI(metodo, datos = {}) {
     //Bidaliko parametroak prestatu
@@ -64,18 +63,47 @@ async function cargarEkipamenduak() {
     }
 }
 
+async function cargarKategoria(idKategoria) {
+    let data = null; // declarar data fuera del try
+    try {
+        const params = new URLSearchParams();
+        params.append('_method', 'GET');
+        params.append('HTTP_APIKEY', API_KEY);
+        params.append('id', idKategoria);
+
+        const response = await fetch(KATEGORIA_API_URL, {
+            method: 'POST', // si tu API requiere POST
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const text = await response.text();
+        data = JSON.parse(text);
+
+    } catch (err) {
+        console.error('Error:', err);
+    }
+    return data;
+}
+
 function mostrarEkipamenduak(ekipamenduak) {
     // Taularen gorputza garbitu
     const tbody = document.getElementById('ekipamendua-body');
     tbody.innerHTML = '';
 
     // Ekipamenduak taulan gehitu
-    ekipamenduak.forEach(ekipamendua => {
+    ekipamenduak.forEach(async ekipamendua => {
         const tr = document.createElement('tr');
+        let kategoria= await cargarKategoria(ekipamendua.idKategoria);
+        
         tr.innerHTML = `
             <td>${ekipamendua.id}</td>
             <td>${ekipamendua.izena}</td>
-            <td>${ekipamendua.kategoria_izena || ekipamendua.idKategoria}</td>
+            <td>${kategoria.izena}</td>
             <td>${ekipamendua.deskribapena}</td>
             <td>${ekipamendua.marka || '-'}</td>
             <td>${ekipamendua.modelo || '-'}</td>
@@ -104,6 +132,7 @@ async function dialogPrepared(id) {
         const markaInput = document.getElementById('marka');
         const modeloaInput = document.getElementById('modeloa');
         const stockInput = document.getElementById('stock');
+        const kategoriaInput = document.getElementById('kategoria');
 
         // Rellenar campos con los datos del equipo
         izenaInput.value = current.izena || '';
@@ -111,6 +140,7 @@ async function dialogPrepared(id) {
         markaInput.value = current.marka || '';
         modeloaInput.value = current.modelo || '';
         stockInput.value = current.stock || '';
+        kategoriaInput.value = current.idKategoria || '';
 
         botonCrear.addEventListener('click', () => { 
             aldatuEkipamendua(id);
@@ -238,3 +268,5 @@ async function cargarKategorias() {
         console.error('Error:', err);
     }
 }
+
+
