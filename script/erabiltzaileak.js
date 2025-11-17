@@ -119,7 +119,7 @@ async function dialogPrepared(nan) {
         botonEditar.addEventListener('click', () => { 
             aldatuErabiltzailea(nan);
         });
-        document.getElementById('aldatuErabiltzailea').showModal()
+        dialog.showModal()
 }
 
 async function aldatuErabiltzailea(nan) {

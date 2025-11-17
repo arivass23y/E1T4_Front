@@ -145,7 +145,8 @@ async function dialogPrepared(id) {
         botonCrear.addEventListener('click', () => { 
             aldatuEkipamendua(id);
         });
-        document.getElementById('aldatuEkipamendua').showModal()
+
+        dialog.showModal()
 }
 
 async function aldatuEkipamendua(id) {
@@ -156,6 +157,11 @@ async function aldatuEkipamendua(id) {
         let modelo = document.getElementById('modeloa').value;
         let stock = document.getElementById('stock').value;
         let idKategoria = document.getElementById('kategoria').value;
+
+        if (stock < 0){
+            alert('Stock-a ezin izan da negatiboa.')
+            return;
+        }
 
         console.log('ID aldatuEkipamendua funtzioan:', id, izena, deskribapena, marka, modelo, stock, idKategoria);
         
@@ -204,6 +210,11 @@ async function crearEkipamendua() {
         // Validar campos obligatorios
         if (!izena.trim() || !deskribapena.trim() || !stock.toString().trim() || !idKategoria.toString().trim()) {
             alert('Izena, deskribapena, stock eta idKategoria derrigorrezkoak dira');
+            return;
+        }
+
+        if (stock < 0){
+            alert('Stock-a ezin izan da negatiboa.')
             return;
         }
 
