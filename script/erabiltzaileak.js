@@ -1,12 +1,9 @@
 const API_URL = '../../E1T4_Back/Kontrolagailuak/erabiltzailea-controller.php';
 const API_KEY = '9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1';
-const botonCrear = document.getElementById('botoia');
-
-//Alejandro, cambia los nombres y demas de las funciones para que funcione con erabiltzaileak, si tienes dudas me dices. Los metodos son los que necesitas, he hecho ctr+f para cambiar el nombre a erabiltzaileak en vez de ekipamenduak y ya.
-
+const botonEditar = document.getElementById('botoiaEditatu');
 
 document.addEventListener('DOMContentLoaded', () => {
-    cargarerabiltzaileak();
+    cargarErabiltzaileak();
 });
 
 async function llamarAPI(metodo, datos = {}) {
@@ -49,44 +46,42 @@ async function llamarAPI(metodo, datos = {}) {
     return resultado;
 }
 
-async function cargarerabiltzaileak() {
+async function cargarErabiltzaileak() {
     try {
         //APIra deitu eta emaitza jaso
         const resultado = await llamarAPI('GET');
         // Emaitza baliozkoa bada, erakutsi
         if (Array.isArray(resultado) || typeof resultado === 'object') {
-            mostrarerabiltzaileak(resultado);
+            mostrarErabiltzaileak(resultado);
         }
     } catch (err) {
         console.error('Error al cargar erabiltzaileak:', err);
-        const tbody = document.getElementById('erabiltzailea-body');
+        const tbody = document.getElementById('erabiltzaileak-body');
         if (tbody) tbody.innerHTML = `<tr><td colspan="8">Error al cargar datos: ${err.message}</td></tr>`;
     }
 }
 
-function mostrarerabiltzaileak(erabiltzaileak) {
+function mostrarErabiltzaileak(erabiltzaileak) {
     // Taularen gorputza garbitu
-    const tbody = document.getElementById('erabiltzailea-body');
+    const tbody = document.getElementById('erabiltzaileak-body');
     tbody.innerHTML = '';
 
     // erabiltzaileak taulan gehitu
     erabiltzaileak.forEach(async erabiltzailea => {
         const tr = document.createElement('tr');
-        let kategoria= await cargarKategoria(erabiltzailea.idKategoria);
         
         tr.innerHTML = `
-            <td>${erabiltzailea.id}</td>
+            <td>${erabiltzailea.nan}</td>
             <td>${erabiltzailea.izena}</td>
-            <td>${kategoria.izena}</td>
-            <td>${erabiltzailea.deskribapena}</td>
-            <td>${erabiltzailea.marka || '-'}</td>
-            <td>${erabiltzailea.modelo || '-'}</td>
-            <td>${erabiltzailea.stock}</td>
+            <td>${erabiltzailea.abizena}</td>
+            <td>${erabiltzailea.erabiltzailea}</td>
+            <td>${erabiltzailea.pasahitza}</td>
+            <td>${erabiltzailea.rola}</td>
             <td> 
-                <button onclick="dialogPrepared(${erabiltzailea.id})" class="edit-btn">
+                <button onclick="dialogPrepared('${erabiltzailea.nan}')" class="edit-btn">
                     <img src="../img/general/editatu.png" alt="Editar" class="editatu">
                 </button>
-                <button onclick="ezabatuerabiltzailea(${erabiltzailea.id})" class="delete-btn">
+                <button onclick="ezabatuErabiltzailea('${erabiltzailea.nan}')" class="delete-btn">
                     <img src="../img/general/ezabatu.png" alt="Borrar" class="editatu">
                 </button>
             </td>
@@ -100,63 +95,59 @@ async function dialogPrepared(id) {
     const current = await llamarAPI('GET', { id });
 
         // Obtener referencias a los campos del dialog
-        const dialog = document.getElementById('aldatuerabiltzailea');
-        const izenaInput = document.getElementById('ekipamenduIzena');
-        const deskribapenaInput = document.getElementById('deskribapena');
-        const markaInput = document.getElementById('marka');
-        const modeloaInput = document.getElementById('modeloa');
-        const stockInput = document.getElementById('stock');
-        const kategoriaInput = document.getElementById('kategoria');
+        const dialog = document.getElementById('aldatuErabiltzailea');
+        const izenaInput = document.getElementById('izenaEditatu');
+        const abizenaInput = document.getElementById('abizenaEditatu');
+        const erabiltzaileaInput = document.getElementById('erabiltzaileaEditatu');
+        const pasahitzaInput = document.getElementById('pasahitzaEditatu');
+        const rolaInput = document.getElementById('rolaEditatu');
 
         // Rellenar campos con los datos del equipo
         izenaInput.value = current.izena || '';
-        deskribapenaInput.value = current.deskribapena || '';
-        markaInput.value = current.marka || '';
-        modeloaInput.value = current.modelo || '';
-        stockInput.value = current.stock || '';
-        kategoriaInput.value = current.idKategoria || '';
+        abizenaInput.value = current.abizena || '';
+        erabiltzaileaInput.value = current.erabiltzailea || '';
+        pasahitzaInput.value = current.pasahitza || '';
+        rolaInput.value = current.rola || '';
 
-        botonCrear.addEventListener('click', () => { 
-            aldatuerabiltzailea(id);
+        botonEditar.addEventListener('click', () => { 
+            aldatuErabiltzailea(id);
         });
-        document.getElementById('aldatuerabiltzailea').showModal()
+        document.getElementById('aldatuErabiltzailea').showModal()
 }
 
-async function aldatuerabiltzailea(id) {
+async function aldatuErabiltzailea(id) {
     try {
-        let izena = document.getElementById('ekipamenduIzena').value;
-        let deskribapena = document.getElementById('deskribapena').value;
-        let marka= document.getElementById('marka').value;
-        let modelo = document.getElementById('modeloa').value;
-        let stock = document.getElementById('stock').value;
-        let idKategoria = document.getElementById('kategoria').value;
+        let izena = document.getElementById('izenaEditatu').value;
+        let abizena= document.getElementById('abizenaEditatu').value;
+        let erabiltzailea = document.getElementById('erabiltzaileaEditatu').value;
+        let pasahitza = document.getElementById('pasahitzaEditatu').value;
+        let rola = document.getElementById('rolaEditatu').value;
 
-        console.log('ID aldatuerabiltzailea funtzioan:', id, izena, deskribapena, marka, modelo, stock, idKategoria);
+        console.log('ID aldatuErabiltzailea funtzioan:', id, izena, abizena, erabiltzailea, pasahitza, rola);
         
         result = await llamarAPI('PUT', {
             id,
             izena,
-            deskribapena,
-            marka,
-            modelo,
-            stock,
-            idKategoria
+            abizena,
+            erabiltzailea,
+            pasahitza,
+            rola
         });
-        const dialog = document.getElementById('aldatuerabiltzailea');
+        const dialog = document.getElementById('aldatuErabiltzailea');
         dialog.close();
-        await cargarerabiltzaileak();
+        await cargarErabiltzaileak();
         const data = await result.json();
     } catch (err) {
         console.error('Error:', err);
     }
 }
 
-async function ezabatuerabiltzailea(id) {
+async function ezabatuErabiltzailea(id) {
     try {
         const result = await llamarAPI('DEL', { id });
         if (result.success) {
-            alert('erabiltzailea ezabatuta');
-            await cargarerabiltzaileak();
+            alert('Erabiltzailea ezabatuta');
+            await cargarErabiltzaileak();
         }
         return result;
     } catch (err) {
@@ -166,36 +157,36 @@ async function ezabatuerabiltzailea(id) {
     }
 }
 
-async function crearerabiltzailea() {
+async function crearErabiltzailea() {
     try {
-        const izena = document.getElementById('ekipamenduIzenaSortu')?.value ?? '';
-        const idKategoria = document.getElementById('kategoriaSortu')?.value ?? '';
-        const deskribapena = document.getElementById('deskribapenaSortu')?.value ?? '';
-        const marka = document.getElementById('markaSortu')?.value ?? '';
-        const modelo = document.getElementById('modeloaSortu')?.value ?? '';
-        const stock = document.getElementById('stockSortu')?.value ?? '';
+        const nan = document.getElementById('NANSortu')?.value ?? '';
+        const izena = document.getElementById('izenaSortu')?.value ?? '';
+        const abizena = document.getElementById('abizenaSortu')?.value ?? '';
+        const erabiltzailea = document.getElementById('erabiltzaileaSortu')?.value ?? '';
+        const pasahitza = document.getElementById('pasahitzaSortu')?.value ?? '';
+        const rola = document.getElementById('rolaSortu')?.value ?? '';
 
         // Validar campos obligatorios
-        if (!izena.trim() || !deskribapena.trim() || !stock.toString().trim() || !idKategoria.toString().trim()) {
-            alert('Izena, deskribapena, stock eta idKategoria derrigorrezkoak dira');
+        if (!nan.trim() || !izena.trim() || !abizena.trim() || !erabiltzailea.trim() || !pasahitza.trim() || !rola.trim()) {
+            alert('NAN, izena, abizena, erabiltzailea, pasahitza eta rola derrigorrezkoak dira');
             return;
         }
 
         const result = await llamarAPI('POST', {
+            nan,
             izena,
-            deskribapena,
-            marka,
-            modelo,
-            stock,
-            idKategoria
+            abizena,
+            erabiltzailea,
+            pasahitza,
+            rola
         });
-        console.log('Resultado de crearerabiltzailea:', result);
+        console.log('Resultado de crearErabiltzailea:', result);
         if (result && result.success) {
             // Cerrar modal si existe
-            const dialog = document.getElementById('sortuerabiltzailea');
+            const dialog = document.getElementById('sortuErabiltzailea');
             try { dialog.close(); } catch (e) { /* ignore */ }
             alert('erabiltzailea sortuta');
-            await cargarerabiltzaileak();
+            await cargarErabiltzaileak();
         }
     } catch (err) {
         console.error('Error al crear erabiltzailea:', err);
