@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="eus">
+<html lang="eu">
 
 <head>
     <meta charset="UTF-8">
@@ -42,13 +42,23 @@
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
                 </a>
                 <h4>Izena</h4>
-                <input class="datuakInput" type="text" id="kategoriaIzena">
-                <button id="botoia" onclick="">Kategoria sortu</button>
+                <input class="datuakInput" type="text" id="kategoriaIzenaSortu">
+                <button id="botoiaSortu" onclick="crearKategoria()">Kategoria sortu</button>
+            </form>
+        </dialog>
+        <dialog class="popup" id="editatuKategoria">
+            <form>
+                <a onclick="document.getElementById('editatuKategoria').close()" class="close-btn">
+                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+                </a>
+                <h4>Izena</h4>
+                <input class="datuakInput" type="text" id="kategoriaIzenaEditatu">
+                <button id="botoiaEditatu">Aldaketak gorde</button>
             </form>
         </dialog>
     </main>
-    <script src="../script/filtros.js"></script>
     <script src="../script/header.js"></script>
+        <script src="../script/kategoriak.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="eus">
+<html lang="eu">
 
 <head>
     <meta charset="UTF-8">
@@ -68,11 +68,11 @@
                 <h4>Modeloa</h4>
                 <input class="datuakInput" type="text" id="modeloaSortu">
                 <h4>Stock</h4>
-                <input class="datuakInput" type="number" id="stockSortu">
+                <input class="datuakInput" type="number" min="0" id="stockSortu">
                 <button id="botoiaSortu" onclick="crearEkipamendua()">Ekipamendua sortu</button>
             </form>
         </dialog>
-        <dialog class="popup"  id="aldatuEkipamendua">
+        <dialog class="popup" id="aldatuEkipamendua">
             <form>
                 <a onclick="document.getElementById('aldatuEkipamendua').close()" class="close-btn">
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
@@ -90,8 +90,8 @@
                 <h4>Modeloa</h4>
                 <input class="datuakInput" type="text" id="modeloa">
                 <h4>Stock</h4>
-                <input class="datuakInput" type="number" id="stock">
-                <button id="botoia">Ekipamendua sortu</button>
+                <input class="datuakInput" type="number" min="0" id="stock">
+                <button id="botoia">Aldaketak gorde</button>
             </form>
         </dialog>
 

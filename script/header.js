@@ -28,7 +28,7 @@ fetch('../components/header.html')
         },
         "erabiltzaileak.html": {
             titulua: "Erabiltzaileak",
-            search: false
+            search: true
         },
         "ekipamenduak.html": {
             titulua: "Ekipamendua",

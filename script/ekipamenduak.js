@@ -109,11 +109,11 @@ function mostrarEkipamenduak(ekipamenduak) {
             <td>${ekipamendua.modelo || '-'}</td>
             <td>${ekipamendua.stock}</td>
             <td> 
-                <button onclick="dialogPrepared(${ekipamendua.id})" class="edit-btn">
-                    <img src="../img/general/editatu.png" alt="Editar" class="editatu">
+                <button onclick="dialogPrepared(${ekipamendua.id})" class="kudeaketak-btn" id="editatu-btn">
+                    <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
                 </button>
-                <button onclick="ezabatuEkipamendua(${ekipamendua.id})" class="delete-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar" class="editatu">
+                <button onclick="ezabatuEkipamendua(${ekipamendua.id})" class="kudeaketak-btn" id="ezabatu-btn">
+                    <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
                 </button>
             </td>
         `;
@@ -145,7 +145,8 @@ async function dialogPrepared(id) {
         botonCrear.addEventListener('click', () => { 
             aldatuEkipamendua(id);
         });
-        document.getElementById('aldatuEkipamendua').showModal()
+
+        dialog.showModal()
 }
 
 async function aldatuEkipamendua(id) {
@@ -156,6 +157,11 @@ async function aldatuEkipamendua(id) {
         let modelo = document.getElementById('modeloa').value;
         let stock = document.getElementById('stock').value;
         let idKategoria = document.getElementById('kategoria').value;
+
+        if (stock < 0){
+            alert('Stock-a ezin izan da negatiboa.')
+            return;
+        }
 
         console.log('ID aldatuEkipamendua funtzioan:', id, izena, deskribapena, marka, modelo, stock, idKategoria);
         
@@ -204,6 +210,11 @@ async function crearEkipamendua() {
         // Validar campos obligatorios
         if (!izena.trim() || !deskribapena.trim() || !stock.toString().trim() || !idKategoria.toString().trim()) {
             alert('Izena, deskribapena, stock eta idKategoria derrigorrezkoak dira');
+            return;
+        }
+
+        if (stock < 0){
+            alert('Stock-a ezin izan da negatiboa.')
             return;
         }
 
