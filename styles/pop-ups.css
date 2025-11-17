@@ -82,8 +82,3 @@ h4 {
     background-color: white;
     color: black;
 }
-
-.kokalekuak-ikusi:hover, .filtroBotoia:hover {
-    background-color: #F0F0F0;
-    cursor: pointer;
-}

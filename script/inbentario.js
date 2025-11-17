@@ -106,11 +106,11 @@ function mostrarinbentarioak(inbentarioak) {
             <td>${ekipamendu.izena}</td>
             <td>${inbentarioa.erosketaData}</td>
             <td> 
-               <button onclick="dialogPrepared('${inbentarioa.etiketa}')" class="edit-btn">
-                    <img src="../img/general/editatu.png" alt="Editar" class="editatu">
+               <button onclick="dialogPrepared('${inbentarioa.etiketa}')" class="kudeaketak-btn" id="editatu-btn">
+                    <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
                 </button>
-                <button onclick="ezabatuinbentarioa('${inbentarioa.etiketa}')" class="delete-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar" class="editatu">
+                <button onclick="ezabatuinbentarioa('${inbentarioa.etiketa}')" class="kudeaketak-btn" id="ezabatu-btn">
+                    <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
                 </button>
             </td>
         `;
