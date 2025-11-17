@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="eus">
+<html lang="eu">
 
 <head>
     <meta charset="UTF-8">
@@ -45,26 +45,49 @@
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
                 </a>
                 <h4>NAN</h4>
-                <input class="datuakInput" type="text" id="NAN" required>
+                <input class="datuakInput" type="text" id="NANSortu" required>
                 <h4>Izena</h4>
-                <input class="datuakInput" type="text" id="izena" required>
+                <input class="datuakInput" type="text" id="izenaSortu" required>
                 <h4>Abizena</h4>
-                <input class="datuakInput" type="text" id="abizena" required>
+                <input class="datuakInput" type="text" id="abizenaSortu" required>
                 <h4>Erabiltzailea</h4>
-                <input class="datuakInput" type="text" id="erabiltzailea" required>
+                <input class="datuakInput" type="text" id="erabiltzaileaSortu" required>
                 <h4>Pasahitza</h4>
-                <input class="datuakInput" type="text" id="pasahitza" required>
+                <input class="datuakInput" type="password" id="pasahitzaSortu" required>
                 <h4>Rola</h4>
-                <select id="rola" required>
+                <select id="rolaSortu" required>
                     <option value="" disabled selected>Aukeratu rola</option>
                     <option>Admin</option>
                     <option>User</option>
                 </select>
-                <button id="botoia" onclick="">Erabiltzailea sortu</button>
+                <button id="botoiaSortu" onclick="crearErabiltzailea()">Erabiltzailea sortu</button>
+            </form>
+        </dialog>
+        <dialog class="popup" id="aldatuErabiltzailea">
+            <form>
+                <a onclick="document.getElementById('aldatuErabiltzailea').close()" class="close-btn">
+                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+                </a>
+                <h4>Izena</h4>
+                <input class="datuakInput" type="text" id="izenaEditatu" required>
+                <h4>Abizena</h4>
+                <input class="datuakInput" type="text" id="abizenaEditatu" required>
+                <h4>Erabiltzailea</h4>
+                <input class="datuakInput" type="text" id="erabiltzaileaEditatu" required>
+                <h4>Pasahitza</h4>
+                <input class="datuakInput" type="password" id="pasahitzaEditatu" required>
+                <h4>Rola</h4>
+                <select id="rolaEditatu" required>
+                    <option value="" disabled selected>Aukeratu rola</option>
+                    <option>Admin</option>
+                    <option>User</option>
+                </select>
+                <button id="botoiaEditatu">Aldaketak gorde</button>
             </form>
         </dialog>
     </main>
     <script src="../script/header.js"></script>
+    <script src="../script/erabiltzaileak.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,165 @@
+const API_URL = '../../E1T4_Back/Kontrolagailuak/kategoria-controller.php';
+const API_KEY = '9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1';
+const botonEditar = document.getElementById('botoiaEditatu');
+
+document.addEventListener('DOMContentLoaded', () => {
+    cargarKategoriak();
+});
+
+async function llamarAPI(metodo, datos = {}) {
+    //Bidaliko parametroak prestatu
+    const params = new URLSearchParams(); 
+    params.append('_method', metodo);
+    params.append('HTTP_APIKEY', API_KEY);
+
+    // Gehitu datuak soilik balioak daudenean
+    for (const [key, value] of Object.entries(datos)) {
+        if (value !== null && value !== undefined) {
+            params.append(key, value);
+        }
+    }
+
+    // APIra deitu
+    const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+    });
+
+    // Erantzuna prozesatu
+    const text = await response.text();
+    let resultado;
+    try {
+        resultado = JSON.parse(text);
+    } catch (err) {
+        // Errorea JSON bihurtzean: status + zerbitzariak itzuli duen testua
+        console.error('API-ko eranztuna ez da JSON:', { status: response.status, text });
+        throw new Error(`APIak testu/HTML itzuli du JSONaren ordez. Egoera: ${response.status}. Begiratu kontsola (Network) eta loga.`);
+    }
+
+    if (!response.ok) {
+        // APIak itzuli duen errore-mezua barne hartu (badago)
+        const mensaje = resultado?.error || `HTTP errorea ${response.status}`;
+        throw new Error(mensaje);
+    }
+
+    return resultado;
+}
+
+async function cargarKategoriak() {
+    try {
+        //APIra deitu eta emaitza jaso
+        const resultado = await llamarAPI('GET');
+        // Emaitza baliozkoa bada, erakutsi
+        if (Array.isArray(resultado) || typeof resultado === 'object') {
+            mostrarKategoriak(resultado);
+        }
+    } catch (err) {
+        console.error('Error al cargar kategoriak:', err);
+        const tbody = document.getElementById('kategoria-body');
+        if (tbody) tbody.innerHTML = `<tr><td colspan="8">Error al cargar datos: ${err.message}</td></tr>`;
+    }
+}
+
+function mostrarKategoriak(kategoriak) {
+    // Taularen gorputza garbitu
+    const tbody = document.getElementById('kategoria-body');
+    tbody.innerHTML = '';
+
+    // kategoriak taulan gehitu
+    kategoriak.forEach(async kategoria => {
+        const tr = document.createElement('tr');
+        
+        tr.innerHTML = `
+            <td>${kategoria.id}</td>
+            <td>${kategoria.izena}</td>
+            <td> 
+                <button onclick="dialogPrepared(${kategoria.id})" class="edit-btn">
+                    <img src="../img/general/editatu.png" alt="Editar" class="editatu">
+                </button>
+                <button onclick="ezabatuKategoria(${kategoria.id})" class="delete-btn">
+                    <img src="../img/general/ezabatu.png" alt="Borrar" class="editatu">
+                </button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+async function dialogPrepared(id) {
+
+    const current = await llamarAPI('GET', { id });
+
+        // Obtener referencias a los campos del dialog
+        const dialog = document.getElementById('editatuKategoria');
+        const izenaInput = document.getElementById('kategoriaIzenaEditatu');
+
+        // Rellenar campos con los datos del equipo
+        izenaInput.value = current.izena || '';
+
+        botonEditar.addEventListener('click', () => { 
+            aldatuKategoria(id);
+        });
+        document.getElementById('editatuKategoria').showModal()
+}
+
+async function aldatuKategoria(id) {
+    try {
+        let izena = document.getElementById('kategoriaIzenaEditatu').value;
+
+        console.log('ID aldatuKategoria funtzioan:', id, izena);
+        
+        result = await llamarAPI('PUT', {
+            id,
+            izena,
+        });
+        const dialog = document.getElementById('editatuKategoria');
+        dialog.close();
+        await cargarKategoriak();
+        const data = await result.json();
+    } catch (err) {
+        console.error('Error:', err);
+    }
+}
+
+async function ezabatuKategoria(id) {
+    try {
+        const result = await llamarAPI('DEL', { id });
+        if (result.success) {
+            alert('Kategoria ezabatuta');
+            await cargarKategoriak();
+        }
+        return result;
+    } catch (err) {
+        console.error('Error al eliminar:', err);
+        alert('Error al eliminar el equipo: ' + err.message);
+        return null;
+    }
+}
+
+async function crearKategoria() {
+    try {
+        const izena = document.getElementById('kategoriaIzenaSortu')?.value ?? '';
+
+        // Validar campos obligatorios
+        if (!izena.trim()) {
+            alert('Izena derrigorrezkoa da');
+            return;
+        }
+
+        const result = await llamarAPI('POST', {
+            izena
+        });
+        console.log('Resultado de crearKategoria:', result);
+        if (result && result.success) {
+            // Cerrar modal si existe
+            const dialog = document.getElementById('sortuKategoria');
+            try { dialog.close(); } catch (e) { /* ignore */ }
+            alert('Kategoria sortuta');
+            await cargarKategoriak();
+        }
+    } catch (err) {
+        console.error('Error al crear kategoria:', err);
+        alert('Error al crear el kategoria: ' + err.message);
+    }
+}
