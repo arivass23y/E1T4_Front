@@ -40,6 +40,8 @@
                 </tbody>
             </table>
         </section>
+
+        <!--Inbentarioa (eta kokalekua) sortzeko dialog -->
         <dialog class="popup" id="sortuInbentarioa">
             <form>
                 <a onclick="document.getElementById('sortuInbentarioa').close()" class="close-btn">
@@ -53,10 +55,15 @@
                 </select>
                 <h4>Erosketa data</h4>
                 <input class="datuakInput" type="date" id="data">
+                <h4>Gela</h4>
+                <select id="gelaSortu">
+                    <option value="" disabled selected>Aukeratu gela</option>
+                </select>
                 <button id="botoia" onclick="crearInbentarioa()">Inbentarioa sortu</button>
             </form>
         </dialog>
 
+        <!--Inbentarioa aldatzeko dialog -->
         <dialog class="popupTaula" id="aldatuInbentarioa">
             <form>
                 <a onclick="document.getElementById('aldatuInbentarioa').close()" class="close-btn">
@@ -73,6 +80,7 @@
             </form>
         </dialog>
 
+        <!--Kokaleku aktiboak dialog -->
         <dialog class="popupTaula" id="kokalekuAktiboak">
             <a onclick="document.getElementById('kokalekuAktiboak').close()" class="close-btn">
                 <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
@@ -92,6 +100,25 @@
                 </tbody>
             </table>
         </dialog>
+
+        <!--Kokalekua aldatzeko dialog -->
+        <dialog class="popupTaula" id="kokalekuAldatu">
+            <form>
+                <a onclick="document.getElementById('kokalekuAldatu').close()" class="close-btn">
+                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+                </a>
+                <h4>Etiketa</h4>
+                <input class="datuakInput" type="text" id="EtiketaKokalekuaAldatu" disabled>
+                <h4>Gela</h4>
+                <select id="gelaAldatu">
+                    <option value="" disabled selected>Aukeratu gela</option>
+                </select>
+                <h4>Amaiera Data</h4>
+                <input class="datuakInput" type="date" id="kokalekuaDataAldatu">
+                <button id="botoiaKokalekuaAldatu">Kokalekua aldatu</button>
+            </form>
+        </dialog>
+
     </main>
 
     <script src="../script/filtros.js"></script>
