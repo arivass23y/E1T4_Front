@@ -1,11 +1,12 @@
-const API_URL = '../../E1T4_Back/Kontrolagailuak/ekipamendua-controller.php';
-const KATEGORIA_API_URL = '../../E1T4_Back/Kontrolagailuak/kategoria-controller.php';
+const API_URL = '../../E1T4_Back/Kontrolagailuak/erabiltzailea-controller.php';
 const API_KEY = '9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1';
 const botonCrear = document.getElementById('botoia');
 
+//Alejandro, cambia los nombres y demas de las funciones para que funcione con erabiltzaileak, si tienes dudas me dices. Los metodos son los que necesitas, he hecho ctr+f para cambiar el nombre a erabiltzaileak en vez de ekipamenduak y ya.
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    cargarEkipamenduak();
-    cargarKategorias();
+    cargarerabiltzaileak();
 });
 
 async function llamarAPI(metodo, datos = {}) {
@@ -48,71 +49,44 @@ async function llamarAPI(metodo, datos = {}) {
     return resultado;
 }
 
-async function cargarEkipamenduak() {
+async function cargarerabiltzaileak() {
     try {
         //APIra deitu eta emaitza jaso
         const resultado = await llamarAPI('GET');
         // Emaitza baliozkoa bada, erakutsi
         if (Array.isArray(resultado) || typeof resultado === 'object') {
-            mostrarEkipamenduak(resultado);
+            mostrarerabiltzaileak(resultado);
         }
     } catch (err) {
-        console.error('Error al cargar ekipamenduak:', err);
-        const tbody = document.getElementById('ekipamendua-body');
+        console.error('Error al cargar erabiltzaileak:', err);
+        const tbody = document.getElementById('erabiltzailea-body');
         if (tbody) tbody.innerHTML = `<tr><td colspan="8">Error al cargar datos: ${err.message}</td></tr>`;
     }
 }
 
-async function cargarKategoria(idKategoria) {
-    let data = null; // declarar data fuera del try
-    try {
-        const params = new URLSearchParams();
-        params.append('_method', 'GET');
-        params.append('HTTP_APIKEY', API_KEY);
-        params.append('id', idKategoria);
-
-        const response = await fetch(KATEGORIA_API_URL, {
-            method: 'POST', // si tu API requiere POST
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: params.toString()
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const text = await response.text();
-        data = JSON.parse(text);
-
-    } catch (err) {
-        console.error('Error:', err);
-    }
-    return data;
-}
-
-function mostrarEkipamenduak(ekipamenduak) {
+function mostrarerabiltzaileak(erabiltzaileak) {
     // Taularen gorputza garbitu
-    const tbody = document.getElementById('ekipamendua-body');
+    const tbody = document.getElementById('erabiltzailea-body');
     tbody.innerHTML = '';
 
-    // Ekipamenduak taulan gehitu
-    ekipamenduak.forEach(async ekipamendua => {
+    // erabiltzaileak taulan gehitu
+    erabiltzaileak.forEach(async erabiltzailea => {
         const tr = document.createElement('tr');
-        let kategoria= await cargarKategoria(ekipamendua.idKategoria);
+        let kategoria= await cargarKategoria(erabiltzailea.idKategoria);
         
         tr.innerHTML = `
-            <td>${ekipamendua.id}</td>
-            <td>${ekipamendua.izena}</td>
+            <td>${erabiltzailea.id}</td>
+            <td>${erabiltzailea.izena}</td>
             <td>${kategoria.izena}</td>
-            <td>${ekipamendua.deskribapena}</td>
-            <td>${ekipamendua.marka || '-'}</td>
-            <td>${ekipamendua.modelo || '-'}</td>
-            <td>${ekipamendua.stock}</td>
+            <td>${erabiltzailea.deskribapena}</td>
+            <td>${erabiltzailea.marka || '-'}</td>
+            <td>${erabiltzailea.modelo || '-'}</td>
+            <td>${erabiltzailea.stock}</td>
             <td> 
-                <button onclick="dialogPrepared(${ekipamendua.id})" class="edit-btn">
+                <button onclick="dialogPrepared(${erabiltzailea.id})" class="edit-btn">
                     <img src="../img/general/editatu.png" alt="Editar" class="editatu">
                 </button>
-                <button onclick="ezabatuEkipamendua(${ekipamendua.id})" class="delete-btn">
+                <button onclick="ezabatuerabiltzailea(${erabiltzailea.id})" class="delete-btn">
                     <img src="../img/general/ezabatu.png" alt="Borrar" class="editatu">
                 </button>
             </td>
@@ -126,7 +100,7 @@ async function dialogPrepared(id) {
     const current = await llamarAPI('GET', { id });
 
         // Obtener referencias a los campos del dialog
-        const dialog = document.getElementById('aldatuEkipamendua');
+        const dialog = document.getElementById('aldatuerabiltzailea');
         const izenaInput = document.getElementById('ekipamenduIzena');
         const deskribapenaInput = document.getElementById('deskribapena');
         const markaInput = document.getElementById('marka');
@@ -143,12 +117,12 @@ async function dialogPrepared(id) {
         kategoriaInput.value = current.idKategoria || '';
 
         botonCrear.addEventListener('click', () => { 
-            aldatuEkipamendua(id);
+            aldatuerabiltzailea(id);
         });
-        document.getElementById('aldatuEkipamendua').showModal()
+        document.getElementById('aldatuerabiltzailea').showModal()
 }
 
-async function aldatuEkipamendua(id) {
+async function aldatuerabiltzailea(id) {
     try {
         let izena = document.getElementById('ekipamenduIzena').value;
         let deskribapena = document.getElementById('deskribapena').value;
@@ -157,7 +131,7 @@ async function aldatuEkipamendua(id) {
         let stock = document.getElementById('stock').value;
         let idKategoria = document.getElementById('kategoria').value;
 
-        console.log('ID aldatuEkipamendua funtzioan:', id, izena, deskribapena, marka, modelo, stock, idKategoria);
+        console.log('ID aldatuerabiltzailea funtzioan:', id, izena, deskribapena, marka, modelo, stock, idKategoria);
         
         result = await llamarAPI('PUT', {
             id,
@@ -168,21 +142,21 @@ async function aldatuEkipamendua(id) {
             stock,
             idKategoria
         });
-        const dialog = document.getElementById('aldatuEkipamendua');
+        const dialog = document.getElementById('aldatuerabiltzailea');
         dialog.close();
-        await cargarEkipamenduak();
+        await cargarerabiltzaileak();
         const data = await result.json();
     } catch (err) {
         console.error('Error:', err);
     }
 }
 
-async function ezabatuEkipamendua(id) {
+async function ezabatuerabiltzailea(id) {
     try {
         const result = await llamarAPI('DEL', { id });
         if (result.success) {
-            alert('Ekipamendua ezabatuta');
-            await cargarEkipamenduak();
+            alert('erabiltzailea ezabatuta');
+            await cargarerabiltzaileak();
         }
         return result;
     } catch (err) {
@@ -192,7 +166,7 @@ async function ezabatuEkipamendua(id) {
     }
 }
 
-async function crearEkipamendua() {
+async function crearerabiltzailea() {
     try {
         const izena = document.getElementById('ekipamenduIzenaSortu')?.value ?? '';
         const idKategoria = document.getElementById('kategoriaSortu')?.value ?? '';
@@ -215,56 +189,16 @@ async function crearEkipamendua() {
             stock,
             idKategoria
         });
-        console.log('Resultado de crearEkipamendua:', result);
+        console.log('Resultado de crearerabiltzailea:', result);
         if (result && result.success) {
             // Cerrar modal si existe
-            const dialog = document.getElementById('sortuEkipamendua');
+            const dialog = document.getElementById('sortuerabiltzailea');
             try { dialog.close(); } catch (e) { /* ignore */ }
-            alert('Ekipamendua sortuta');
-            await cargarEkipamenduak();
+            alert('erabiltzailea sortuta');
+            await cargarerabiltzaileak();
         }
     } catch (err) {
-        console.error('Error al crear ekipamendua:', err);
-        alert('Error al crear el ekipamendua: ' + err.message);
-    }
-}
-
-async function cargarKategorias() {
-    try {
-        // Crear parámetros para la solicitud
-        const params = new URLSearchParams();
-        params.append('_method', 'GET');
-        params.append('HTTP_APIKEY', API_KEY);
-
-        // Hacer la petición
-        const response = await fetch(KATEGORIA_API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: params.toString()
-        });
-
-        // Obtener respuesta como texto
-        const text = await response.text();
-
-        // Parsear JSON
-        let categorias = JSON.parse(text);
-
-        // Obtener el select
-        const select = document.getElementById('kategoriaSortu');
-        let selectAldatu = document.getElementById('kategoria');
-
-        // Llenar select con las categorías
-        if (select && Array.isArray(categorias)) {
-            categorias.forEach(cat => {
-                const option = document.createElement('option');
-                option.value = cat.id;
-                option.textContent = cat.izena;
-                select.appendChild(option);
-                selectAldatu.appendChild(option.cloneNode(true));
-            });
-        }
-
-    } catch (err) {
-        console.error('Error:', err);
+        console.error('Error al crear erabiltzailea:', err);
+        alert('Error al crear el erabiltzailea: ' + err.message);
     }
 }

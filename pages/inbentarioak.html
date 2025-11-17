@@ -17,7 +17,7 @@
         <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
     </a>
     <main class="tabla-wrapper">
-        <button class="kokalekuak-ikusi" onclick="document.getElementById('kokalekuAktiboak').showModal()">
+        <button class="kokalekuak-ikusi" onclick="cargarKokalekuak()">
             <p >Kokaleku aktiboak</p>
             <img src="../img/kokalekuak.png" alt="Añadir" class="filter-icon" id="plus-icon">
         </button>
@@ -46,16 +46,33 @@
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
                 </a>
                 <h4>Etiketa</h4>
-                <input class="datuakInput" type="text" id="ekipamenduIzena">
+                <input class="datuakInput" type="text" id="inbentarioEtiketa">
                 <h4>Ekipamendua</h4>
-                <select id="kategoria">
+                <select id="ekipamendua">
                     <option value="" disabled selected>Aukeratu ekipamendua</option>
                 </select>
                 <h4>Erosketa data</h4>
-                <input class="datuakInput" type="date" id="stock">
-                <button id="botoia" onclick="">Inbentarioa sortu</button>
+                <input class="datuakInput" type="date" id="data">
+                <button id="botoia" onclick="crearInbentarioa()">Inbentarioa sortu</button>
             </form>
         </dialog>
+
+        <dialog class="popupTaula" id="aldatuInbentarioa">
+            <form>
+                <a onclick="document.getElementById('aldatuInbentarioa').close()" class="close-btn">
+                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+                </a>
+                <input type="hidden" id="inbentarioEtiketaAldatu">
+                <h4>Ekipamendua</h4>
+                <select id="ekipamenduaAldatu">
+                    <option value="" disabled selected>Aukeratu ekipamendua</option>
+                </select>
+                <h4>Erosketa data</h4>
+                <input class="datuakInput" type="date" id="dataAldatu">
+                <button id="botoiaAldatu">Inbentarioa aldatu</button>
+            </form>
+        </dialog>
+
         <dialog class="popupTaula" id="kokalekuAktiboak">
             <a onclick="document.getElementById('kokalekuAktiboak').close()" class="close-btn">
                 <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
@@ -79,39 +96,7 @@
 
     <script src="../script/filtros.js"></script>
     <script src="../script/header.js"></script>
-
-    <script>
-        async function kargatuInbentarioa() {
-            try {
-                const response = await fetch("get_inbentarioa.php");
-                const datuak = await response.json();
-
-                const tbody = document.getElementById("inbentarioa-body");
-                tbody.innerHTML = "";
-
-                datuak.forEach(d => {
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `
-                    <td>${d.etiketa}</td>
-                    <td>${d.ekipamenduIzena}</td>
-                    <td>${d.erosketaData}</td>
-                    <td>${d.hasieraData}</td>
-                    <td>${d.amaieraData}</td>
-                    <td>${d.gela}</td>
-                    <td>
-                        <button class="edit-btn">✏️</button>
-                        <button class="delete-btn">🗑️</button>
-                    </td>
-                `;
-                    tbody.appendChild(tr);
-                });
-            } catch (err) {
-                console.error("Errorea datuak kargatzean:", err);
-            }
-        }
-
-        kargatuInbentarioa();
-    </script>
+    <script src="../script/inbentario.js"></script>
 </body>
 
 </html>
