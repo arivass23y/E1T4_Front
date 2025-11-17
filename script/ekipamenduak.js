@@ -268,5 +268,3 @@ async function cargarKategorias() {
         console.error('Error:', err);
     }
 }
-
-
