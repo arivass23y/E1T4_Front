@@ -70,12 +70,18 @@ function mostrarErabiltzaileak(erabiltzaileak) {
     erabiltzaileak.forEach(async erabiltzailea => {
         const tr = document.createElement('tr');
         
+        if (erabiltzailea.rola == "A"){
+            erabiltzailea.rola = "Admin"
+        } else if (erabiltzailea.rola == "U"){
+            erabiltzailea.rola = "User"
+        }
+
         tr.innerHTML = `
             <td>${erabiltzailea.nan}</td>
             <td>${erabiltzailea.izena}</td>
             <td>${erabiltzailea.abizena}</td>
             <td>${erabiltzailea.erabiltzailea}</td>
-            <td>${erabiltzailea.pasahitza}</td>
+            <td><b>············</b></td>
             <td>${erabiltzailea.rola}</td>
             <td> 
                 <button onclick="dialogPrepared('${erabiltzailea.nan}')" class="edit-btn">
@@ -90,9 +96,9 @@ function mostrarErabiltzaileak(erabiltzaileak) {
     });
 }
 
-async function dialogPrepared(id) {
+async function dialogPrepared(nan) {
 
-    const current = await llamarAPI('GET', { id });
+    const current = await llamarAPI('GET', { nan });
 
         // Obtener referencias a los campos del dialog
         const dialog = document.getElementById('aldatuErabiltzailea');
@@ -106,16 +112,17 @@ async function dialogPrepared(id) {
         izenaInput.value = current.izena || '';
         abizenaInput.value = current.abizena || '';
         erabiltzaileaInput.value = current.erabiltzailea || '';
-        pasahitzaInput.value = current.pasahitza || '';
-        rolaInput.value = current.rola || '';
+        pasahitzaInput.value = '';
+        const rolak = { "A": "Admin", "U": "User" };
+        rolaInput.value = rolak[current.rola] || '';
 
         botonEditar.addEventListener('click', () => { 
-            aldatuErabiltzailea(id);
+            aldatuErabiltzailea(nan);
         });
         document.getElementById('aldatuErabiltzailea').showModal()
 }
 
-async function aldatuErabiltzailea(id) {
+async function aldatuErabiltzailea(nan) {
     try {
         let izena = document.getElementById('izenaEditatu').value;
         let abizena= document.getElementById('abizenaEditatu').value;
@@ -123,10 +130,16 @@ async function aldatuErabiltzailea(id) {
         let pasahitza = document.getElementById('pasahitzaEditatu').value;
         let rola = document.getElementById('rolaEditatu').value;
 
-        console.log('ID aldatuErabiltzailea funtzioan:', id, izena, abizena, erabiltzailea, pasahitza, rola);
+        if (rola == "Admin"){
+            rola = "A"
+        } else if (rola == "User"){
+            rola = "U"
+        }
+
+        console.log('ID aldatuErabiltzailea funtzioan:', nan, izena, abizena, erabiltzailea, pasahitza, rola);
         
         result = await llamarAPI('PUT', {
-            id,
+            nan,
             izena,
             abizena,
             erabiltzailea,
@@ -142,9 +155,9 @@ async function aldatuErabiltzailea(id) {
     }
 }
 
-async function ezabatuErabiltzailea(id) {
+async function ezabatuErabiltzailea(nan) {
     try {
-        const result = await llamarAPI('DEL', { id });
+        const result = await llamarAPI('DEL', { nan });
         if (result.success) {
             alert('Erabiltzailea ezabatuta');
             await cargarErabiltzaileak();
@@ -164,12 +177,23 @@ async function crearErabiltzailea() {
         const abizena = document.getElementById('abizenaSortu')?.value ?? '';
         const erabiltzailea = document.getElementById('erabiltzaileaSortu')?.value ?? '';
         const pasahitza = document.getElementById('pasahitzaSortu')?.value ?? '';
-        const rola = document.getElementById('rolaSortu')?.value ?? '';
+        let rola = document.getElementById('rolaSortu')?.value ?? '';
 
         // Validar campos obligatorios
         if (!nan.trim() || !izena.trim() || !abizena.trim() || !erabiltzailea.trim() || !pasahitza.trim() || !rola.trim()) {
             alert('NAN, izena, abizena, erabiltzailea, pasahitza eta rola derrigorrezkoak dira');
             return;
+        }
+
+        if (!validarNAN(nan)){
+            alert('NAN inválido');
+            return;
+        }
+
+        if (rola == "Admin"){
+            rola = "A"
+        } else if (rola == "User"){
+            rola = "U"
         }
 
         const result = await llamarAPI('POST', {
@@ -192,4 +216,16 @@ async function crearErabiltzailea() {
         console.error('Error al crear erabiltzailea:', err);
         alert('Error al crear el erabiltzailea: ' + err.message);
     }
+}
+
+function validarNAN(nan) {
+    nan = nan.toUpperCase().trim();
+    if (!/^\d{8}[A-Z]$/.test(nan)) return false;
+
+    const letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+    const numero = parseInt(nan.slice(0, 8), 10);
+    const letra = nan.slice(-1);
+    const letraCorrecta = letras[numero % 23];
+
+    return letra === letraCorrecta;
 }
