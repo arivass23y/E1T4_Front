@@ -84,11 +84,11 @@ function mostrarErabiltzaileak(erabiltzaileak) {
             <td><b>············</b></td>
             <td>${erabiltzailea.rola}</td>
             <td> 
-                <button onclick="dialogPrepared('${erabiltzailea.nan}')" class="edit-btn">
-                    <img src="../img/general/editatu.png" alt="Editar" class="editatu">
+                <button onclick="dialogPrepared('${erabiltzailea.nan}')" class="kudeaketak-btn" id="editatu-btn">
+                    <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
                 </button>
-                <button onclick="ezabatuErabiltzailea('${erabiltzailea.nan}')" class="delete-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar" class="editatu">
+                <button onclick="ezabatuErabiltzailea('${erabiltzailea.nan}')" class="kudeaketak-btn" id="ezabatu-btn">
+                    <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
                 </button>
             </td>
         `;

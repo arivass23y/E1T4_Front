@@ -143,24 +143,39 @@ tr:nth-of-type(1)>th {
     }
 }
 
-#kudeaketa-icon {
-    width: 30px;
-    padding: 3px;
-    background-color: white;
-    border: none;
-    margin-left: 10px;
-}
-
+/*Lo de los filtros*/
 #kudeaketa-icon img {
     width: 20px;
 }
 
-.edit-btn, .delete-btn {
-    max-width: 30px;
-    max-height: 30px;
-}
-
-.editatu {
+.kudeaketak-img {
     max-width: 20px;
     max-height: 20px;
+}
+
+.kudeaketak-btn {
+    background-color: white;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.kudeaketak-btn:hover  {
+    background-color: #F0F0F0;
+    cursor: pointer;
+}
+
+#editatu-btn {
+    border-color: #0077B6;
+}
+
+#ezabatu-btn {
+    border-color: rgb(245, 74, 74);
+}
+
+.taula td:last-child {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    padding-left: 0px;
 }

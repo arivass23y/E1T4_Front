@@ -74,11 +74,11 @@ function mostrarKategoriak(kategoriak) {
             <td>${kategoria.id}</td>
             <td>${kategoria.izena}</td>
             <td> 
-                <button onclick="dialogPrepared(${kategoria.id})" class="edit-btn">
-                    <img src="../img/general/editatu.png" alt="Editar" class="editatu">
+                <button onclick="dialogPrepared(${kategoria.id})" class="kudeaketak-btn" id="editatu-btn">
+                    <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
                 </button>
-                <button onclick="ezabatuKategoria(${kategoria.id})" class="delete-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar" class="editatu">
+                <button onclick="ezabatuKategoria(${kategoria.id})" class="kudeaketak-btn" id="ezabatu-btn">
+                    <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
                 </button>
             </td>
         `;

@@ -75,11 +75,11 @@ function mostrarGelak(gelak) {
             <td>${gela.izena}</td>
             <td>${gela.taldea}</td>
             <td> 
-                <button onclick="dialogPrepared(${gela.id})" class="edit-btn">
-                    <img src="../img/general/editatu.png" alt="Editar" class="editatu">
+                <button onclick="dialogPrepared(${gela.id})" class="kudeaketak-btn" id="editatu-btn">
+                    <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
                 </button>
-                <button onclick="ezabatuGela(${gela.id})" class="delete-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar" class="editatu">
+                <button onclick="ezabatuGela(${gela.id})" class="kudeaketak-btn" id="ezabatu-btn">
+                    <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
                 </button>
             </td>
         `;
