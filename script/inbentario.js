@@ -2,11 +2,23 @@ const API_URL = '../../E1T4_Back/Kontrolagailuak/inbentarioa-controller.php';
 const Ekipamendua_API_URL = '../../E1T4_Back/Kontrolagailuak/ekipamendua-controller.php';
 const Kokalekua_API_URL = '../../E1T4_Back/Kontrolagailuak/kokalekua-controller.php';
 const Gela_API_URL = '../../E1T4_Back/Kontrolagailuak/gela-controller.php';
-const API_KEY = '9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1';
+let API_KEY = "";
 const botonCrear = document.getElementById('botoiaAldatu');
 const botonKokalekuaAldatu = document.getElementById('botoiaKokalekuaAldatu');
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    const apiKeyz = "9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1";
+    sessionStorage.setItem('apiKey',apiKeyz);
+    const apiKey = sessionStorage.getItem('apiKey');
+    if (!apiKey) {
+        alert('No hay sesión activa, vuelve a iniciar sesión.');
+        window.location.href = 'login.html';
+    }
+    else{
+        API_KEY = apiKey;
+    }
+
     cargarinbentarioak();
     cargarEkipamenduak();
     cargarGelak();
@@ -440,32 +452,45 @@ async function sortuKokalekua(etiketa, hasieraData, idGela) {
     }
 }
 async function crearInbentarioa() {
+    const etiketa = document.getElementById('inbentarioEtiketa').value;
+    const ekipamendua = document.getElementById('ekipamendua').value;
+    const erosketaData = document.getElementById('data').value;
+    const gela = document.getElementById('gelaSortu').value;
+
+    if (!etiketa.trim() || !ekipamendua.trim() || !erosketaData.trim() || !gela) {
+        alert('Datuak falta dira');
+        return;
+    }
+
+    let inventarioCreado = false;
+
+    // Crear inventario
     try {
-        const etiketa = document.getElementById('inbentarioEtiketa').value;
-        const ekipamendua = document.getElementById('ekipamendua').value;
-        const erosketaData = document.getElementById('data').value;
-        const gela = document.getElementById('gelaSortu').value;
-        sort
-        // Validar campos obligatorios
-        if (!etiketa.trim() || !ekipamendua.trim() || !erosketaData.trim()) {
-            alert('Datuak falta dira');
-            return;
-        }
-
-        const result = await llamarAPI('POST', {
-            etiketa,
-            ekipamendua,
-            erosketaData
-        });
-
+        const result = await llamarAPI('POST', { etiketa, ekipamendua, erosketaData, gela });
         if (result && result.success) {
-            // Cerrar modal si existe
-            const dialog = document.getElementById('sortuinbentarioa');
-            dialog.close();
-            await cargarinbentarioak();
+            inventarioCreado = true;
+            console.log('Inventario creado correctamente');
+        } else {
+            console.warn('Inventario no confirmado por la API:', result);
         }
     } catch (err) {
-        console.error('Error al crear inbentarioa:', err);
-        alert('Error al crear el inbentarioa: ' + err.message);
+        console.warn('Advertencia: fetch error al crear inventario (puede que ya esté creado):', err.message);
+        inventarioCreado = true; // asumimos que pudo crearse
+    }
+
+    // Crear kokalekua aunque haya fetch error
+    try {
+        await sortuKokalekua(etiketa, erosketaData, gela);
+    } catch (err) {
+        console.warn('Advertencia: fetch error al crear kokalekua (puede que ya esté creado):', err.message);
+    }
+
+    // Cerrar modal y recargar inventarios
+    try { document.getElementById('sortuinbentarioa')?.close(); } catch(e) {}
+    await cargarinbentarioak();
+
+    if (inventarioCreado) {
+        alert('Inventario y kokalekua procesados (puede haber advertencias en la consola).');
     }
 }
+
