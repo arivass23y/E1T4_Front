@@ -32,7 +32,7 @@
                         <th>Etiketa</th>
                         <th>Ekipamendua</th>
                         <th>Erosketa data</th>
-                        <th>Kudeaketak</th>
+                        <th><section>Kudeaketak</section></th>
                     </tr>
                 </thead>
                 <tbody id="inbentarioa-body">
@@ -64,7 +64,7 @@
         </dialog>
 
         <!--Inbentarioa aldatzeko dialog -->
-        <dialog class="popupTaula" id="aldatuInbentarioa">
+        <dialog class="popup" id="aldatuInbentarioa">
             <form>
                 <a onclick="document.getElementById('aldatuInbentarioa').close()" class="close-btn">
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
@@ -76,7 +76,7 @@
                 </select>
                 <h4>Erosketa data</h4>
                 <input class="datuakInput" type="date" id="dataAldatu">
-                <button id="botoiaAldatu">Inbentarioa aldatu</button>
+                <button id="botoiaEditatu">Inbentarioa aldatu</button>
             </form>
         </dialog>
 
@@ -92,7 +92,7 @@
                         <th>Gela</th>
                         <th>Hasiera data</th>
                         <th>Amaiera data</th>
-                        <th>Kudeaketak</th>
+                        <th><section>Kudeaketak</section></th>
                     </tr>
                 </thead>
                 <tbody id="kokalekua-body">
@@ -102,7 +102,7 @@
         </dialog>
 
         <!--Kokalekua aldatzeko dialog -->
-        <dialog class="popupTaula" id="kokalekuAldatu">
+        <dialog class="popup" id="kokalekuAldatu">
             <form>
                 <a onclick="document.getElementById('kokalekuAldatu').close()" class="close-btn">
                     <img class="close" src="../img/mezuak/close.png" alt="Cerrar">

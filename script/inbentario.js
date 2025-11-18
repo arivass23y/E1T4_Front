@@ -3,7 +3,7 @@ const Ekipamendua_API_URL = '../../E1T4_Back/Kontrolagailuak/ekipamendua-control
 const Kokalekua_API_URL = '../../E1T4_Back/Kontrolagailuak/kokalekua-controller.php';
 const Gela_API_URL = '../../E1T4_Back/Kontrolagailuak/gela-controller.php';
 let API_KEY = "";
-const botonCrear = document.getElementById('botoiaAldatu');
+const botonCrear = document.getElementById('botoiaEditatu');
 const botonSortu = document.getElementById('botoiaSortu');
 const botonKokalekuaAldatu = document.getElementById('botoiaKokalekuaAldatu');
 
@@ -99,13 +99,15 @@ function mostrarinbentarioak(inbentarioak) {
             <td>${inbentarioa.etiketa}</td>
             <td>${ekipamendu.izena}</td>
             <td>${inbentarioa.erosketaData}</td>
-            <td> 
-               <button onclick="dialogPrepared('${inbentarioa.etiketa}')" class="kudeaketak-btn" id="editatu-btn">
-                    <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
-                </button>
-                <button onclick="ezabatuinbentarioa('${inbentarioa.etiketa}')" class="kudeaketak-btn" id="ezabatu-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
-                </button>
+            <td>
+                <section> 
+                <button onclick="dialogPrepared('${inbentarioa.etiketa}')" class="kudeaketak-btn" id="editatu-btn">
+                        <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
+                    </button>
+                    <button onclick="ezabatuinbentarioa('${inbentarioa.etiketa}')" class="kudeaketak-btn" id="ezabatu-btn">
+                        <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
+                    </button>
+                </section>
             </td>
         `;
         tbody.appendChild(tr);
@@ -395,7 +397,7 @@ async function cargarKokalekuak() {
             <td>${kokalekua.hasieraData}</td>
             <td>${kokalekua.amaieraData}</td>
             <td> 
-               <button onclick="dialogPreparedKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="kudeaketak-btn" id="editatu-btn-kokalekua"">
+               <button onclick="dialogPreparedKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="kudeaketak-btn" id="editatu-btn">
                     <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
                 </button>
                 <button onclick="ezabatuKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="kudeaketak-btn" id="ezabatu-btn">

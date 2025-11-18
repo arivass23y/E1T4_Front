@@ -17,11 +17,9 @@
         <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
     </a>
     <main class="tabla-wrapper">
-        <header class="filter-container">
-            <button class="botoi-konjuntuoak" onclick="document.getElementById('sortuEkipamendua').showModal()">
-                <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
-            </button>
-        </header>
+        <button class="filtroBotoia" onclick="document.getElementById('sortuEkipamendua').showModal()">
+            <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
+        </button>
 
         <section>
             <table class="taula">
@@ -34,7 +32,7 @@
                         <th>Marka</th>
                         <th>Modeloa</th>
                         <th>Stock</th>
-                        <th>Kudeaketak</th>
+                        <th><section>Kudeaketak</section></th>
                     </tr>
                 </thead>
                 <tbody id="ekipamendua-body">
