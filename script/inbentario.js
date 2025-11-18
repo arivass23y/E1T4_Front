@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const apiKey = sessionStorage.getItem('apiKey');
     if (!apiKey) {
         alert('No hay sesión activa, vuelve a iniciar sesión.');
-        window.location.href = 'login.html';
+        window.location.href = 'hasi-saioa.html';
     }
     else{
         API_KEY = apiKey;
