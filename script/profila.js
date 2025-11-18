@@ -3,12 +3,12 @@ const API_KEY = '9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e
 const botonEditar = document.getElementById('botoiaEditatu');
 
 document.addEventListener('DOMContentLoaded', () => {
-    cargarErabiltzaileak();
+    cargarErabiltzailea();
 });
 
 async function llamarAPI(metodo, datos = {}) {
     //Bidaliko parametroak prestatu
-    const params = new URLSearchParams(); 
+    const params = new URLSearchParams();
     params.append('_method', metodo);
     params.append('HTTP_APIKEY', API_KEY);
 
@@ -46,14 +46,14 @@ async function llamarAPI(metodo, datos = {}) {
     return resultado;
 }
 
-async function cargarErabiltzaileak() {
+async function cargarErabiltzailea() {
     try {
         //APIra deitu eta emaitza jaso
-        const resultado = await llamarAPI('GET');
+        const resultado = await llamarAPI('GET', { nan });
+        console.log(resultado);
         // Emaitza baliozkoa bada, erakutsi
-        if (Array.isArray(resultado) || typeof resultado === 'object') {
-            mostrarErabiltzaileak(resultado);
-        }
+        mostrarErabiltzaileak(resultado);
+
     } catch (err) {
         console.error('Error al cargar erabiltzaileak:', err);
         const tbody = document.getElementById('profilaDatuak');
@@ -61,75 +61,62 @@ async function cargarErabiltzaileak() {
     }
 }
 
-function mostrarErabiltzaileak(erabiltzaileak) {
-    // Taularen gorputza garbitu
+function mostrarErabiltzaileak(erabiltzailea) {
     const tbody = document.getElementById('profilaDatuak');
     tbody.innerHTML = '';
 
-    // erabiltzaileak taulan gehitu
-    erabiltzaileak.forEach(async erabiltzailea => {
-        const section = document.createElement('section');
-        
-        if (erabiltzailea.rola == "A"){
-            erabiltzailea.rola = "Admin"
-        } else if (erabiltzailea.rola == "U"){
-            erabiltzailea.rola = "User"
-        }
+    if (erabiltzailea.rola == "A") erabiltzailea.rola = "Admin";
+    if (erabiltzailea.rola == "U") erabiltzailea.rola = "User";
 
-        section.innerHTML = `
-            <section><h2>NAN<h2><p>${erabiltzailea.nan}</p></section>
-            <section><h2>Izena<h2><p>${erabiltzailea.izena}</p></section>
-            <section><h2>Abizena<h2><p>${erabiltzailea.abizena}</p></section>
-            <section><h2>Erabiltzailea<h2><p>${erabiltzailea.erabiltzailea}</p></section>
-            <h2>NAN<h2><p><b>············</b></p></section>
-            <section><h2>Rola<h2><p>${erabiltzailea.rola}</p></section>
-        `;
-        tbody.appendChild(section);
-    });
+    tbody.innerHTML = `
+        <section><h3>NAN</h3><p>${erabiltzailea.nan}</p></section>
+        <section><h3>Izena</h3><p>${erabiltzailea.izena}</p></section>
+        <section><h3>Abizena</h3><p>${erabiltzailea.abizena}</p></section>
+        <section><h3>Erabiltzailea</h3><p>${erabiltzailea.erabiltzailea}</p></section>
+        <section><h3>Pasahitza</h3><p><b>············</b></p></section>
+        <section><h3>Rola</h3><p>${erabiltzailea.rola}</p></section>
+    `;
+
+    const buttonBody = document.getElementById('botoi-section');
+    buttonBody.innerHTML = '';
+    buttonBody.innerHTML = `
+        <button id="botoia" onclick="dialogPrepared('${erabiltzailea.nan}')">Profila editatu</button>
+    `;
 }
+
 
 async function dialogPrepared(nan) {
 
     const current = await llamarAPI('GET', { nan });
 
-        // Obtener referencias a los campos del dialog
-        const dialog = document.getElementById('aldatuProfila');
-        const izenaInput = document.getElementById('izenaEditatu');
-        const abizenaInput = document.getElementById('abizenaEditatu');
-        const erabiltzaileaInput = document.getElementById('erabiltzaileaEditatu');
-        const pasahitzaInput = document.getElementById('pasahitzaEditatu');
-        const rolaInput = document.getElementById('rolaEditatu');
+    // Obtener referencias a los campos del dialog
+    const dialog = document.getElementById('aldatuProfila');
+    const izenaInput = document.getElementById('izenaEditatu');
+    const abizenaInput = document.getElementById('abizenaEditatu');
+    const erabiltzaileaInput = document.getElementById('erabiltzaileaEditatu');
+    const pasahitzaInput = document.getElementById('pasahitzaEditatu');
 
-        // Rellenar campos con los datos del equipo
-        izenaInput.value = current.izena || '';
-        abizenaInput.value = current.abizena || '';
-        erabiltzaileaInput.value = current.erabiltzailea || '';
-        pasahitzaInput.value = '';
-        const rolak = { "A": "Admin", "U": "User" };
-        rolaInput.value = rolak[current.rola] || '';
+    // Rellenar campos con los datos del equipo
+    izenaInput.value = current.izena || '';
+    abizenaInput.value = current.abizena || '';
+    erabiltzaileaInput.value = current.erabiltzailea || '';
+    pasahitzaInput.value = '';
 
-        botonEditar.addEventListener('click', () => { 
-            aldatuErabiltzailea(nan);
-        });
-        dialog.showModal()
+    botonEditar.addEventListener('click', () => {
+        aldatuErabiltzailea(nan);
+    });
+    dialog.showModal()
 }
 
 async function aldatuErabiltzailea(nan) {
     try {
         let izena = document.getElementById('izenaEditatu').value;
-        let abizena= document.getElementById('abizenaEditatu').value;
+        let abizena = document.getElementById('abizenaEditatu').value;
         let erabiltzailea = document.getElementById('erabiltzaileaEditatu').value;
         let pasahitza = document.getElementById('pasahitzaEditatu').value;
-        let rola = document.getElementById('rolaEditatu').value;
-
-        if (rola == "Admin"){
-            rola = "A"
-        } else if (rola == "User"){
-            rola = "U"
-        }
 
         console.log('ID aldatuErabiltzailea funtzioan:', nan, izena, abizena, erabiltzailea, pasahitza, rola);
-        
+
         result = await llamarAPI('PUT', {
             nan,
             izena,
@@ -145,16 +132,4 @@ async function aldatuErabiltzailea(nan) {
     } catch (err) {
         console.error('Error:', err);
     }
-}
-
-function validarNAN(nan) {
-    nan = nan.toUpperCase().trim();
-    if (!/^\d{8}[A-Z]$/.test(nan)) return false;
-
-    const letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
-    const numero = parseInt(nan.slice(0, 8), 10);
-    const letra = nan.slice(-1);
-    const letraCorrecta = letras[numero % 23];
-
-    return letra === letraCorrecta;
 }

@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/orriak/profila.css">
     <link rel="stylesheet" href="../styles/pop-ups.css">
-        <link rel="stylesheet" href="../styles/orriak/taulak.css">
-
 </head>
 
 <body>
@@ -23,8 +21,7 @@
             <img class="profila-img" src="../img/navbar/avatar.png" alt="erabiltzaile avatar">
             <section class="datuak" id="profilaDatuak">
             </section>
-            <section class="botoi-section">
-                <button id="botoia" onclick="document.getElementById('aldatuProfila').showModal()">Profila editatu</button>
+            <section class="botoi-section" id="botoi-section">
             </section>
         </section>
         <dialog class="popup" id="aldatuProfila">
@@ -40,18 +37,11 @@
                 <input class="datuakInput" type="text" id="erabiltzaileaEditatu" required>
                 <h4>Pasahitza</h4>
                 <input class="datuakInput" type="password" id="pasahitzaEditatu" required>
-                <h4>Rola</h4>
-                <select id="rolaEditatu" required>
-                    <option value="" disabled selected>Aukeratu rola</option>
-                    <option>Admin</option>
-                    <option>User</option>
-                </select>
                 <button id="botoiaEditatu">Aldaketak gorde</button>
             </form>
         </dialog>
     </main>
     <script src="../script/header.js"></script>
-    <script src="../script/errore-mezua.js"></script>
     <script src="../script/profila.js"></script>
 </body>
 
