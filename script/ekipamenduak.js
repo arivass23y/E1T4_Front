@@ -184,10 +184,14 @@ async function aldatuEkipamendua(id) {
             stock,
             idKategoria
         });
-        const dialog = document.getElementById('aldatuEkipamendua');
-        dialog.close();
-        await cargarEkipamenduak();
-        const data = await result.json();
+        if (result.success) {
+            alert('Ekipamendua aldatuta');
+            const dialog = document.getElementById('aldatuEkipamendua');
+            dialog.close();
+            await cargarEkipamenduak();
+            const data = await result.json();
+        }
+
     } catch (err) {
         console.error('Error:', err);
     }
