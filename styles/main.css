@@ -6,6 +6,8 @@
 
 body {
     font-family: 'Inter', sans-serif;
+    padding-top: 70px;
+    padding-bottom: 30px;
 }
 
 /* Animación menú */
