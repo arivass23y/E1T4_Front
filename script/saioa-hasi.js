@@ -10,7 +10,6 @@ async function login() {
     else{
         try {
             const resultado = await llamarAPI('LOGIN', { erabiltzailea, pasahitza });
-
             if (resultado.success && resultado.success.toString().trim().toLowerCase() === "true") {
                 alert("Login ondo burutu da."); 
                 sessionStorage.setItem('nan', resultado.nan);
@@ -18,6 +17,7 @@ async function login() {
                 window.location.href ='../index.html';
             } else {
                 alert("Erabiltzaile edo pasahitz okerra.");
+
             }
         } catch (err) {
             console.error("Errorea login egiten:", err);
