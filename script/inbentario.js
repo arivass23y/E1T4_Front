@@ -364,11 +364,11 @@ async function cargarKokalekuak() {
             <td>${kokalekua.hasieraData}</td>
             <td></td>
             <td> 
-               <button onclick="dialogPreparedKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')"  class="edit-btn">
-                    <img src="../img/general/editatu.png" alt="Editar" class="editatu">
+               <button onclick="dialogPreparedKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="kudeaketak-btn" id="editatu-btn"">
+                    <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
                 </button>
-                <button onclick="ezabatuKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="delete-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar" class="editatu">
+                <button onclick="ezabatuKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="kudeaketak-btn" id="ezabatu-btn">
+                    <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
                 </button>
             </td>
 
@@ -493,4 +493,3 @@ async function crearInbentarioa() {
         alert('Inventario y kokalekua procesados (puede haber advertencias en la consola).');
     }
 }
-
