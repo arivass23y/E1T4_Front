@@ -8,12 +8,10 @@ const botonKokalekuaAldatu = document.getElementById('botoiaKokalekuaAldatu');
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const apiKeyz = "9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1";
-    sessionStorage.setItem('apiKey',apiKeyz);
     const apiKey = sessionStorage.getItem('apiKey');
     if (!apiKey) {
-        alert('No hay sesión activa, vuelve a iniciar sesión.');
-        window.location.href = 'hasi-saioa.html';
+        alert('Ez dago saio aktiborik, hasi saioa berriro.');
+        window.location.href = 'saioa-hasi.html';
     }
     else{
         API_KEY = apiKey;
@@ -162,7 +160,40 @@ async function ezabatuinbentarioa(etiketa) {
     }
 }
 
+async function crearInbentarioa() {
+    const etiketa = document.getElementById('inbentarioEtiketa').value;
+    const ekipamendua = document.getElementById('ekipamendua').value;
+    const erosketaData = document.getElementById('data').value;
+    const gela = document.getElementById('gelaSortu').value;
 
+    if (!etiketa.trim() || !ekipamendua.trim() || !erosketaData.trim() || !gela) {
+        alert('Datuak falta dira');
+        return;
+    }
+
+    let inventarioCreado = false;
+
+    // Crear inventario
+    try {
+        const result = await llamarAPI('POST', { etiketa, ekipamendua, erosketaData, gela });
+        if (result && result.success) {
+            inventarioCreado = true;
+            console.log('Inventario creado correctamente');
+        } else {
+            console.warn('Inventario no confirmado por la API:', result);
+        }
+    } catch (err) {
+        console.warn('Advertencia: fetch error al crear inventario (puede que ya esté creado):', err.message);
+        inventarioCreado = true; // asumimos que pudo crearse
+    }
+
+    // Crear kokalekua aunque haya fetch error
+    try {
+        await sortuKokalekua(etiketa, erosketaData, gela);
+    } catch (err) {
+        console.warn('Advertencia: fetch error al crear kokalekua (puede que ya esté creado):', err.message);
+    }
+}
 
 
 
@@ -431,9 +462,9 @@ async function ezabatuKokalekua(etiketa,hasieraData) {
         return null;
     }
 }
+
 async function sortuKokalekua(etiketa, hasieraData, idGela) {
     try {
-        
         const resultKokaleku = await llamarAPIKokalekuak('POST', {
             etiketa,
             hasieraData,
@@ -443,53 +474,11 @@ async function sortuKokalekua(etiketa, hasieraData, idGela) {
             // Cerrar modal si existe
             const dialog = document.getElementById('sortuinbentarioa');
             try { dialog.close(); } catch (e) { /* ignore */ }
-            alert('Kokalekua sortuta');
             await cargarinbentarioak();
+            await cargarKokalekuak();
         }
     } catch (err) {
         console.error('Error al crear kokalekua:', err);
         alert('Error al crear el kokalekua: ' + err.message);
-    }
-}
-async function crearInbentarioa() {
-    const etiketa = document.getElementById('inbentarioEtiketa').value;
-    const ekipamendua = document.getElementById('ekipamendua').value;
-    const erosketaData = document.getElementById('data').value;
-    const gela = document.getElementById('gelaSortu').value;
-
-    if (!etiketa.trim() || !ekipamendua.trim() || !erosketaData.trim() || !gela) {
-        alert('Datuak falta dira');
-        return;
-    }
-
-    let inventarioCreado = false;
-
-    // Crear inventario
-    try {
-        const result = await llamarAPI('POST', { etiketa, ekipamendua, erosketaData, gela });
-        if (result && result.success) {
-            inventarioCreado = true;
-            console.log('Inventario creado correctamente');
-        } else {
-            console.warn('Inventario no confirmado por la API:', result);
-        }
-    } catch (err) {
-        console.warn('Advertencia: fetch error al crear inventario (puede que ya esté creado):', err.message);
-        inventarioCreado = true; // asumimos que pudo crearse
-    }
-
-    // Crear kokalekua aunque haya fetch error
-    try {
-        await sortuKokalekua(etiketa, erosketaData, gela);
-    } catch (err) {
-        console.warn('Advertencia: fetch error al crear kokalekua (puede que ya esté creado):', err.message);
-    }
-
-    // Cerrar modal y recargar inventarios
-    try { document.getElementById('sortuinbentarioa')?.close(); } catch(e) {}
-    await cargarinbentarioak();
-
-    if (inventarioCreado) {
-        alert('Inventario y kokalekua procesados (puede haber advertencias en la consola).');
     }
 }
