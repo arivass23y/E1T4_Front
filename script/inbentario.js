@@ -406,6 +406,9 @@ async function cargarKokalekuak() {
         kokalekuak.forEach(async kokalekua => {
             const tr = document.createElement('tr');
             let gela= await cargarGela(kokalekua.idGela);
+            if(kokalekua.amaieraData===null || kokalekua.amaieraData==='0000-00-00'){
+                kokalekua.amaieraData='Ez ezarrita';
+            }
             tr.innerHTML = `
             <td>${kokalekua.etiketa}</td>
             <td>${gela.izena}</td>
