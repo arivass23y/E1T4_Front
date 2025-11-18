@@ -1,39 +1,41 @@
+//Erabili diren kontrolagailu guztien URL
 const API_URL = '../../E1T4_Back/Kontrolagailuak/inbentarioa-controller.php';
 const Ekipamendua_API_URL = '../../E1T4_Back/Kontrolagailuak/ekipamendua-controller.php';
 const Kokalekua_API_URL = '../../E1T4_Back/Kontrolagailuak/kokalekua-controller.php';
 const Gela_API_URL = '../../E1T4_Back/Kontrolagailuak/gela-controller.php';
+// API KEY hemen sortu, gero artxibo osoan erabiltzeko
 let API_KEY = "";
 const botonCrear = document.getElementById('botoiaEditatu');
 const botonSortu = document.getElementById('botoiaSortu');
 const botonKokalekuaAldatu = document.getElementById('botoiaKokalekuaAldatu');
 
-botonSortu.addEventListener('click', () => { 
+botonSortu.addEventListener('click', () => {  //Inbentarioa sortzeko botoia clicatzean, bere kokalekua ere bai sortzen da
     crearInbentarioa();
     sortuKokalekua();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => { //HTML-a kargatzerakoan
 
-    const apiKey = sessionStorage.getItem('apiKey');
-    if (!apiKey) {
+    const apiKey = sessionStorage.getItem('apiKey'); //ApiKey hartzen dugu
+    if (!apiKey) { //Ez bada existitzen, berriro logatzera bidaltzen digu
         alert('Ez dago saio aktiborik, hasi saioa berriro.');
         window.location.href = 'saioa-hasi.html';
-    }
+    } 
     else{
-        API_KEY = apiKey;
+        API_KEY = apiKey;//Api Key gordetzen dugu aldagaian
     }
 
+    //HTML guztia datuekin kargatzen dugu
     cargarinbentarioak();
     cargarEkipamenduak();
     cargarGelak();
 });
 
-
-
-async function llamarAPI(metodo, datos = {}) {
+//Inbentarioa klasea deiak egiteko metodo berrerabilgarria
+async function llamarAPI(metodo, datos = {}) { 
     //Bidaliko parametroak prestatu
     const params = new URLSearchParams(); 
-    params.append('_method', metodo);
+    params.append('_method', metodo); 
     params.append('HTTP_APIKEY', API_KEY);
 
     // Gehitu datuak soilik balioak daudenean
@@ -70,6 +72,7 @@ async function llamarAPI(metodo, datos = {}) {
     return resultado;
 }
 
+//Inbentaioko datu guztiak hartu eta gero bidali html-an ikusteko
 async function cargarinbentarioak() {
     try {
         //APIra deitu eta emaitza jaso
@@ -85,6 +88,7 @@ async function cargarinbentarioak() {
     }
 }
 
+//Inbentarioa HTML-ean sartu modu dinamikoan
 function mostrarinbentarioak(inbentarioak) {
     // Taularen gorputza garbitu
     const tbody = document.getElementById('inbentarioa-body');
@@ -94,7 +98,7 @@ function mostrarinbentarioak(inbentarioak) {
     inbentarioak.forEach(async inbentarioa => {
         const tr = document.createElement('tr');
         let ekipamendu= await cargarEkipamendua(inbentarioa.idEkipamendu);
-        
+        //Informazioa sartu
         tr.innerHTML = `
             <td>${inbentarioa.etiketa}</td>
             <td>${ekipamendu.izena}</td>
@@ -114,54 +118,60 @@ function mostrarinbentarioak(inbentarioak) {
     });
 }
 
+//Inbentarioa aldatzeko <dialog> prestatu, inbentarioa zeukan informazioa jartzen, zer aldatzen ari den ikusteko
 async function dialogPrepared(etiketa) {
 
-    const current = await llamarAPI('GET', { etiketa });
+    const current = await llamarAPI('GET', { etiketa }); //Hautatutako inbentarioaren informazioa lortu
 
-        // Obtener referencias a los campos del dialog
+        // Dialog eremuei buruzko erreferentziak lortzea
+
         const dialog = document.getElementById('aldatuinbentarioa');
         const etiketaInput = document.getElementById('inbentarioEtiketaAldatu');
         const ekipamenduaInput = document.getElementById('ekipamenduaAldatu');
         const dataInput = document.getElementById('dataAldatu');
 
-        // Rellenar campos con los datos del equipo
+        //Bete eremuak datuekin
+
         etiketaInput.value=current.etiketa || '';
         ekipamenduaInput.value = current.idEkipamendu || '';
         dataInput.value = current.erosketaData || '';
 
-        botonCrear.addEventListener('click', () => { 
+        botonCrear.addEventListener('click', () => { //Aldatzeko botoia clic egiterakoan, eremua aldatzeko metodoa deitzen da
             aldatuInbentarioa(etiketa);
         });
         document.getElementById('aldatuInbentarioa').showModal()
 }
 
+//Inbentarioa aldatzeko hautatutako parametro berriekin
 async function aldatuInbentarioa(etiketa) {
     try {
+        // Dialog eremuei buruzko erreferentziak lortzea
         const ekipamendua = document.getElementById('ekipamenduaAldatu').value;
         const erosketaData = document.getElementById('dataAldatu').value;
         const formData = new FormData();
         formData.append("erosketaData", erosketaData);
         
+        //API deia egin
         result = await llamarAPI('PUT', {
             etiketa,
             ekipamendua,
             erosketaData
 
         });
-        const dialog = document.getElementById('aldatuinbentarioa');
         const data = await result.json();
-        alert(data.message);
+        alert(data.message); //Aldaketa egin ahal izan bada bistaratu
     } catch (err) {
         console.error('Error:', err);
     }
 }
 
+// Inbentarioa ezabatzeko datu baseetik
 async function ezabatuinbentarioa(etiketa) {
     try {
-        const result = await llamarAPI('DEL', { etiketa });
-        if (result.success) {
+        const result = await llamarAPI('DEL', { etiketa }); //Ezabatu nahi den inbentarioaren etiketarekin API deitu
+        if (result.success) { //Ezabatu bada
             alert('inbentarioa ezabatuta');
-            await cargarinbentarioak();
+            await cargarinbentarioak(); //Inbentarioak berriro kargatu
         }
     } catch (err) {
         console.error('Error al eliminar:', err);
@@ -170,12 +180,15 @@ async function ezabatuinbentarioa(etiketa) {
     }
 }
 
+//Inbentario berria sortzeko metodoa
 async function crearInbentarioa() {
+    // Dialog eremuei buruzko erreferentziak lortzea
     const etiketa = document.getElementById('inbentarioEtiketa').value;
     const ekipamendua = document.getElementById('ekipamendua').value;
     const erosketaData = document.getElementById('data').value;
     const gela = document.getElementById('gelaSortu').value;
 
+    //Datuak huts ez daudela konprobatu
     if (!etiketa.trim() || !ekipamendua.trim() || !erosketaData.trim() || !gela) {
         alert('Datuak falta dira');
         return;
@@ -183,10 +196,10 @@ async function crearInbentarioa() {
 
     let inventarioCreado = false;
 
-    // Crear inventario
+    // 
     try {
-        const result = await llamarAPI('POST', { etiketa, ekipamendua, erosketaData, gela });
-        if (result && result.success) {
+        const result = await llamarAPI('POST', { etiketa, ekipamendua, erosketaData, gela }); //API deia egin 
+        if (result && result.success) { // Erroreren bat badago, bistaratu
             inventarioCreado = true;
         } else {
             console.warn('Inventario no confirmado por la API:', result);
@@ -197,33 +210,30 @@ async function crearInbentarioa() {
     }
 }
 
-
-
+//Ekipamenduak lortu, bere izenak bistarateko inbentarioa sortzeko orduan
 async function cargarEkipamenduak() {
     try {
-        // Crear parámetros para la solicitud
+        // Deia prestatu
         const params = new URLSearchParams();
         params.append('_method', 'GET');
         params.append('HTTP_APIKEY', API_KEY);
 
-        // Hacer la petición
+        // Deia kudeatu
         const response = await fetch(Ekipamendua_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params.toString()
         });
 
-        // Obtener respuesta como texto
+        // Erantzunak jaso
         const text = await response.text();
-
-        // Parsear JSON
         let ekipamendus = JSON.parse(text);
 
-        // Obtener el select
+        // Ekipamenduen izenak bistarateko select-ak hartu
         const select = document.getElementById('ekipamendua');
         let selectAldatu = document.getElementById('ekipamenduaAldatu');
 
-        // Llenar select con las categorías
+        // Select bete
         if (select && Array.isArray(ekipamendus)) {
             ekipamendus.forEach(cat => {
                 const option = document.createElement('option');
@@ -239,20 +249,24 @@ async function cargarEkipamenduak() {
     }
 }
 
+//Lortu ekipamendu bat, inbentarioen tablan izena bistarateko
 async function cargarEkipamendua(idEkipamendua) {
-    let data = null; // declarar data fuera del try
+    let data = null; 
     try {
+        //Deia prestatu
         const params = new URLSearchParams();
         params.append('_method', 'GET');
         params.append('HTTP_APIKEY', API_KEY);
         params.append('id', idEkipamendua);
 
+        //Deia egin
         const response = await fetch(Ekipamendua_API_URL, {
-            method: 'POST', // si tu API requiere POST
+            method: 'POST', 
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params.toString()
         });
 
+        //Erantzuna ondo ez badago
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -263,36 +277,34 @@ async function cargarEkipamendua(idEkipamendua) {
     } catch (err) {
         console.error('Error:', err);
     }
-    return data;
+    return data; //Datuak itzuli
 }
 
 
-
+//Gelak Select-etan bistaratzeko hartu
 async function cargarGelak() {
     try {
-        // Crear parámetros para la solicitud
+        // Deia preparatu
         const params = new URLSearchParams();
         params.append('_method', 'GET');
         params.append('HTTP_APIKEY', API_KEY);
 
-        // Hacer la petición
+        // Deia egin
         const response = await fetch(Gela_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params.toString()
         });
 
-        // Obtener respuesta como texto
+        // Erantzuna JSON bezala hartu
         const text = await response.text();
-
-        // Parsear JSON
         let ekipamendus = JSON.parse(text);
 
-        // Obtener el select
+        // Select lortu
         const select = document.getElementById('gelaSortu');
         let selectAldatu = document.getElementById('gelaAldatu');
 
-        // Llenar select con las categorías
+        // Select bete
         if (select && Array.isArray(ekipamendus)) {
             ekipamendus.forEach(cat => {
                 const option = document.createElement('option');
@@ -308,16 +320,18 @@ async function cargarGelak() {
     }
 }
 
+//Gela bakarra lortu kokalekuen taulan bistaratzeko
 async function cargarGela(idGela) {
-    let data = null; // declarar data fuera del try
+    let data = null; 
     try {
+        //Deia prestatu
         const params = new URLSearchParams();
         params.append('_method', 'GET');
         params.append('HTTP_APIKEY', API_KEY);
         params.append('id', idGela);
 
         const response = await fetch(Gela_API_URL, {
-            method: 'POST', // si tu API requiere POST
+            method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params.toString()
         });
@@ -332,11 +346,11 @@ async function cargarGela(idGela) {
     } catch (err) {
         console.error('Error:', err);
     }
-    return data;
+    return data; //Datuak bidali
 }
 
 
-
+//Kokalekua klasea deiak egiteko metodo berrerabilgarria
 async function llamarAPIKokalekuak(metodo, datos = {}) {
     //Bidaliko parametroak prestatu
     const params = new URLSearchParams(); 
@@ -377,6 +391,7 @@ async function llamarAPIKokalekuak(metodo, datos = {}) {
     return resultado;
 }
 
+//Kokaleku guztiak hartu taulan bistaratzeko
 async function cargarKokalekuak() {
     document.getElementById('kokalekuAktiboak').showModal();
     try {
@@ -414,81 +429,85 @@ async function cargarKokalekuak() {
     }
 }
 
+//Kokalekua aldatzeko dialog prestatu
 async function dialogPreparedKokalekua(etiketa,hasieraData) {
-    const current = await llamarAPIKokalekuak('GET', { etiketa, hasieraData });
+    const current = await llamarAPIKokalekuak('GET', { etiketa, hasieraData }); //Datuak hartzeko deia
 
-        // Obtener referencias a los campos del dialog
+        // Dialog eremuei buruzko erreferentziak lortzea
         const etiketaInput = document.getElementById('EtiketaKokalekuaAldatu');
         const klaseaInput = document.getElementById('gelaAldatu');
 
-        // Rellenar campos con los datos del equipo
+        // Bete eremuak ekipoaren datuekin
+
         etiketaInput.value=etiketa || '';
         klaseaInput.value = current.idGela || '';
-        botonKokalekuaAldatu.addEventListener('click', () => { 
+        botonKokalekuaAldatu.addEventListener('click', () => { //Aldatzeko botoia clicatzerakoan, kokalekua aldatzeko metodoa eta kokaleku berria egiteko metodoa deitzen dira.
             aldatuKokalekua(etiketa,hasieraData);
             KokalekuBerria(hasieraData, etiketa);
         });
         document.getElementById('kokalekuAldatu').showModal()
 }
 
+//Kokalekua aldatzeko metodoa
 async function aldatuKokalekua(etiketa, hasieraData) {
     try {
+        //Datuak hartzen ditu
         const idGela = document.getElementById('gelaAldatu').value;
         const amaieraData = document.getElementById('kokalekuaDataAldatu').value;
 
-        const result = await llamarAPIKokalekuak('PUT', {
+        const result = await llamarAPIKokalekuak('PUT', { //API deia egiten du
             etiketa,
             hasieraData,
             amaieraData,
             idGela,
         });
 
-
-
-    } catch (err) {
+    } catch (err) { //Erroreak kudeatzen ditu
         console.error('Error:', err);
     }
 }
 
-
+// Kokalekua aldatzeko metodoa
 async function ezabatuKokalekua(etiketa,hasieraData) {
     try {
-        const result = await llamarAPIKokalekuak('DEL', { etiketa, hasieraData });  
+        const result = await llamarAPIKokalekuak('DEL', { etiketa, hasieraData });  //API deia egiten du, taulako bi Foreign-Keyrekin
         if (result.success) {
-            alert('Kokalekua ezabatuta');
+            alert('Kokalekua ezabatuta'); //Ezabatu bada, bistaratu
             await cargarKokalekuak();
         }
-    } catch (err) {
+    } catch (err) { //Erroeak kudeatu
         console.error('Error al eliminar:', err);
         alert('Error al eliminar el equipo: ' + err.message);
         return null;
     }
 }
 
+//Kokaleku berria sortzeko metodoa, inbentario berria sortzerakoan
 async function sortuKokalekua() {
+        // Datu guztiak hartu
         const etiketa = document.getElementById('inbentarioEtiketa').value;
         const hasieraData = document.getElementById('data').value;
         const idGela = document.getElementById('gelaSortu').value;
-        const resultKokaleku = await llamarAPIKokalekuak('POST', {
+        const resultKokaleku = await llamarAPIKokalekuak('POST', { //API deia egin
             etiketa,
             hasieraData,
             idGela
         }); 
 }
 
+//Kokaleku bati amaiera data jartzerakoan kokaleku berria non dagoen jakiteko beste kokaleku bat sortzen da
 async function KokalekuBerria(hasieraData, etiketa) {
     try {
-        const idGela = document.getElementById('gelaAldatu').value;
+        const idGela = document.getElementById('gelaAldatu').value; // Balio bakarra hartu
 
-        alert(idGela);
-        const resultKokaleku = await llamarAPIKokalekuak('POST', {
+        const resultKokaleku = await llamarAPIKokalekuak('POST', { //API deia egiten da
             etiketa,
             hasieraData,
             idGela
         });
 
 
-    } catch (err) {
+    } catch (err) { //Erroreak kudeatu
         console.error('Error al crear kokalekua:', err);
     }
 }

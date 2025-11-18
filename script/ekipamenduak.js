@@ -1,21 +1,25 @@
+//Erabili diren kontrolagailu guztien URL
 const API_URL = '../../E1T4_Back/Kontrolagailuak/ekipamendua-controller.php';
 const KATEGORIA_API_URL = '../../E1T4_Back/Kontrolagailuak/kategoria-controller.php';
+// API KEY hemen sortu, gero artxibo osoan erabiltzeko
 let API_KEY = '';
 const botonCrear = document.getElementById('botoia');
 
-document.addEventListener('DOMContentLoaded', () => {
-    const apiKey = sessionStorage.getItem('apiKey');
-    if (!apiKey) {
+document.addEventListener('DOMContentLoaded', () => { //HTML-a kargatzerakoan
+    const apiKey = sessionStorage.getItem('apiKey');//ApiKey hartzen dugu
+    if (!apiKey) {//Ez bada existitzen, berriro logatzera bidaltzen digu
         alert('Ez dago saio aktiborik, hasi saioa berriro.');
         window.location.href = 'saioa-hasi.html';
     }
     else{
-        API_KEY = apiKey;
+        API_KEY = apiKey;//Api Key gordetzen dugu aldagaian
     }
+    //HTML guztia datuekin kargatzen dugu
     cargarEkipamenduak();
     cargarKategorias();
 });
 
+//Ekipamendua klasea deiak egiteko metodo berrerabilgarria
 async function llamarAPI(metodo, datos = {}) {
     //Bidaliko parametroak prestatu
     const params = new URLSearchParams(); 
@@ -56,6 +60,7 @@ async function llamarAPI(metodo, datos = {}) {
     return resultado;
 }
 
+//Ekipamenduak lortu gero bistaratzeko
 async function cargarEkipamenduak() {
     try {
         //APIra deitu eta emaitza jaso
@@ -64,21 +69,24 @@ async function cargarEkipamenduak() {
         if (Array.isArray(resultado) || typeof resultado === 'object') {
             mostrarEkipamenduak(resultado);
         }
-    } catch (err) {
+    } catch (err) { //Erroreak kudeatu
         console.error('Error al cargar ekipamenduak:', err);
         const tbody = document.getElementById('ekipamendua-body');
         if (tbody) tbody.innerHTML = `<tr><td colspan="8">Error al cargar datos: ${err.message}</td></tr>`;
     }
 }
 
+//Kategoria bakarra lortu, gero taulan bistaratzeko
 async function cargarKategoria(idKategoria) {
-    let data = null; // declarar data fuera del try
+    let data = null;
     try {
+        //Deia prestatu
         const params = new URLSearchParams();
         params.append('_method', 'GET');
         params.append('HTTP_APIKEY', API_KEY);
         params.append('id', idKategoria);
 
+        //Deia egin
         const response = await fetch(KATEGORIA_API_URL, {
             method: 'POST', // si tu API requiere POST
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -95,9 +103,10 @@ async function cargarKategoria(idKategoria) {
     } catch (err) {
         console.error('Error:', err);
     }
-    return data;
+    return data; //Datuak bidali
 }
 
+//EKipamenduak taulan bistaratzeko metodo dinamikoa
 function mostrarEkipamenduak(ekipamenduak) {
     // Taularen gorputza garbitu
     const tbody = document.getElementById('ekipamendua-body');
@@ -131,11 +140,13 @@ function mostrarEkipamenduak(ekipamenduak) {
     });
 }
 
+//Ekipamendua aldatzeko dialog prestatu, bere datuekin hautatuta, zer aldatzen ari duzun jakiteko
 async function dialogPrepared(id) {
 
-    const current = await llamarAPI('GET', { id });
+    const current = await llamarAPI('GET', { id }); //Datuak lortu
 
-        // Obtener referencias a los campos del dialog
+        // Elkarrizketaren eremuei buruzko erreferentziak lortzea
+
         const dialog = document.getElementById('aldatuEkipamendua');
         const izenaInput = document.getElementById('ekipamenduIzena');
         const deskribapenaInput = document.getElementById('deskribapena');
@@ -144,7 +155,8 @@ async function dialogPrepared(id) {
         const stockInput = document.getElementById('stock');
         const kategoriaInput = document.getElementById('kategoria');
 
-        // Rellenar campos con los datos del equipo
+        // Bete eremuak ekipoaren datuekin
+
         izenaInput.value = current.izena || '';
         deskribapenaInput.value = current.deskribapena || '';
         markaInput.value = current.marka || '';
@@ -152,15 +164,17 @@ async function dialogPrepared(id) {
         stockInput.value = current.stock || '';
         kategoriaInput.value = current.idKategoria || '';
 
-        botonCrear.addEventListener('click', () => { 
+        botonCrear.addEventListener('click', () => { // Sortzeko botoia sakatzerakoan, ekipamendua aldatzeko metodoa deitzen da, bere id-arekin
             aldatuEkipamendua(id);
         });
 
         dialog.showModal()
 }
 
+//Ekipamendua aldatzeko metodoa
 async function aldatuEkipamendua(id) {
     try {
+        //Hautagai guztiak hartu
         let izena = document.getElementById('ekipamenduIzena').value;
         let deskribapena = document.getElementById('deskribapena').value;
         let marka= document.getElementById('marka').value;
@@ -168,14 +182,12 @@ async function aldatuEkipamendua(id) {
         let stock = document.getElementById('stock').value;
         let idKategoria = document.getElementById('kategoria').value;
 
-        if (stock < 0){
+        if (stock < 0){ //Stock negatiboa ez badago konprobatu
             alert('Stock-a ezin izan da negatiboa.')
             return;
         }
-
-        console.log('ID aldatuEkipamendua funtzioan:', id, izena, deskribapena, marka, modelo, stock, idKategoria);
         
-        result = await llamarAPI('PUT', {
+        result = await llamarAPI('PUT', { //API deia egin
             id,
             izena,
             deskribapena,
@@ -197,23 +209,26 @@ async function aldatuEkipamendua(id) {
     }
 }
 
+//Ekipamendua ezabatzeko metodos
 async function ezabatuEkipamendua(id) {
     try {
-        const result = await llamarAPI('DEL', { id });
+        const result = await llamarAPI('DEL', { id }); //API deia egin
         if (result.success) {
             alert('Ekipamendua ezabatuta');
             await cargarEkipamenduak();
         }
         return result;
-    } catch (err) {
+    } catch (err) { //Erroreak kudeatu
         console.error('Error al eliminar:', err);
         alert('Error al eliminar el equipo: ' + err.message);
         return null;
     }
 }
 
+//Ekipamendua sortzeko metodoa
 async function crearEkipamendua() {
     try {
+        //Hautagai guztiak lortu
         const izena = document.getElementById('ekipamenduIzenaSortu')?.value ?? '';
         const idKategoria = document.getElementById('kategoriaSortu')?.value ?? '';
         const deskribapena = document.getElementById('deskribapenaSortu')?.value ?? '';
@@ -221,18 +236,18 @@ async function crearEkipamendua() {
         const modelo = document.getElementById('modeloaSortu')?.value ?? '';
         const stock = document.getElementById('stockSortu')?.value ?? '';
 
-        // Validar campos obligatorios
+        // Hautagai guztiak konprobatu
         if (!izena.trim() || !deskribapena.trim() || !stock.toString().trim() || !idKategoria.toString().trim()) {
             alert('Izena, deskribapena, stock eta idKategoria derrigorrezkoak dira');
             return;
         }
 
-        if (stock < 0){
+        if (stock < 0){ //Stock negatiboa ez badago konprobatu
             alert('Stock-a ezin izan da negatiboa.')
             return;
         }
 
-        const result = await llamarAPI('POST', {
+        const result = await llamarAPI('POST', { //API deia egin
             izena,
             deskribapena,
             marka,
@@ -240,7 +255,6 @@ async function crearEkipamendua() {
             stock,
             idKategoria
         });
-        console.log('Resultado de crearEkipamendua:', result);
         if (result && result.success) {
             alert('Ekipamendua sortuta');
             const dialog = document.getElementById('sortuEkipamendua');
@@ -253,31 +267,29 @@ async function crearEkipamendua() {
     }
 }
 
+//kategoria huztiak hartu, select-etan bistaratzeko
 async function cargarKategorias() {
     try {
-        // Crear parámetros para la solicitud
+        // Eskaerarako parametroak sortu
         const params = new URLSearchParams();
         params.append('_method', 'GET');
         params.append('HTTP_APIKEY', API_KEY);
 
-        // Hacer la petición
+        // deia egin
         const response = await fetch(KATEGORIA_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params.toString()
         });
 
-        // Obtener respuesta como texto
         const text = await response.text();
-
-        // Parsear JSON
         let categorias = JSON.parse(text);
 
-        // Obtener el select
+        // Select hartu
         const select = document.getElementById('kategoriaSortu');
         let selectAldatu = document.getElementById('kategoria');
 
-        // Llenar select con las categorías
+        // Select bete kategorien izenekin
         if (select && Array.isArray(categorias)) {
             categorias.forEach(cat => {
                 const option = document.createElement('option');
