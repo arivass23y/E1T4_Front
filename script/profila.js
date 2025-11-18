@@ -95,6 +95,8 @@ async function dialogPrepared(nan) {
     const abizenaInput = document.getElementById('abizenaEditatu');
     const erabiltzaileaInput = document.getElementById('erabiltzaileaEditatu');
     const pasahitzaInput = document.getElementById('pasahitzaEditatu');
+    
+    let rola = current.rola;
 
     // Rellenar campos con los datos del equipo
     izenaInput.value = current.izena || '';
@@ -103,12 +105,12 @@ async function dialogPrepared(nan) {
     pasahitzaInput.value = '';
 
     botonEditar.addEventListener('click', () => {
-        aldatuErabiltzailea(nan);
+        aldatuErabiltzailea(nan,rola);
     });
     dialog.showModal()
 }
 
-async function aldatuErabiltzailea(nan) {
+async function aldatuErabiltzailea(nan,rola) {
     try {
         let izena = document.getElementById('izenaEditatu').value;
         let abizena = document.getElementById('abizenaEditatu').value;
