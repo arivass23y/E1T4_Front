@@ -4,7 +4,13 @@ const Kokalekua_API_URL = '../../E1T4_Back/Kontrolagailuak/kokalekua-controller.
 const Gela_API_URL = '../../E1T4_Back/Kontrolagailuak/gela-controller.php';
 let API_KEY = "";
 const botonCrear = document.getElementById('botoiaAldatu');
+const botonSortu = document.getElementById('botoiaSortu');
 const botonKokalekuaAldatu = document.getElementById('botoiaKokalekuaAldatu');
+
+botonSortu.addEventListener('click', () => { 
+    crearInbentarioa();
+    sortuKokalekua();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -21,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarEkipamenduak();
     cargarGelak();
 });
+
+
 
 async function llamarAPI(metodo, datos = {}) {
     //Bidaliko parametroak prestatu
@@ -178,20 +186,12 @@ async function crearInbentarioa() {
         const result = await llamarAPI('POST', { etiketa, ekipamendua, erosketaData, gela });
         if (result && result.success) {
             inventarioCreado = true;
-            console.log('Inventario creado correctamente');
         } else {
             console.warn('Inventario no confirmado por la API:', result);
         }
     } catch (err) {
         console.warn('Advertencia: fetch error al crear inventario (puede que ya esté creado):', err.message);
         inventarioCreado = true; // asumimos que pudo crearse
-    }
-
-    // Crear kokalekua aunque haya fetch error
-    try {
-        await sortuKokalekua(etiketa, erosketaData, gela);
-    } catch (err) {
-        console.warn('Advertencia: fetch error al crear kokalekua (puede que ya esté creado):', err.message);
     }
 }
 
@@ -393,9 +393,9 @@ async function cargarKokalekuak() {
             <td>${kokalekua.etiketa}</td>
             <td>${gela.izena}</td>
             <td>${kokalekua.hasieraData}</td>
-            <td></td>
+            <td>${kokalekua.amaieraData}</td>
             <td> 
-               <button onclick="dialogPreparedKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="kudeaketak-btn" id="editatu-btn"">
+               <button onclick="dialogPreparedKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="kudeaketak-btn" id="editatu-btn-kokalekua"">
                     <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
                 </button>
                 <button onclick="ezabatuKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="kudeaketak-btn" id="ezabatu-btn">
@@ -417,37 +417,37 @@ async function dialogPreparedKokalekua(etiketa,hasieraData) {
 
         // Obtener referencias a los campos del dialog
         const etiketaInput = document.getElementById('EtiketaKokalekuaAldatu');
-        const klaseaInput = document.getElementById('klaseaAldatu');
+        const klaseaInput = document.getElementById('gelaAldatu');
 
         // Rellenar campos con los datos del equipo
         etiketaInput.value=etiketa || '';
         klaseaInput.value = current.idGela || '';
-        console.log(etiketa, hasieraData);
         botonKokalekuaAldatu.addEventListener('click', () => { 
             aldatuKokalekua(etiketa,hasieraData);
+            KokalekuBerria(hasieraData, etiketa);
         });
         document.getElementById('kokalekuAldatu').showModal()
 }
 
-async function aldatuKokalekua(etiketa,hasieraData) {
-try {
-        const idGela= document.getElementById('klaseaAldatu').value;
+async function aldatuKokalekua(etiketa, hasieraData) {
+    try {
+        const idGela = document.getElementById('gelaAldatu').value;
         const amaieraData = document.getElementById('kokalekuaDataAldatu').value;
-        const formData = new FormData();
-        formData.append("amaieraData", amaieraData);
-        result = await llamarAPIKokalekuak('PUT', {
+
+        const result = await llamarAPIKokalekuak('PUT', {
             etiketa,
             hasieraData,
             amaieraData,
             idGela,
         });
-        const dialog = document.getElementById('aldatuinbentarioa');
-        const data = await result.json();
-        alert(data.message);
+
+
+
     } catch (err) {
         console.error('Error:', err);
     }
 }
+
 
 async function ezabatuKokalekua(etiketa,hasieraData) {
     try {
@@ -463,22 +463,30 @@ async function ezabatuKokalekua(etiketa,hasieraData) {
     }
 }
 
-async function sortuKokalekua(etiketa, hasieraData, idGela) {
-    try {
+async function sortuKokalekua() {
+        const etiketa = document.getElementById('inbentarioEtiketa').value;
+        const hasieraData = document.getElementById('data').value;
+        const idGela = document.getElementById('gelaSortu').value;
         const resultKokaleku = await llamarAPIKokalekuak('POST', {
             etiketa,
             hasieraData,
             idGela
         }); 
-        if (resultKokaleku && resultKokaleku.success) {
-            // Cerrar modal si existe
-            const dialog = document.getElementById('sortuinbentarioa');
-            try { dialog.close(); } catch (e) { /* ignore */ }
-            await cargarinbentarioak();
-            await cargarKokalekuak();
-        }
+}
+
+async function KokalekuBerria(hasieraData, etiketa) {
+    try {
+        const idGela = document.getElementById('gelaAldatu').value;
+
+        alert(idGela);
+        const resultKokaleku = await llamarAPIKokalekuak('POST', {
+            etiketa,
+            hasieraData,
+            idGela
+        });
+
+
     } catch (err) {
         console.error('Error al crear kokalekua:', err);
-        alert('Error al crear el kokalekua: ' + err.message);
     }
 }

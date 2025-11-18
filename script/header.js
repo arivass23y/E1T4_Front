@@ -10,7 +10,7 @@ fetch('../components/header.html')
 
     botonCerrarSesion.addEventListener('click', () => {
         sessionStorage.clear();
-        window.location.href = 'saioa-hasi.html';
+        window.location.href = '../../E1T4_Front/pages/saioa-hasi.html';
     });
 
         menuToggle.addEventListener('click', () => {
