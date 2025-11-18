@@ -149,7 +149,7 @@ a {
     background-color: #F0F0F0;
 }
 
-#botoiaSortu, #botoiaEditatu {
+#botoiaSortu, #botoiaEditatu, #botoiaKokalekuaAldatu {
     width: 100%;
     height: 20%;
     border: 1px solid;
@@ -158,7 +158,7 @@ a {
     padding: 8px 12px;
 }
 
-#botoiaSortu:hover, #botoiaEditatu:hover {
+#botoiaSortu:hover, #botoiaEditatu:hover, #botoiaKokalekuaAldatu:hover {
     background-color: #7ABFCC;
     cursor: pointer;
 }

@@ -91,13 +91,15 @@ function mostrarErabiltzaileak(erabiltzaileak) {
             <td>${erabiltzailea.erabiltzailea}</td>
             <td><b>············</b></td>
             <td>${erabiltzailea.rola}</td>
-            <td> 
-                <button onclick="dialogPrepared('${erabiltzailea.nan}')" class="kudeaketak-btn" id="editatu-btn">
-                    <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
-                </button>
-                <button onclick="ezabatuErabiltzailea('${erabiltzailea.nan}')" class="kudeaketak-btn" id="ezabatu-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
-                </button>
+            <td>
+                <section> 
+                    <button onclick="dialogPrepared('${erabiltzailea.nan}')" class="kudeaketak-btn" id="editatu-btn">
+                        <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
+                    </button>
+                    <button onclick="ezabatuErabiltzailea('${erabiltzailea.nan}')" class="kudeaketak-btn" id="ezabatu-btn">
+                        <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
+                    </button>
+                </section>
             </td>
         `;
         tbody.appendChild(tr);

@@ -81,13 +81,15 @@ function mostrarKategoriak(kategoriak) {
         tr.innerHTML = `
             <td>${kategoria.id}</td>
             <td>${kategoria.izena}</td>
-            <td> 
-                <button onclick="dialogPrepared(${kategoria.id})" class="kudeaketak-btn" id="editatu-btn">
-                    <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
-                </button>
-                <button onclick="ezabatuKategoria(${kategoria.id})" class="kudeaketak-btn" id="ezabatu-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
-                </button>
+            <td>
+                <section> 
+                    <button onclick="dialogPrepared(${kategoria.id})" class="kudeaketak-btn" id="editatu-btn">
+                        <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
+                    </button>
+                    <button onclick="ezabatuKategoria(${kategoria.id})" class="kudeaketak-btn" id="ezabatu-btn">
+                        <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
+                    </button>
+                </section>
             </td>
         `;
         tbody.appendChild(tr);

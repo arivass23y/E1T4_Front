@@ -116,13 +116,15 @@ function mostrarEkipamenduak(ekipamenduak) {
             <td>${ekipamendua.marka || '-'}</td>
             <td>${ekipamendua.modelo || '-'}</td>
             <td>${ekipamendua.stock}</td>
-            <td> 
-                <button onclick="dialogPrepared(${ekipamendua.id})" class="kudeaketak-btn" id="editatu-btn">
-                    <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
-                </button>
-                <button onclick="ezabatuEkipamendua(${ekipamendua.id})" class="kudeaketak-btn" id="ezabatu-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
-                </button>
+            <td>
+                <section> 
+                    <button onclick="dialogPrepared(${ekipamendua.id})" class="kudeaketak-btn" id="editatu-btn">
+                        <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
+                    </button>
+                    <button onclick="ezabatuEkipamendua(${ekipamendua.id})" class="kudeaketak-btn" id="ezabatu-btn">
+                        <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
+                    </button>
+                </section>
             </td>
         `;
         tbody.appendChild(tr);

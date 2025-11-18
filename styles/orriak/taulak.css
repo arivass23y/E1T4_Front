@@ -10,7 +10,8 @@
     padding: 10px;
     border: 1px solid #CAF0F8;
     white-space: normal;
-    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .taula th {
@@ -25,7 +26,7 @@
     margin: auto;
 }
 
-.filter-container, .filtroBotoia {
+.filtroBotoia {
     position: absolute;
     top: -55px;
     right: 15%;
@@ -83,7 +84,7 @@
     border: none;
 }
 
-.filtroBotoia:hover, .botoi-konjuntuoak:hover {
+.filtroBotoia:hover {
     background-color: #F0F0F0;
     border-radius: 5px;
     cursor: pointer;
@@ -158,7 +159,7 @@
     border-color: rgb(245, 74, 74);
 }
 
-.taula td:last-child {
+.taula td:last-child section{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -167,7 +168,7 @@
     width: 100%;
 }
 
-.taula th:last-child {
+.taula th:last-child section{
     display: flex;
     justify-content: center;
     align-items: center;
