@@ -1,8 +1,10 @@
 const API_URL = '../../E1T4_Back/Kontrolagailuak/inbentarioa-controller.php';
 const Ekipamendua_API_URL = '../../E1T4_Back/Kontrolagailuak/ekipamendua-controller.php';
 const Kokalekua_API_URL = '../../E1T4_Back/Kontrolagailuak/kokalekua-controller.php';
-const API_KEY = '9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1';
-const botonEditar = document.getElementById('botoiaEditatu');
+const Gela_API_URL = '../../E1T4_Back/Kontrolagailuak/gela-controller.php';
+let API_KEY = "";
+const botonCrear = document.getElementById('botoiaAldatu');
+const botonKokalekuaAldatu = document.getElementById('botoiaKokalekuaAldatu');
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -119,7 +121,7 @@ async function dialogPrepared(etiketa) {
         ekipamenduaInput.value = current.idEkipamendu || '';
         dataInput.value = current.erosketaData || '';
 
-        botonEditar.addEventListener('click', () => { 
+        botonCrear.addEventListener('click', () => { 
             aldatuInbentarioa(etiketa);
         });
         document.getElementById('aldatuInbentarioa').showModal()
@@ -362,11 +364,11 @@ async function cargarKokalekuak() {
             <td>${kokalekua.hasieraData}</td>
             <td></td>
             <td> 
-               <button onclick="dialogPreparedKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')"  class="edit-btn">
-                    <img src="../img/general/editatu.png" alt="Editar" class="editatu">
+               <button onclick="dialogPreparedKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="kudeaketak-btn" id="editatu-btn"">
+                    <img src="../img/general/editatu.png" alt="Editar" class="kudeaketak-img">
                 </button>
-                <button onclick="ezabatuKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="delete-btn">
-                    <img src="../img/general/ezabatu.png" alt="Borrar" class="editatu">
+                <button onclick="ezabatuKokalekua('${kokalekua.etiketa}', '${kokalekua.hasieraData}')" class="kudeaketak-btn" id="ezabatu-btn">
+                    <img src="../img/general/ezabatu.png" alt="Borrar" class="kudeaketak-img">
                 </button>
             </td>
 
@@ -491,4 +493,3 @@ async function crearInbentarioa() {
         alert('Inventario y kokalekua procesados (puede haber advertencias en la consola).');
     }
 }
-
