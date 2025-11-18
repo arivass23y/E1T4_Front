@@ -184,10 +184,14 @@ async function aldatuEkipamendua(id) {
             stock,
             idKategoria
         });
-        const dialog = document.getElementById('aldatuEkipamendua');
-        dialog.close();
-        await cargarEkipamenduak();
-        const data = await result.json();
+        if (result.success) {
+            alert('Ekipamendua aldatuta');
+            const dialog = document.getElementById('aldatuEkipamendua');
+            dialog.close();
+            await cargarEkipamenduak();
+            const data = await result.json();
+        }
+
     } catch (err) {
         console.error('Error:', err);
     }
@@ -238,10 +242,9 @@ async function crearEkipamendua() {
         });
         console.log('Resultado de crearEkipamendua:', result);
         if (result && result.success) {
-            // Cerrar modal si existe
+            alert('Ekipamendua sortuta');
             const dialog = document.getElementById('sortuEkipamendua');
             try { dialog.close(); } catch (e) { /* ignore */ }
-            alert('Ekipamendua sortuta');
             await cargarEkipamenduak();
         }
     } catch (err) {

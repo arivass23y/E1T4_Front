@@ -1,84 +1,95 @@
-.datuakInput, select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #0077B6;
-    font-size: 1rem;
+:root {
+  --primary: #0077b6;
+  --focus: #0096c7;
+  --accent: #90e0ef;
+  --accent-dark: #7abfcc;
+  --white: #ffffff;
+  --testua-dark: #000000;
 }
 
-.datuakInput:focus, select:focus {
-    outline: none;
-    border-color: #0096C7;
-    box-shadow: 0 0 5px #0096C7;
+.datuakInput,
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid var(--primary);
+  font-size: 1rem;
+}
+
+.datuakInput:focus,
+select:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 5px var(--focus);
 }
 
 #botoia {
-    width: 100%;
-    height: 20%;
-    border: 1px solid;
-    border-radius: 8px;
-    background-color: #90E0EF;
-    padding: 8px 12px;
+  width: 100%;
+  height: 20%;
+  border: 1px solid;
+  border-radius: 8px;
+  background-color: var(--accent);
+  padding: 8px 12px;
 }
 
 #botoia:hover {
-    background-color: #7ABFCC;
-    cursor: pointer;
+  background-color: var(--accent-dark);
+  cursor: pointer;
 }
 
 .close-btn {
-    text-decoration: none;
-    margin-left: 10px;
-    cursor: pointer;
+  text-decoration: none;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 16px;
-    height: 16px;
-    opacity: 0.7;
-    transition: opacity 0.2s;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
 }
 
 .close:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 dialog {
-    color: #0077B6;
-    border-radius: 8px;
-    padding: 20px;
+  color: var(--primary);
+  border-radius: 8px;
+  padding: 20px;
 }
 
 h4 {
-    color: black;
+  color: var(--testua-dark);
 }
 
 .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 500px;
-    max-height: 650px;
-    padding: 30px;
-    border: 2px solid #0077B6;
-    border-radius: 10px;
-    background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  max-height: 650px;
+  padding: 30px;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  background-color: var(--white);
 }
 
 .popupTaula {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 700px;
-    max-height: 650px;
-    padding: 30px;
-    border: 2px solid #0077B6;
-    border-radius: 10px;
-    background-color: white;
-    color: black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 700px;
+  max-height: 650px;
+  padding: 30px;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  background-color: var(--white);
+  color: var(--testua-dark);
 }

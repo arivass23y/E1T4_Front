@@ -123,10 +123,14 @@ async function aldatuKategoria(id) {
             id,
             izena,
         });
-        const dialog = document.getElementById('editatuKategoria');
-        dialog.close();
-        await cargarKategoriak();
-        const data = await result.json();
+        if (result.success) {
+            alert('Kategoria aldatu da');
+            const dialog = document.getElementById('editatuKategoria');
+            dialog.close();
+            await cargarKategoriak();
+            const data = await result.json();
+        }
+
     } catch (err) {
         console.error('Error:', err);
     }

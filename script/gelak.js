@@ -128,10 +128,14 @@ async function aldatuGela(id) {
             izena,
             taldea,
         });
-        const dialog = document.getElementById('aldatuGela');
-        dialog.close();
-        await cargarGelak();
-        const data = await result.json();
+        if (result.success) {
+            alert('Gela aldatu da');
+            const dialog = document.getElementById('aldatuGela');
+            dialog.close();
+            await cargarGelak();
+            const data = await result.json();
+        }
+
     } catch (err) {
         console.error('Error:', err);
     }

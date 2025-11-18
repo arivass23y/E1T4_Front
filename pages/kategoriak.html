@@ -1,64 +1,88 @@
 <!DOCTYPE html>
 <html lang="eu">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kategoriak</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/pop-ups.css">
-    <link rel="stylesheet" href="../styles/orriak/taulak.css">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/pop-ups.css" />
+    <link rel="stylesheet" href="../styles/orriak/taulak.css" />
+  </head>
 
-<body>
+  <body>
     <section id="header"></section>
     <a href="../index.html">
-        <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
+      <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera" />
     </a>
     <main class="tabla-wrapper">
+      <button
+        class="filtroBotoia"
+        onclick="document.getElementById('sortuKategoria').showModal()"
+      >
+        <img
+          src="../img/general/gehitu.png"
+          alt="Añadir"
+          class="filter-icon"
+          id="plus-icon"
+        />
+      </button>
 
-        <button class="filtroBotoia" onclick="document.getElementById('sortuKategoria').showModal()">
-            <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
-        </button>
-
-        <section>
-            <table class="taula">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Izena</th>
-                        <th><section>Kudeaketak</section></th>
-                    </tr>
-                </thead>
-                <tbody id="kategoria-body">
-
-                </tbody>
-            </table>
-        </section>
-        <dialog class="popup" id="sortuKategoria">
-            <form>
-                <a onclick="document.getElementById('sortuKategoria').close()" class="close-btn">
-                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-                </a>
-                <h4>Izena</h4>
-                <input class="datuakInput" type="text" id="kategoriaIzenaSortu">
-                <button id="botoiaSortu" onclick="crearKategoria()">Kategoria sortu</button>
-            </form>
-        </dialog>
-        <dialog class="popup" id="editatuKategoria">
-            <form>
-                <a onclick="document.getElementById('editatuKategoria').close()" class="close-btn">
-                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-                </a>
-                <h4>Izena</h4>
-                <input class="datuakInput" type="text" id="kategoriaIzenaEditatu">
-                <button id="botoiaEditatu">Aldaketak gorde</button>
-            </form>
-        </dialog>
+      <section>
+        <table class="taula">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Izena</th>
+              <th><section>Kudeaketak</section></th>
+            </tr>
+          </thead>
+          <tbody id="kategoria-body"></tbody>
+        </table>
+      </section>
+      <dialog class="popup" id="sortuKategoria">
+        <form>
+          <a
+            onclick="document.getElementById('sortuKategoria').close()"
+            class="close-btn"
+          >
+            <img class="close" src="../img/mezuak/close.png" alt="Cerrar" />
+          </a>
+          <h4>Izena</h4>
+          <input
+            class="datuakInput"
+            type="text"
+            id="kategoriaIzenaSortu"
+            required
+          />
+          <button id="botoiaSortu" onclick="crearKategoria()">
+            Kategoria sortu
+          </button>
+        </form>
+      </dialog>
+      <dialog class="popup" id="editatuKategoria">
+        <form>
+          <a
+            onclick="document.getElementById('editatuKategoria').close()"
+            class="close-btn"
+          >
+            <img class="close" src="../img/mezuak/close.png" alt="Cerrar" />
+          </a>
+          <h4>Izena</h4>
+          <input
+            class="datuakInput"
+            type="text"
+            id="kategoriaIzenaEditatu"
+            required
+          />
+          <button id="botoiaEditatu">Aldaketak gorde</button>
+        </form>
+      </dialog>
     </main>
     <script src="../script/header.js"></script>
-        <script src="../script/kategoriak.js"></script>
-</body>
-
+    <script src="../script/kategoriak.js"></script>
+  </body>
 </html>

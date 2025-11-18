@@ -1,48 +1,64 @@
 <!DOCTYPE html>
 <html lang="eu">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profila</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/orriak/profila.css">
-    <link rel="stylesheet" href="../styles/pop-ups.css">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/orriak/profila.css" />
+    <link rel="stylesheet" href="../styles/pop-ups.css" />
+  </head>
 
-<body>
+  <body>
     <section id="header"></section>
     <a href="../index.html">
-        <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
+      <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera" />
     </a>
     <main>
-        <section class="gorputza">
-            <img class="profila-img" src="../img/navbar/avatar.png" alt="erabiltzaile avatar">
-            <section class="datuak" id="profilaDatuak">
-            </section>
-            <section class="botoi-section" id="botoi-section">
-            </section>
-        </section>
-        <dialog class="popup" id="aldatuProfila">
-            <form>
-                <a onclick="document.getElementById('aldatuProfila').close()" class="close-btn">
-                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-                </a>
-                <h4>Izena</h4>
-                <input class="datuakInput" type="text" id="izenaEditatu" required>
-                <h4>Abizena</h4>
-                <input class="datuakInput" type="text" id="abizenaEditatu" required>
-                <h4>Erabiltzailea</h4>
-                <input class="datuakInput" type="text" id="erabiltzaileaEditatu" required>
-                <h4>Pasahitza</h4>
-                <input class="datuakInput" type="password" id="pasahitzaEditatu" required>
-                <button id="botoiaEditatu">Aldaketak gorde</button>
-            </form>
-        </dialog>
+      <section class="gorputza">
+        <img
+          class="profila-img"
+          src="../img/navbar/avatar.png"
+          alt="erabiltzaile avatar"
+        />
+        <section class="datuak" id="profilaDatuak"></section>
+        <section class="botoi-section" id="botoi-section"></section>
+      </section>
+      <dialog class="popup" id="aldatuProfila">
+        <form>
+          <a
+            onclick="document.getElementById('aldatuProfila').close()"
+            class="close-btn"
+          >
+            <img class="close" src="../img/mezuak/close.png" alt="Cerrar" />
+          </a>
+          <h4>Izena</h4>
+          <input class="datuakInput" type="text" id="izenaEditatu" required />
+          <h4>Abizena</h4>
+          <input class="datuakInput" type="text" id="abizenaEditatu" required />
+          <h4>Erabiltzailea</h4>
+          <input
+            class="datuakInput"
+            type="text"
+            id="erabiltzaileaEditatu"
+            required
+          />
+          <h4>Pasahitza</h4>
+          <input
+            class="datuakInput"
+            type="password"
+            id="pasahitzaEditatu"
+            required
+          />
+          <button id="botoiaEditatu">Aldaketak gorde</button>
+        </form>
+      </dialog>
     </main>
     <script src="../script/header.js"></script>
     <script src="../script/profila.js"></script>
-</body>
-
+  </body>
 </html>

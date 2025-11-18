@@ -1,128 +1,163 @@
 <!DOCTYPE html>
 <html lang="eu">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inbentarioa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/orriak/taulak.css">
-    <link rel="stylesheet" href="../styles/pop-ups.css">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/orriak/taulak.css" />
+    <link rel="stylesheet" href="../styles/pop-ups.css" />
+  </head>
 
-<body>
+  <body>
     <section id="header"></section>
     <a href="../index.html">
-        <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
+      <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera" />
     </a>
     <main class="tabla-wrapper">
-        <button class="kokalekuak-ikusi" onclick="cargarKokalekuak()">
-            <p >Kokaleku aktiboak</p>
-            <img src="../img/kokalekuak.png" alt="Añadir" class="filter-icon" id="plus-icon">
-        </button>
-        <button class="filtroBotoia" onclick="document.getElementById('sortuInbentarioa').showModal()">
-            <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
-        </button>
+      <button class="kokalekuak-ikusi" onclick="cargarKokalekuak()">
+        <p>Kokaleku aktiboak</p>
+        <img
+          src="../img/kokalekuak.png"
+          alt="Añadir"
+          class="filter-icon"
+          id="plus-icon"
+        />
+      </button>
+      <button
+        class="filtroBotoia"
+        onclick="document.getElementById('sortuInbentarioa').showModal()"
+      >
+        <img
+          src="../img/general/gehitu.png"
+          alt="Añadir"
+          class="filter-icon"
+          id="plus-icon"
+        />
+      </button>
 
-        <section>
-            <table class="taula">
-                <thead>
-                    <tr>
-                        <th>Etiketa</th>
-                        <th>Ekipamendua</th>
-                        <th>Erosketa data</th>
-                        <th><section>Kudeaketak</section></th>
-                    </tr>
-                </thead>
-                <tbody id="inbentarioa-body">
-                    <!-- Datuak hemen gehituko dira dinamikan -->
-                </tbody>
-            </table>
-        </section>
+      <section>
+        <table class="taula">
+          <thead>
+            <tr>
+              <th>Etiketa</th>
+              <th>Ekipamendua</th>
+              <th>Erosketa data</th>
+              <th><section>Kudeaketak</section></th>
+            </tr>
+          </thead>
+          <tbody id="inbentarioa-body">
+            <!-- Datuak hemen gehituko dira dinamikan -->
+          </tbody>
+        </table>
+      </section>
 
-        <!--Inbentarioa (eta kokalekua) sortzeko dialog -->
-        <dialog class="popup" id="sortuInbentarioa">
-            <form>
-                <a onclick="document.getElementById('sortuInbentarioa').close()" class="close-btn">
-                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-                </a>
-                <h4>Etiketa</h4>
-                <input class="datuakInput" type="text" id="inbentarioEtiketa">
-                <h4>Ekipamendua</h4>
-                <select id="ekipamendua">
-                    <option value="" disabled selected>Aukeratu ekipamendua</option>
-                </select>
-                <h4>Erosketa data</h4>
-                <input class="datuakInput" type="date" id="data">
-                <h4>Gela</h4>
-                <select id="gelaSortu">
-                    <option value="" disabled selected>Aukeratu gela</option>
-                </select>
-                <button id="botoiaSortu" >Inbentarioa sortu</button>
-            </form>
-        </dialog>
+      <!--Inbentarioa (eta kokalekua) sortzeko dialog -->
+      <dialog class="popup" id="sortuInbentarioa">
+        <form>
+          <a
+            onclick="document.getElementById('sortuInbentarioa').close()"
+            class="close-btn"
+          >
+            <img class="close" src="../img/mezuak/close.png" alt="Cerrar" />
+          </a>
+          <h4>Etiketa</h4>
+          <input
+            class="datuakInput"
+            type="text"
+            id="inbentarioEtiketa"
+            required
+          />
+          <h4>Ekipamendua</h4>
+          <select id="ekipamendua" required>
+            <option value="" disabled selected>Aukeratu ekipamendua</option>
+          </select>
+          <h4>Erosketa data</h4>
+          <input class="datuakInput" type="date" id="data" required />
+          <h4>Gela</h4>
+          <select id="gelaSortu" required>
+            <option value="" disabled selected>Aukeratu gela</option>
+          </select>
+          <button id="botoiaSortu">Inbentarioa sortu</button>
+        </form>
+      </dialog>
 
-        <!--Inbentarioa aldatzeko dialog -->
-        <dialog class="popup" id="aldatuInbentarioa">
-            <form>
-                <a onclick="document.getElementById('aldatuInbentarioa').close()" class="close-btn">
-                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-                </a>
-                <input type="hidden" id="inbentarioEtiketaAldatu">
-                <h4>Ekipamendua</h4>
-                <select id="ekipamenduaAldatu">
-                    <option value="" disabled selected>Aukeratu ekipamendua</option>
-                </select>
-                <h4>Erosketa data</h4>
-                <input class="datuakInput" type="date" id="dataAldatu">
-                <button id="botoiaEditatu">Inbentarioa aldatu</button>
-            </form>
-        </dialog>
+      <!--Inbentarioa aldatzeko dialog -->
+      <dialog class="popup" id="aldatuInbentarioa">
+        <form>
+          <a
+            onclick="document.getElementById('aldatuInbentarioa').close()"
+            class="close-btn"
+          >
+            <img class="close" src="../img/mezuak/close.png" alt="Cerrar" />
+          </a>
+          <input type="hidden" id="inbentarioEtiketaAldatu" />
+          <h4>Ekipamendua</h4>
+          <select id="ekipamenduaAldatu" required>
+            <option value="" disabled selected>Aukeratu ekipamendua</option>
+          </select>
+          <h4>Erosketa data</h4>
+          <input class="datuakInput" type="date" id="dataAldatu" required />
+          <button id="botoiaEditatu">Inbentarioa aldatu</button>
+        </form>
+      </dialog>
 
-        <!--Kokaleku aktiboak dialog -->
-        <dialog class="popupTaula" id="kokalekuAktiboak">
-            <a onclick="document.getElementById('kokalekuAktiboak').close()" class="close-btn">
-                <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-            </a>
-            <table class="taula">
-                <thead>
-                    <tr>
-                        <th>Etiketa</th>
-                        <th>Gela</th>
-                        <th>Hasiera data</th>
-                        <th>Amaiera data</th>
-                        <th><section>Kudeaketak</section></th>
-                    </tr>
-                </thead>
-                <tbody id="kokalekua-body">
-                    <!-- Datuak hemen gehituko dira dinamikan -->
-                </tbody>
-            </table>
-        </dialog>
+      <!--Kokaleku aktiboak dialog -->
+      <dialog class="popupTaula" id="kokalekuAktiboak">
+        <a
+          onclick="document.getElementById('kokalekuAktiboak').close()"
+          class="close-btn"
+        >
+          <img class="close" src="../img/mezuak/close.png" alt="Cerrar" />
+        </a>
+        <table class="taula">
+          <thead>
+            <tr>
+              <th>Etiketa</th>
+              <th>Gela</th>
+              <th>Hasiera data</th>
+              <th>Amaiera data</th>
+              <th><section>Kudeaketak</section></th>
+            </tr>
+          </thead>
+          <tbody id="kokalekua-body">
+            <!-- Datuak hemen gehituko dira dinamikan -->
+          </tbody>
+        </table>
+      </dialog>
 
-        <!--Kokalekua aldatzeko dialog -->
-        <dialog class="popup" id="kokalekuAldatu">
-            <form>
-                <a onclick="document.getElementById('kokalekuAldatu').close()" class="close-btn">
-                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-                </a>
-                <h4>Etiketa</h4>
-                <input class="datuakInput" type="text" id="EtiketaKokalekuaAldatu" disabled>
-                <h4>Gela</h4>
-                <select id="gelaAldatu">
-                    <option value="" disabled selected>Aukeratu gela</option>
-                </select>
-                <h4>Amaiera Data</h4>
-                <input class="datuakInput" type="date" id="kokalekuaDataAldatu">
-                <button id="botoiaKokalekuaAldatu">Kokalekua aldatu</button>
-            </form>
-        </dialog>
-
+      <!--Kokalekua aldatzeko dialog -->
+      <dialog class="popup" id="kokalekuAldatu">
+        <form>
+          <a
+            onclick="document.getElementById('kokalekuAldatu').close()"
+            class="close-btn"
+          >
+            <img class="close" src="../img/mezuak/close.png" alt="Cerrar" />
+          </a>
+          <h4>Etiketa</h4>
+          <input
+            class="datuakInput"
+            type="text"
+            id="EtiketaKokalekuaAldatu"
+            disabled
+          />
+          <h4>Gela</h4>
+          <select id="gelaAldatu">
+            <option value="" disabled selected>Aukeratu gela</option>
+          </select>
+          <h4>Amaiera Data</h4>
+          <input class="datuakInput" type="date" id="kokalekuaDataAldatu" />
+          <button id="botoiaKokalekuaAldatu">Kokalekua aldatu</button>
+        </form>
+      </dialog>
     </main>
 
     <script src="../script/header.js"></script>
     <script src="../script/inbentario.js"></script>
-</body>
-
+  </body>
 </html>
