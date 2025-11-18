@@ -1,59 +1,64 @@
-const API_URL = '../../E1T4_Back/Kontrolagailuak/erabiltzailea-controller.php';
+const API_URL = 'http://localhost/Reto1/E1T4_Back/Kontrolagailuak/erabiltzailea-controller.php';
 
 async function login() {
-    const erabiltzaile = document.getElementById("erabiltzailea").value;
-    const pasahitza = document.getElementById("pasahitza").value;
-    if(erabiltzaile === "" || pasahitza === "") {
+    const erabiltzailea = document.getElementById("erabiltzailea").value.trim();
+    const pasahitza = document.getElementById("pasahitza").value.trim();
+
+    if (!erabiltzailea || !pasahitza) {
         alert("Mesedez, bete eremu guztiak.");
-    }   
+    }
     else{
-        const resultado = await llamarAPI('LOGIN', { erabiltzaile, pasahitza });
-        if(resultado.success === "true") {
-            alert("penecius jr");
-            localStorage.setItem('apiKey', resultado.apiKey);
-            window.location.href = 'profila.html';
-        } else {
-            alert(" jr");
-            alert("Erabiltzaile edo pasahitz okerra.");
+        try {
+            const resultado = await llamarAPI('LOGIN', { erabiltzailea, pasahitza });
+
+            if (resultado.success && resultado.success.toString().trim().toLowerCase() === "true") {
+                localStorage.setItem('apiKey', resultado.apiKey);
+                window.location.href ='../index.html';
+            } else {
+                alert("Erabiltzaile edo pasahitz okerra.");
+            }
+        } catch (err) {
+            console.error("Errorea login egiten:", err);
+            alert("Errorea login egiten: " + err.message);
         }
     }
 }
 
 async function llamarAPI(metodo, datos = {}) {
-    //Bidaliko parametroak prestatu
     const params = new URLSearchParams(); 
     params.append('_method', metodo);
 
-    // Gehitu datuak soilik balioak daudenean
+    // Añadir datos
     for (const [key, value] of Object.entries(datos)) {
         if (value !== null && value !== undefined) {
             params.append(key, value);
         }
     }
 
-    // APIra deitu
-    const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString()
-    });
-
-    // Erantzuna prozesatu
-    const text = await response.text();
-    let resultado;
     try {
-        resultado = JSON.parse(text);
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        });
+
+        const text = await response.text();
+
+        let resultado;
+        try {
+            resultado = JSON.parse(text);
+        } catch (err) {
+            console.error('Respuesta API no es JSON válido:', { status: response.status, text });
+            throw new Error(`API devolvió algo que no es JSON. Estado: ${response.status}`);
+        }
+
+        if (!response.ok) {
+            const mensaje = resultado?.error || `HTTP error ${response.status}`;
+            throw new Error(mensaje);
+        }
+
+        return resultado;
     } catch (err) {
-        // Errorea JSON bihurtzean: status + zerbitzariak itzuli duen testua
-        console.error('API-ko eranztuna ez da JSON:', { status: response.status, text });
-        throw new Error(`APIak testu/HTML itzuli du JSONaren ordez. Egoera: ${response.status}. Begiratu kontsola (Network) eta loga.`);
+        throw new Error("Error en la petición a la API: " + err.message);
     }
-
-    if (!response.ok) {
-        // APIak itzuli duen errore-mezua barne hartu (badago)
-        const mensaje = resultado?.error || `HTTP errorea ${response.status}`;
-        throw new Error(mensaje);
-    }
-
-    return resultado;
 }
