@@ -1,165 +1,190 @@
 :root {
-    --light: #CAF0F8;
-    --primary: #0077B6;
-    --white: #FFFFFF;
-    --hover: #F0F0F0;
-    --accent: #90E0EF;
-    --accent-dark: #7ABFCC;
-    --shadow-strong: rgba(0, 0, 0, 0.3);
-    --shadow-medium: rgba(0, 0, 0, 0.2);
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --testua-dark: #000000;
+  --light: #caf0f8;
+  --primary: #0077b6;
+  --white: #ffffff;
+  --hover: #f0f0f0;
+  --accent: #90e0ef;
+  --accent-dark: #7abfcc;
+  --shadow-strong: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.2);
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --text-dark: #000000;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    padding-top: 70px;
-    padding-bottom: 30px;
+  font-family: "Inter", sans-serif;
+  padding-top: 70px;
+  padding-bottom: 30px;
 }
 
-.kategoriak-titulo {
-    display: flex;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-    text-shadow: 0 2px 4px var(--shadow-strong);
-}
-
-#div-principal {
-    background-color: var(--light);
-    padding-top: 1em;
-    margin: auto;
-    margin-top: 6%;
-    max-width: 800px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px var(--shadow-medium);
-    border: 1px solid var(--primary);
+#principal {
+  background-color: var(--light);
+  padding: 1em;
+  margin: 6% auto;
+  max-width: 800px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px var(--shadow-medium);
+  border: 1px solid var(--primary);
 }
 
 .principal-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .principal-icon {
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
 }
 
 .kategoriak-titulo {
-    font-size: 2rem;
-    font-weight: bold;
-    text-shadow: 0 2px 4px var(--shadow-light);
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 40px 0 20px 0;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px var(--shadow-strong);
 }
 
 #Kategoriak {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    justify-content: center;
-    background-color: var(--light);
-    padding: 50px 30px;
-    margin: 0 auto 50px auto;
-    max-width: 800px;
-    border-radius: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  justify-content: center;
+  background-color: var(--light);
+  padding: 50px 30px;
+  margin: 0 auto 50px auto;
+  max-width: 800px;
+  border-radius: 15px;
 }
 
 .category-column {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .category {
-    background-color: var(--white);
-    border: 1px solid var(--primary);
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: var(--white);
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .category:hover {
-    background-color: var(--hover);
-}
-
-a {
-    text-decoration: none;
-    color: var(--testua-dark);
+  background-color: var(--hover);
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px var(--shadow-medium);
 }
 
 .category-icon {
-    width: 40px;
-    height: 40px;
-    margin-top: 12px;
-    margin-bottom: 15px;
-    margin-right: 8px;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 15px;
 }
 
-.category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px var(--shadow-medium);
-}
-
-@media (max-width: 768px) {
-    .nav-center { display: none; }
-    .nav-left .nav-text { font-size: 1rem; }
-    .nav-img { width: 35px; }
-
-    #Kategoriak {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-        padding: 30px 5%;
-        min-height: auto;
-    }
-
-    .category-column { flex-direction: row; gap: 20px; }
-    .category-icon { width: 50px; height: 50px; margin-bottom: 10px; }
+a {
+  text-decoration: none;
+  color: var(--text-dark);
 }
 
 #botoi-atzera {
-    width: 50px;
-    height: 50px;
-    border: 1px solid var(--primary);
-    border-radius: 10px;
-    margin: 5px;
-    padding: 3px;
-    background-color: var(--white);
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  margin: 5px;
+  padding: 3px;
+  background-color: var(--white);
 }
 
 #botoi-atzera:hover {
-    background-color: var(--hover);
+  background-color: var(--hover);
 }
 
-#botoiaSortu, #botoiaEditatu, #botoiaKokalekuaAldatu {
-    width: 100%;
-    height: 20%;
-    border: 1px solid;
-    border-radius: 8px;
-    background-color: var(--accent);
-    padding: 8px 12px;
+#botoiaSortu,
+#botoiaEditatu,
+#botoiaKokalekuaAldatu {
+  width: 100%;
+  height: 20%;
+  border: 1px solid;
+  border-radius: 8px;
+  background-color: var(--accent);
+  padding: 8px 12px;
 }
 
-#botoiaSortu:hover, #botoiaEditatu:hover, #botoiaKokalekuaAldatu:hover {
-    background-color: var(--accent-dark);
-    cursor: pointer;
+#botoiaSortu:hover,
+#botoiaEditatu:hover,
+#botoiaKokalekuaAldatu:hover {
+  background-color: var(--accent-dark);
+  cursor: pointer;
+}
+
+/* Responsive atala */
+@media (max-width: 768px) {
+  #Kategoriak {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 30px 15px;
+  }
+
+  .category-column {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .category-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .principal-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .kategoriak-titulo {
+    font-size: 1.8rem;
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  #principal {
+    padding: 1em;
+    margin: 5% 10px;
+  }
+
+  .kategoriak-titulo {
+    font-size: 1.5rem;
+  }
+
+  .category {
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  .category-icon {
+    width: 40px;
+    height: 40px;
+  }
 }

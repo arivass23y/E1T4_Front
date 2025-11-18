@@ -1,93 +1,138 @@
 <!DOCTYPE html>
 <html lang="eu">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ekipamendua</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/pop-ups.css">
-    <link rel="stylesheet" href="../styles/orriak/taulak.css">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/pop-ups.css" />
+    <link rel="stylesheet" href="../styles/orriak/taulak.css" />
+  </head>
 
-<body>
+  <body>
     <section id="header"></section>
     <a href="../index.html">
-        <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
+      <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera" />
     </a>
     <main class="tabla-wrapper">
-        <button class="filtroBotoia" onclick="document.getElementById('sortuEkipamendua').showModal()">
-            <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
-        </button>
+      <button
+        class="filtroBotoia"
+        onclick="document.getElementById('sortuEkipamendua').showModal()"
+      >
+        <img
+          src="../img/general/gehitu.png"
+          alt="Añadir"
+          class="filter-icon"
+          id="plus-icon"
+        />
+      </button>
 
-        <section>
-            <table class="taula">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Izena</th>
-                        <th>Kategoria</th>
-                        <th>Deskribapena</th>
-                        <th>Marka</th>
-                        <th>Modeloa</th>
-                        <th>Stock</th>
-                        <th><section>Kudeaketak</section></th>
-                    </tr>
-                </thead>
-                <tbody id="ekipamendua-body">
-
-                </tbody>
-            </table>
-        </section>
-        <dialog class="popup" id="sortuEkipamendua">
-            <form>
-                <a onclick="document.getElementById('sortuEkipamendua').close()" class="close-btn">
-                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-                </a>
-                <h4>Izena</h4>
-                <input class="datuakInput" type="text" id="ekipamenduIzenaSortu" required>
-                <h4>Kategoria</h4>
-                <select id="kategoriaSortu" aria-placeholder="Aukeratu kategoria" required>
-                    <option value="" disabled selected>Aukeratu kategoria</option>
-                </select>
-                <h4>Deskribapena</h4>
-                <input class="datuakInput" type="text" id="deskribapenaSortu" required>
-                <h4>Marka</h4>
-                <input class="datuakInput" type="text" id="markaSortu">
-                <h4>Modeloa</h4>
-                <input class="datuakInput" type="text" id="modeloaSortu">
-                <h4>Stock</h4>
-                <input class="datuakInput" type="number" min="0" id="stockSortu" required>
-                <button id="botoiaSortu" onclick="crearEkipamendua()">Ekipamendua sortu</button>
-            </form>
-        </dialog>
-        <dialog class="popup" id="aldatuEkipamendua">
-            <form>
-                <a onclick="document.getElementById('aldatuEkipamendua').close()" class="close-btn">
-                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-                </a>
-                <h4>Izena</h4>
-                <input class="datuakInput" type="text" id="ekipamenduIzena" required>
-                <h4>Kategoria</h4>
-                <select id="kategoria" required>
-                    <option value="" disabled selected>Aukeratu kategoria</option>
-                </select>
-                <h4>Deskribapena</h4>
-                <input class="datuakInput" type="text" id="deskribapena" required>
-                <h4>Marka</h4>
-                <input class="datuakInput" type="text" id="marka">
-                <h4>Modeloa</h4>
-                <input class="datuakInput" type="text" id="modeloa">
-                <h4>Stock</h4>
-                <input class="datuakInput" type="number" min="0" id="stock" required>
-                <button id="botoia">Aldaketak gorde</button>
-            </form>
-        </dialog>
-
+      <section>
+        <table class="taula">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Izena</th>
+              <th>Kategoria</th>
+              <th>Deskribapena</th>
+              <th>Marka</th>
+              <th>Modeloa</th>
+              <th>Stock</th>
+              <th><section>Kudeaketak</section></th>
+            </tr>
+          </thead>
+          <tbody id="ekipamendua-body"></tbody>
+        </table>
+      </section>
+      <dialog class="popup" id="sortuEkipamendua">
+        <form>
+          <a
+            onclick="document.getElementById('sortuEkipamendua').close()"
+            class="close-btn"
+          >
+            <img class="close" src="../img/mezuak/close.png" alt="Cerrar" />
+          </a>
+          <h4>Izena</h4>
+          <input
+            class="datuakInput"
+            type="text"
+            id="ekipamenduIzenaSortu"
+            required
+          />
+          <h4>Kategoria</h4>
+          <select
+            id="kategoriaSortu"
+            aria-placeholder="Aukeratu kategoria"
+            required
+          >
+            <option value="" disabled selected>Aukeratu kategoria</option>
+          </select>
+          <h4>Deskribapena</h4>
+          <input
+            class="datuakInput"
+            type="text"
+            id="deskribapenaSortu"
+            required
+          />
+          <h4>Marka</h4>
+          <input class="datuakInput" type="text" id="markaSortu" />
+          <h4>Modeloa</h4>
+          <input class="datuakInput" type="text" id="modeloaSortu" />
+          <h4>Stock</h4>
+          <input
+            class="datuakInput"
+            type="number"
+            min="0"
+            id="stockSortu"
+            required
+          />
+          <button id="botoiaSortu" onclick="crearEkipamendua()">
+            Ekipamendua sortu
+          </button>
+        </form>
+      </dialog>
+      <dialog class="popup" id="aldatuEkipamendua">
+        <form>
+          <a
+            onclick="document.getElementById('aldatuEkipamendua').close()"
+            class="close-btn"
+          >
+            <img class="close" src="../img/mezuak/close.png" alt="Cerrar" />
+          </a>
+          <h4>Izena</h4>
+          <input
+            class="datuakInput"
+            type="text"
+            id="ekipamenduIzena"
+            required
+          />
+          <h4>Kategoria</h4>
+          <select id="kategoria" required>
+            <option value="" disabled selected>Aukeratu kategoria</option>
+          </select>
+          <h4>Deskribapena</h4>
+          <input class="datuakInput" type="text" id="deskribapena" required />
+          <h4>Marka</h4>
+          <input class="datuakInput" type="text" id="marka" />
+          <h4>Modeloa</h4>
+          <input class="datuakInput" type="text" id="modeloa" />
+          <h4>Stock</h4>
+          <input
+            class="datuakInput"
+            type="number"
+            min="0"
+            id="stock"
+            required
+          />
+          <button id="botoia">Aldaketak gorde</button>
+        </form>
+      </dialog>
     </main>
     <script src="../script/header.js"></script>
     <script src="../script/ekipamenduak.js"></script>
-</body>
-
+  </body>
 </html>

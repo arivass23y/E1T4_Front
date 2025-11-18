@@ -1,147 +1,147 @@
 :root {
-    --fondo: #CAF0F8;
-    --borde: #0077B6;
-    --focus: #0096C7;
-    --boton: #90E0EF;
-    --div-fondo: #FFFFFF;
-    --shadow: rgba(0, 0, 0, 0.1);
+  --fondo: #caf0f8;
+  --borde: #0077b6;
+  --focus: #0096c7;
+  --boton: #90e0ef;
+  --div-fondo: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.1);
 }
 
 body {
-    background-color: var(--fondo);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
+  background-color: var(--fondo);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
 .nav-img {
-    width: 310px;
-    height: 180px;
-    border: 2px solid var(--borde);
-    border-radius: 15px;
-    margin-bottom: -5px;
-    background-color: var(--div-fondo);
-    object-fit: contain;
-    margin-bottom: 10px;
-    padding: 15px;
+  width: 310px;
+  height: 180px;
+  border: 2px solid var(--borde);
+  border-radius: 15px;
+  margin-bottom: -5px;
+  background-color: var(--div-fondo);
+  object-fit: contain;
+  margin-bottom: 10px;
+  padding: 15px;
 }
 
 #div-hasi {
-    width: 300px;
-    background-color: var(--div-fondo);
-    border: 2px solid var(--borde);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 5px 15px var(--shadow);;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 300px;
+  background-color: var(--div-fondo);
+  border: 2px solid var(--borde);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 5px 15px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 form {
-    width: 100%;
-    text-align: left;
+  width: 100%;
+  text-align: left;
 }
 
 input {
-    width: 90%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid var(--borde);
-    font-size: 1rem;
+  width: 90%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid var(--borde);
+  font-size: 1rem;
 }
 
 input:focus {
-    outline: none;
-    border-color: var(--focus);
-    box-shadow: 0 0 5px var(--focus);
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 5px var(--focus);
 }
 
 #saioa-botoia {
-    width: 100%;
-    height: 20%;
-    border: 1px solid;
-    border-radius: 8px;
-    background-color: var(--boton);
-    padding: 8px 12px;
-    cursor: pointer;
+  width: 100%;
+  height: 20%;
+  border: 1px solid;
+  border-radius: 8px;
+  background-color: var(--boton);
+  padding: 8px 12px;
+  cursor: pointer;
 }
 
 #saioa-botoia:hover {
-    background-color: var(--focus);
+  background-color: var(--focus);
 }
 
 @media (max-width: 480px) {
-    body {
-        margin: 20px;
-        padding: 10px;
-        justify-content: center;
-    }
+  body {
+    margin: 20px;
+    padding: 10px;
+    justify-content: center;
+  }
 
-    .nav-img {
-        width: 100%;
-        padding: 10px;
-        margin-top: 20px;
-        margin: 20px;
-    }
+  .nav-img {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    margin: 20px;
+  }
 
-    #div-hasi {
-        width: 100%;
-        padding: 20px;
-        margin-top: 10px;
-        margin: 20px;
-    }
+  #div-hasi {
+    width: 100%;
+    padding: 20px;
+    margin-top: 10px;
+    margin: 20px;
+  }
 
-    input,
-    #saioa-botoia {
-        font-size: 0.95rem;
-    }
+  input,
+  #saioa-botoia {
+    font-size: 0.95rem;
+  }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
-    body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .nav-img {
-        width: 82%;
-    }
+  .nav-img {
+    width: 82%;
+  }
 
-    #div-hasi {
-        width: 80%;
-        padding: 25px;
-    }
+  #div-hasi {
+    width: 80%;
+    padding: 25px;
+  }
 }
 
-@media (min-height: 390px) and (max-height: 440px) and (min-width: 481px) and (max-width: 768px){
-    body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+@media (min-height: 390px) and (max-height: 440px) and (min-width: 481px) and (max-width: 768px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .nav-img {
-        width: 82%;
-    }
+  .nav-img {
+    width: 82%;
+  }
 
-    #div-hasi {
-        width: 80%;
-        padding: 25px;
-    }
+  #div-hasi {
+    width: 80%;
+    padding: 25px;
+  }
 }
 
 @media (min-width: 769px) {
-    .nav-img {
-        width: 310px;
-    }
+  .nav-img {
+    width: 310px;
+  }
 
-    #div-hasi {
-        width: 300px;
-    }
+  #div-hasi {
+    width: 300px;
+  }
 }

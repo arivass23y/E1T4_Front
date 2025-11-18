@@ -1,70 +1,87 @@
 <!DOCTYPE html>
 <html lang="eu">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gelak</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/pop-ups.css">
-    <link rel="stylesheet" href="../styles/orriak/taulak.css">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/pop-ups.css" />
+    <link rel="stylesheet" href="../styles/orriak/taulak.css" />
+  </head>
 
-<body>
+  <body>
     <section id="header"></section>
     <a href="../index.html">
-        <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera">
+      <img id="botoi-atzera" src="../img/general/atzera.png" alt="Atzera" />
     </a>
     <main class="tabla-wrapper">
+      <button
+        class="filtroBotoia"
+        onclick="document.getElementById('sortuGela').showModal()"
+      >
+        <img
+          src="../img/general/gehitu.png"
+          alt="Añadir"
+          class="filter-icon"
+          id="plus-icon"
+        />
+      </button>
 
-        <button class="filtroBotoia" onclick="document.getElementById('sortuGela').showModal()">
-            <img src="../img/general/gehitu.png" alt="Añadir" class="filter-icon" id="plus-icon">
-        </button>
-
-        <section>
-            <table class="taula">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Izena</th>
-                        <th>Taldea</th>
-                        <th><section>Kudeaketak</section></th>
-                    </tr>
-                </thead>
-                <tbody id="gela-body">
-
-                </tbody>
-            </table>
-        </section>
-        <dialog class="popup" id="sortuGela">
-            <form>
-                <a onclick="document.getElementById('sortuGela').close()" class="close-btn">
-                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-                </a>
-                <h4>Gela izena</h4>
-                <input class="datuakInput" type="text" id="gelaIzenaSortu" required>
-                <h4>Taldea</h4>
-                <input class="datuakInput" type="text" id="taldeaSortu">
-                <button id="botoiaSortu" onclick="crearGela()">Gela sortu</button>
-            </form>
-        </dialog>
-        <dialog class="popup" id="aldatuGela">
-            <form>
-                <a onclick="document.getElementById('aldatuGela').close()" class="close-btn">
-                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
-                </a>
-                <h4>Gela izena</h4>
-                <input class="datuakInput" type="text" id="gelaIzenaAldatu" required>
-                <h4>Taldea</h4>
-                <input class="datuakInput" type="text" id="taldeaAldatu">
-                <button id="botoia">Aldaketak gorde</button>
-            </form>
-        </dialog>
+      <section>
+        <table class="taula">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Izena</th>
+              <th>Taldea</th>
+              <th><section>Kudeaketak</section></th>
+            </tr>
+          </thead>
+          <tbody id="gela-body"></tbody>
+        </table>
+      </section>
+      <dialog class="popup" id="sortuGela">
+        <form>
+          <a
+            onclick="document.getElementById('sortuGela').close()"
+            class="close-btn"
+          >
+            <img class="close" src="../img/mezuak/close.png" alt="Cerrar" />
+          </a>
+          <h4>Gela izena</h4>
+          <input class="datuakInput" type="text" id="gelaIzenaSortu" required />
+          <h4>Taldea</h4>
+          <input class="datuakInput" type="text" id="taldeaSortu" />
+          <button id="botoiaSortu" onclick="crearGela()">Gela sortu</button>
+        </form>
+      </dialog>
+      <dialog class="popup" id="aldatuGela">
+        <form>
+          <a
+            onclick="document.getElementById('aldatuGela').close()"
+            class="close-btn"
+          >
+            <img class="close" src="../img/mezuak/close.png" alt="Cerrar" />
+          </a>
+          <h4>Gela izena</h4>
+          <input
+            class="datuakInput"
+            type="text"
+            id="gelaIzenaAldatu"
+            required
+          />
+          <h4>Taldea</h4>
+          <input class="datuakInput" type="text" id="taldeaAldatu" />
+          <button id="botoia">Aldaketak gorde</button>
+        </form>
+      </dialog>
     </main>
 
     <script src="../script/header.js"></script>
     <script src="../script/gelak.js"></script>
-</body>
-
+  </body>
 </html>

@@ -1,35 +1,35 @@
 :root {
-  --borde: #0077B6;
+  --borde: #0077b6;
   --fondo: white;
 }
 
 .gorputza {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 500px;
-    min-height: 500px;
-    padding: 50px;
-    border: 2px solid var(--borde);
-    border-radius: 10px;
-    background-color: var(--fondo);;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 500px;
+  min-height: 500px;
+  padding: 50px;
+  border: 2px solid var(--borde);
+  border-radius: 10px;
+  background-color: var(--fondo);
 }
 
 .datuak {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, auto);
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 30px;
 }
 
 .profila-img {
-    display: block;
-    margin: 0 auto 10%;
-    max-width: 100px;
-    margin-bottom: 10%;
+  display: block;
+  margin: 0 auto 10%;
+  max-width: 100px;
+  margin-bottom: 10%;
 }
 
 .botoi-section {
-    margin-top: 20%;
+  margin-top: 20%;
 }
