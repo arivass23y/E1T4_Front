@@ -188,7 +188,7 @@ async function crearErabiltzailea() {
         const erabiltzailea = document.getElementById('erabiltzaileaSortu')?.value ?? '';
         const pasahitza = document.getElementById('pasahitzaSortu')?.value ?? '';
         let rola = document.getElementById('rolaSortu')?.value ?? '';
-
+        console.log(nan,izena,abizena,erabiltzailea,pasahitza,rola);
         // Validar campos obligatorios
         if (!nan.trim() || !izena.trim() || !abizena.trim() || !erabiltzailea.trim() || !pasahitza.trim() || !rola.trim()) {
             alert('NAN, izena, abizena, erabiltzailea, pasahitza eta rola derrigorrezkoak dira');
@@ -205,7 +205,7 @@ async function crearErabiltzailea() {
         } else if (rola == "User"){
             rola = "U"
         }
-
+        console.log(rola);
         const result = await llamarAPI('POST', {
             nan,
             izena,
