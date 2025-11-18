@@ -28,31 +28,31 @@ fetch('../components/header.html')
         },
         "erabiltzaileak.html": {
             titulua: "Erabiltzaileak",
-            search: true
+            search: false
         },
         "ekipamenduak.html": {
             titulua: "Ekipamendua",
-            search: true,
+            search: false,
             searchPlaceholder: "Equipamenduaren izena..."
         },
         "kategoriak.html": {
             titulua: "Kategoriak",
-            search: true,
+            search: false,
             searchPlaceholder: "Kategoriaren izena..."
         },
         "inbentarioak.html": {
             titulua: "Inbentarioa",
-            search: true,
+            search: false,
             searchPlaceholder: "Inbentarioren etiketa..."
         },
         "kokalekuak.html": {
             titulua: "Kokalekuak",
-            search: true,
+            search: false,
             searchPlaceholder: "Gelaren izena..."
         },
         "gelak.html": {
             titulua: "Gelak",
-            search: true,
+            search: false,
             searchPlaceholder: "Gelaren izena..."
         }
     };

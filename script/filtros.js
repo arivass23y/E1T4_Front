@@ -1,4 +1,4 @@
-/*document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
   const filterIcon = document.getElementById("boton-filtro");
   const filterList = document.getElementById("filter-list");
 
@@ -89,4 +89,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error(err);
         tbody.innerHTML = "<tr><td colspan='8'>Errorea datuak kargatzean</td></tr>";
     }
-});*/
+});
