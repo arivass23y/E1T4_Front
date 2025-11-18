@@ -142,7 +142,7 @@
 .kudeaketak-btn {
     background-color: white;
     border-radius: 5px;
-    padding: 3px;
+    padding: 5px;
 }
 
 .kudeaketak-btn:hover  {
@@ -162,7 +162,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 30px;
     height: 100%;
     width: 100%;
+}
+
+.taula th:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

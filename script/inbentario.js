@@ -2,7 +2,7 @@ const API_URL = '../../E1T4_Back/Kontrolagailuak/inbentarioa-controller.php';
 const Ekipamendua_API_URL = '../../E1T4_Back/Kontrolagailuak/ekipamendua-controller.php';
 const Kokalekua_API_URL = '../../E1T4_Back/Kontrolagailuak/kokalekua-controller.php';
 const API_KEY = '9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1';
-const botonCrear = document.getElementById('botoiaAldatu');
+const botonEditar = document.getElementById('botoiaEditatu');
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarinbentarioak();
@@ -133,7 +133,7 @@ async function dialogPrepared(etiketa) {
         ekipamenduaInput.value = current.idEkipamendu || '';
         dataInput.value = current.erosketaData || '';
 
-        botonCrear.addEventListener('click', () => { 
+        botonEditar.addEventListener('click', () => { 
             aldatuInbentarioa(etiketa);
         });
         document.getElementById('aldatuInbentarioa').showModal()
