@@ -224,7 +224,6 @@ async function crearErabiltzailea() {
         }
     } catch (err) {
         console.error('Error al crear erabiltzailea:', err);
-        alert('Error al crear el erabiltzailea: ' + err.message);
     }
 }
 
