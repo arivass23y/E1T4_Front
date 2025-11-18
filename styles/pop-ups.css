@@ -1,15 +1,24 @@
+:root {
+    --primary: #0077B6;
+    --focus: #0096C7;
+    --accent: #90E0EF;
+    --accent-dark: #7ABFCC;
+    --white: #FFFFFF;
+    --testua-dark: #000000;
+}
+
 .datuakInput, select {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
-    border: 1px solid #0077B6;
+    border: 1px solid var(--primary);
     font-size: 1rem;
 }
 
 .datuakInput:focus, select:focus {
     outline: none;
-    border-color: #0096C7;
-    box-shadow: 0 0 5px #0096C7;
+    border-color: var(--focus);
+    box-shadow: 0 0 5px var(--focus);
 }
 
 #botoia {
@@ -17,12 +26,12 @@
     height: 20%;
     border: 1px solid;
     border-radius: 8px;
-    background-color: #90E0EF;
+    background-color: var(--accent);
     padding: 8px 12px;
 }
 
 #botoia:hover {
-    background-color: #7ABFCC;
+    background-color: var(--accent-dark);
     cursor: pointer;
 }
 
@@ -47,13 +56,13 @@
 }
 
 dialog {
-    color: #0077B6;
+    color: var(--primary);
     border-radius: 8px;
     padding: 20px;
 }
 
 h4 {
-    color: black;
+    color: var(--testua-dark);
 }
 
 .popup {
@@ -64,9 +73,9 @@ h4 {
     max-width: 500px;
     max-height: 650px;
     padding: 30px;
-    border: 2px solid #0077B6;
+    border: 2px solid var(--primary);
     border-radius: 10px;
-    background-color: white;
+    background-color: var(--white);
 }
 
 .popupTaula {
@@ -77,8 +86,8 @@ h4 {
     min-width: 700px;
     max-height: 650px;
     padding: 30px;
-    border: 2px solid #0077B6;
+    border: 2px solid var(--primary);
     border-radius: 10px;
-    background-color: white;
-    color: black;
+    background-color: var(--white);
+    color: var(--testua-dark);
 }

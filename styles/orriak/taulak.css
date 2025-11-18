@@ -1,3 +1,12 @@
+:root {
+    --primary: #0077B6;
+    --light: #CAF0F8;
+    --hover: #F0F0F0;
+    --danger: rgb(245, 74, 74);
+    --white: #FFFFFF;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
 .taula {
     width: 70%;
     margin: auto;
@@ -5,17 +14,16 @@
     table-layout: fixed;
 }
 
-
 .taula th, .taula td {
     padding: 10px;
-    border: 1px solid #CAF0F8;
+    border: 1px solid var(--light);
     white-space: normal;
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
 
 .taula th {
-    background-color: #CAF0F8;
+    background-color: var(--light);
     text-align: left;
     padding-left: 8px;
 }
@@ -32,11 +40,11 @@
     right: 15%;
     gap: 8px;
     align-items: center;
-    border: 1px solid #0077B6;
+    border: 1px solid var(--primary);
     border-radius: 5px;
     padding: 8px;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: var(--white);
+    box-shadow: 0 2px 5px var(--shadow);
 }
 
 .kokalekuak-ikusi {
@@ -46,46 +54,21 @@
     display: flex;
     gap: 8px;
     align-items: center;
-    border: 1px solid #0077B6;
+    border: 1px solid var(--primary);
     border-radius: 5px;
     padding: 8px;
-    background-color: white;
+    background-color: var(--white);
     width: fit-content;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--shadow);
 }
 
 .kokalekuak-ikusi:hover {
-    background-color: #F0F0F0;
+    background-color: var(--hover);
     cursor: pointer;
 }
 
-.filter-list ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.filter-list li {
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.filter-list li:hover {
-  background-color: #f0f0f0;
-}
-
-.filter-container span {
-    color: #0077B6;
-}
-
-.filter-container button {
-    background-color: white;
-    border: none;
-}
-
 .filtroBotoia:hover {
-    background-color: #F0F0F0;
+    background-color: var(--hover);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -99,67 +82,31 @@
     border-radius: 5px;
 }
 
-.filter-list {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: calc(100% + 5px);
-    background-color: white;
-    border: 1px solid #0077B6;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    padding: 10px 15px;
-    min-width: 200px;
-    z-index: 1000;
-    animation: fadeIn 0.2s ease-in-out;
-}
-
-.filter-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.filter-list li {
-    padding: 5px 0;
-    border-bottom: 1px solid #ddd;
-    font-size: 0.95rem;
-}
-
-.filter-list li:last-child {
-    border-bottom: none;
-}
-
-/*Lo de los filtros*/
-#kudeaketa-icon img {
-    width: 20px;
-}
-
 .kudeaketak-img {
     max-width: 20px;
     max-height: 20px;
 }
 
 .kudeaketak-btn {
-    background-color: white;
+    background-color: var(--white);
     border-radius: 5px;
     padding: 5px;
 }
 
 .kudeaketak-btn:hover  {
-    background-color: #F0F0F0;
+    background-color: var(--hover);
     cursor: pointer;
 }
 
 #editatu-btn {
-    border-color: #0077B6;
+    border-color: var(--primary);
 }
 
 #ezabatu-btn {
-    border-color: rgb(245, 74, 74);
+    border-color: var(--danger);
 }
 
-.taula td:last-child section{
+.taula td:last-child section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -168,7 +115,7 @@
     width: 100%;
 }
 
-.taula th:last-child section{
+.taula th:last-child section {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,8 +1,17 @@
+:root {
+    --primary: #0077B6;
+    --primary-dark: #005d8f;
+    --white: #FFFFFF;
+    --hover: #F0F0F0;
+    --shadow-strong: rgba(0,0,0,0.3);
+    --border-light: rgba(255,255,255,0.2);
+}
+
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0077B6;
+    background-color: var(--primary);
     padding: 10px 2%;
     padding-left: 0;
     position: fixed;
@@ -12,13 +21,11 @@ nav {
     z-index: 1000;
 }
 
-
 .nav-left, .nav-center, .nav-right {
     display: flex;
     align-items: center;
     margin-left: 10px;
 }
-
 
 .nav-img {
     width: 40px;
@@ -27,7 +34,7 @@ nav {
 }
 
 .nav-text {
-    color: white;
+    color: var(--white);
     font-size: 1.2rem;
     margin-left: 10px;
 }
@@ -65,7 +72,7 @@ nav {
 .nav-btn {
     margin-left: 15px;
     padding: 5px 15px;
-    background-color: white;
+    background-color: var(--white);
     border: none;
     border-radius: 15px;
     cursor: pointer;
@@ -79,9 +86,9 @@ nav {
     width: 250px;
     height: calc(100vh - 60px);
     flex-direction: column;
-    background-color: #0077B6;
+    background-color: var(--primary);
     z-index: 9999;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 10px var(--shadow-strong);
 }
 
 .sidebar.show {
@@ -89,20 +96,19 @@ nav {
 }
 
 .sidebar a, .sidebar li {
-    color: white;
+    color: var(--white);
     text-decoration: none;
     padding: 12px 13px;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid var(--border-light);
 }
 
 .sidebar header {
-    color: white;
+    color: var(--white);
     display: flex;
     align-items: center;
     padding: 10px 13px;
     gap: 10px;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-
+    border-bottom: 1px solid var(--border-light);
 }
 
 .sidebar img {
@@ -111,16 +117,17 @@ nav {
     margin-top: 0;
 }
 
-#menu-icon:hover, li:hover{
-    background-color: #005d8f;
+#menu-icon:hover,
+li:hover {
+    background-color: var(--primary-dark);
     border-radius: 10px;
 }
 
-.nav-img:hover{
-    background-color: #005d8f;
+.nav-img:hover {
+    background-color: var(--primary-dark);
     border-radius: 20px;
 }
 
-.nav-btn:hover{
-    background-color: #F0F0F0;
+.nav-btn:hover {
+    background-color: var(--hover);
 }

@@ -1,5 +1,14 @@
+:root {
+    --fondo: #CAF0F8;
+    --borde: #0077B6;
+    --focus: #0096C7;
+    --boton: #90E0EF;
+    --div-fondo: #FFFFFF;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
 body {
-    background-color: #CAF0F8;
+    background-color: var(--fondo);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,10 +21,10 @@ body {
 .nav-img {
     width: 310px;
     height: 180px;
-    border: 2px solid #0077B6;
+    border: 2px solid var(--borde);
     border-radius: 15px;
     margin-bottom: -5px;
-    background-color: white;
+    background-color: var(--div-fondo);
     object-fit: contain;
     margin-bottom: 10px;
     padding: 15px;
@@ -23,11 +32,11 @@ body {
 
 #div-hasi {
     width: 300px;
-    background-color: white;
-    border: 2px solid #0077B6;
+    background-color: var(--div-fondo);
+    border: 2px solid var(--borde);
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px var(--shadow);;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,19 +47,18 @@ form {
     text-align: left;
 }
 
-
 input {
     width: 90%;
     padding: 8px;
     margin-bottom: 15px;
-    border: 1px solid #0077B6;
+    border: 1px solid var(--borde);
     font-size: 1rem;
 }
 
 input:focus {
     outline: none;
-    border-color: #0096C7;
-    box-shadow: 0 0 5px #0096C7;
+    border-color: var(--focus);
+    box-shadow: 0 0 5px var(--focus);
 }
 
 #saioa-botoia {
@@ -58,13 +66,13 @@ input:focus {
     height: 20%;
     border: 1px solid;
     border-radius: 8px;
-    background-color: #90E0EF;
+    background-color: var(--boton);
     padding: 8px 12px;
     cursor: pointer;
 }
 
 #saioa-botoia:hover {
-    background-color: #0096C7;
+    background-color: var(--focus);
 }
 
 @media (max-width: 480px) {
@@ -94,7 +102,6 @@ input:focus {
     }
 }
 
-/* --- Para tablets y pantallas medianas --- */
 @media (min-width: 481px) and (max-width: 768px) {
     body {
         display: flex;
@@ -129,7 +136,6 @@ input:focus {
     }
 }
 
-/* --- Para escritorio --- */
 @media (min-width: 769px) {
     .nav-img {
         width: 310px;
