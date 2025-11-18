@@ -493,4 +493,3 @@ async function crearInbentarioa() {
         alert('Inventario y kokalekua procesados (puede haber advertencias en la consola).');
     }
 }
-

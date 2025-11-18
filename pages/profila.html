@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/orriak/profila.css">
     <link rel="stylesheet" href="../styles/pop-ups.css">
+        <link rel="stylesheet" href="../styles/orriak/taulak.css">
+
 </head>
 
 <body>
@@ -19,40 +21,38 @@
     <main>
         <section class="gorputza">
             <img class="profila-img" src="../img/navbar/avatar.png" alt="erabiltzaile avatar">
-            <section class="datuak">
-                <section>
-                    <h4>Izena</h4>
-                    <p>BBBB</p>
-                </section>
-                <section>
-                    <h4>Abizena</h4>
-                    <p>BBBB</p>
-                </section>
-                <section>
-                    <h4>Erabiltzailea</h4>
-                    <p>BBBB</p>
-                </section>
-                <section>
-                    <h4>Pasahitza</h4>
-                    <p>BBBB</p>
-                </section>
-                <section>
-                    <h4>NAN</h4>
-                    <p>BBBB</p>
-                </section>
-                <section>
-                    <h4>Rola</h4>
-                    <p>BBBB</p>
-                </section>
+            <section class="datuak" id="profilaDatuak">
             </section>
             <section class="botoi-section">
-                <button id="botoia">Profila editatu</button>
+                <button id="botoia" onclick="document.getElementById('aldatuProfila').showModal()">Profila editatu</button>
             </section>
         </section>
-        <section id="toastContainer"></section>
+        <dialog class="popup" id="aldatuProfila">
+            <form>
+                <a onclick="document.getElementById('aldatuProfila').close()" class="close-btn">
+                    <img class="close" src="../img/mezuak/close.png" alt="Cerrar">
+                </a>
+                <h4>Izena</h4>
+                <input class="datuakInput" type="text" id="izenaEditatu" required>
+                <h4>Abizena</h4>
+                <input class="datuakInput" type="text" id="abizenaEditatu" required>
+                <h4>Erabiltzailea</h4>
+                <input class="datuakInput" type="text" id="erabiltzaileaEditatu" required>
+                <h4>Pasahitza</h4>
+                <input class="datuakInput" type="password" id="pasahitzaEditatu" required>
+                <h4>Rola</h4>
+                <select id="rolaEditatu" required>
+                    <option value="" disabled selected>Aukeratu rola</option>
+                    <option>Admin</option>
+                    <option>User</option>
+                </select>
+                <button id="botoiaEditatu">Aldaketak gorde</button>
+            </form>
+        </dialog>
     </main>
     <script src="../script/header.js"></script>
     <script src="../script/errore-mezua.js"></script>
+    <script src="../script/profila.js"></script>
 </body>
 
 </html>
