@@ -75,13 +75,14 @@ function mostrarErabiltzaileak(erabiltzaileak) {
     tbody.innerHTML = '';
 
     // erabiltzaileak taulan gehitu
-    erabiltzaileak.forEach(async erabiltzailea => {
+    try {
+        erabiltzaileak.forEach(async erabiltzailea => {
         const tr = document.createElement('tr');
-        
+            
         if (erabiltzailea.rola == "A"){
             erabiltzailea.rola = "Admin"
         } else if (erabiltzailea.rola == "U"){
-            erabiltzailea.rola = "User"
+             erabiltzailea.rola = "User"
         }
 
         tr.innerHTML = `
@@ -103,7 +104,19 @@ function mostrarErabiltzaileak(erabiltzaileak) {
             </td>
         `;
         tbody.appendChild(tr);
-    });
+        });
+
+    } catch (err) {
+        console.error('Errorea erabiltzaileak erakusten:', err);
+        alert('Ez daukazu erabiltzaileak kudeatzeko baimenik.');
+
+        tbody.innerHTML = '<tr><td colspan="7">Ez daukazu erabiltzaileak kudeatzeko baimenik.</td></tr>';
+
+        const sortuBotoia = document.querySelector('.filtroBotoia');
+        sortuBotoia.disabled = true;
+        sortuBotoia.style.backgroundColor = '#f0f0f0';
+        sortuBotoia.style.cursor = 'not-allowed';
+    }
 }
 
 async function dialogPrepared(nan) {
