@@ -59,7 +59,8 @@ input:focus {
     border: 1px solid;
     border-radius: 8px;
     background-color: #90E0EF;
-    margin-bottom: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
 }
 
 #saioa-botoia:hover {
