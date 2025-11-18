@@ -1,9 +1,17 @@
 const API_URL = '../../E1T4_Back/Kontrolagailuak/ekipamendua-controller.php';
 const KATEGORIA_API_URL = '../../E1T4_Back/Kontrolagailuak/kategoria-controller.php';
-const API_KEY = '9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1';
+let API_KEY = '';
 const botonCrear = document.getElementById('botoia');
 
 document.addEventListener('DOMContentLoaded', () => {
+    const apiKey = sessionStorage.getItem('apiKey');
+    if (!apiKey) {
+        alert('Ez dago saio aktiborik, hasi saioa berriro.');
+        window.location.href = 'saioa-hasi.html';
+    }
+    else{
+        API_KEY = apiKey;
+    }
     cargarEkipamenduak();
     cargarKategorias();
 });

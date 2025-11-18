@@ -6,6 +6,12 @@ fetch('components/header-index.html')
 
     const menuToggle = document.getElementById('menu-icon');
     const sidebar = document.getElementById('sidebar');
+    const botonCerrarSesion = document.getElementById('logout-btn-index');
+
+    botonCerrarSesion.addEventListener('click', () => {
+        sessionStorage.clear();
+        window.location.href = 'saioa-hasi.html';
+    });
 
         menuToggle.addEventListener('click', () => {
             sidebar.classList.toggle('show');
