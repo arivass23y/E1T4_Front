@@ -1,3 +1,4 @@
+// Header konponentea kargatzea eta nabigazio barra kontrolatzea
 fetch('components/header-index.html')
     .then(res => res.text())
     .then(html => {
@@ -8,15 +9,18 @@ fetch('components/header-index.html')
     const sidebar = document.getElementById('sidebar');
     const botonCerrarSesion = document.getElementById('logout-btn-index');
 
+    // Saioa itxi botoian klik egitean
     botonCerrarSesion.addEventListener('click', () => {
         sessionStorage.clear();
         window.location.href = 'pages/saioa-hasi.html';
     });
 
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('show');
-        });
+    // Nabigazio barra erakutsi/ezkutatu
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('show');
+    });
 
+    // Ezkutatu sidebar klik egiten denean kanpoan
     document.addEventListener('click', (e) => {
         if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
             sidebar.classList.remove('show');

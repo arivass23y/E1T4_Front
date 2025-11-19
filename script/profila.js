@@ -2,6 +2,7 @@ const API_URL = '../../E1T4_Back/Kontrolagailuak/erabiltzailea-controller.php';
 let API_KEY = '';
 const botonEditar = document.getElementById('botoiaEditatu');
 
+// Kargatu erabiltzailearen datuak orria kargatzean
 document.addEventListener('DOMContentLoaded', () => {
     const apiKey = sessionStorage.getItem('apiKey');
     if (!apiKey) {
@@ -54,6 +55,7 @@ async function llamarAPI(metodo, datos = {}) {
     return resultado;
 }
 
+// Erabiltzailearen datuak kargatu
 async function cargarErabiltzailea(nan) {
     try {
         //APIra deitu eta emaitza jaso
@@ -69,6 +71,7 @@ async function cargarErabiltzailea(nan) {
     }
 }
 
+// Erabiltzaileen datuak erakutsi
 function mostrarErabiltzaileak(erabiltzailea) {
     const tbody = document.getElementById('profilaDatuak');
     tbody.innerHTML = '';
@@ -76,6 +79,7 @@ function mostrarErabiltzaileak(erabiltzailea) {
     if (erabiltzailea.rola == "A") erabiltzailea.rola = "Admin";
     if (erabiltzailea.rola == "U") erabiltzailea.rola = "User";
 
+    // Datuak taulan erakutsi
     tbody.innerHTML = `
         <section><h3>NAN</h3><p>${erabiltzailea.nan}</p></section>
         <section><h3>Izena</h3><p>${erabiltzailea.izena}</p></section>
@@ -92,12 +96,12 @@ function mostrarErabiltzaileak(erabiltzailea) {
     `;
 }
 
-
+// Erabiltzailea editatzeko dialogoa prestatu
 async function dialogPrepared(nan) {
 
     const current = await llamarAPI('GET', { nan });
 
-    // Obtener referencias a los campos del dialog
+    // Kanpoatik erabili beharreko elementuak
     const dialog = document.getElementById('aldatuProfila');
     const izenaInput = document.getElementById('izenaEditatu');
     const abizenaInput = document.getElementById('abizenaEditatu');
@@ -106,7 +110,7 @@ async function dialogPrepared(nan) {
     
     let rola = current.rola;
 
-    // Rellenar campos con los datos del equipo
+    // Kanpoak datuekin bete
     izenaInput.value = current.izena || '';
     abizenaInput.value = current.abizena || '';
     erabiltzaileaInput.value = current.erabiltzailea || '';
@@ -118,8 +122,10 @@ async function dialogPrepared(nan) {
     dialog.showModal()
 }
 
+// Erabiltzailearen datuak aldatu
 async function aldatuErabiltzailea(nan,rola) {
     try {
+        // Erabiltzailearen datuak hartu formularioatik
         let izena = document.getElementById('izenaEditatu').value;
         let abizena = document.getElementById('abizenaEditatu').value;
         let erabiltzailea = document.getElementById('erabiltzaileaEditatu').value;
@@ -127,6 +133,7 @@ async function aldatuErabiltzailea(nan,rola) {
 
         console.log('ID aldatuErabiltzailea funtzioan:', nan, izena, abizena, erabiltzailea, pasahitza, rola);
 
+        // APIra deitu aldaketak aplikatzeko PUT metodoarekin
         result = await llamarAPI('PUT', {
             nan,
             izena,

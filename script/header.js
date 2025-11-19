@@ -1,3 +1,4 @@
+// Header konponentea kargatu eta funtzionalitateak gehitu
 fetch('../components/header.html')
     .then(res => res.text())
     .then(html => {
@@ -8,15 +9,18 @@ fetch('../components/header.html')
     const sidebar = document.getElementById('sidebar');
     const botonCerrarSesion = document.getElementById('logout-btn');
 
+    // Saioa itxi botoia funtzionalitatea gehitu
     botonCerrarSesion.addEventListener('click', () => {
         sessionStorage.clear();
         window.location.href = '../../E1T4_Front/pages/saioa-hasi.html';
     });
 
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('show');
-        });
+    // Menua ireki/itxi funtzionalitatea gehitu
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('show');
+    });
 
+    // Menua kanpoan klik egitean itxi
     document.addEventListener('click', (e) => {
         if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
             sidebar.classList.remove('show');
@@ -27,6 +31,7 @@ fetch('../components/header.html')
     const navText = document.getElementById('nav-text');
     const searchWrapper = document.getElementById('search-wrapper');
 
+    // Ordezko konfigurazioa orrialde bakoitzerako
     const pagesConfig = {
         "profila.html": {
             titulua: "Profila",
@@ -67,6 +72,7 @@ fetch('../components/header.html')
 
     navText.textContent = config.titulua;
 
+    // Bilaketa barra konfiguratu
     if (config.search) {
         searchWrapper.style.display = "flex";
         if (config.searchPlaceholder) {

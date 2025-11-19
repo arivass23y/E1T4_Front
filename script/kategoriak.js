@@ -3,17 +3,20 @@ let API_KEY = '';
 const botonEditar = document.getElementById('botoiaEditatu');
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Saio aktiboa egiaztatu eta API_KEY lortu
     const apiKey = sessionStorage.getItem('apiKey');
-    if (!apiKey) {
+    if (!apiKey) { // Saio aktiborik ez badago, login orrialdera joan
         alert('Ez dago saio aktiborik, hasi saioa berriro.');
         window.location.href = 'saioa-hasi.html';
     }
-    else{
+    else{ // Bestela, API_KEY aldagaian gorde
         API_KEY = apiKey;
     }
+    // Eta kategoriak kargatu
     cargarKategoriak();
 });
 
+// API deia egiteko funtzio orokorra
 async function llamarAPI(metodo, datos = {}) {
     //Bidaliko parametroak prestatu
     const params = new URLSearchParams(); 
@@ -54,6 +57,7 @@ async function llamarAPI(metodo, datos = {}) {
     return resultado;
 }
 
+// Kategoriak kargatu eta erakutsi
 async function cargarKategoriak() {
     try {
         //APIra deitu eta emaitza jaso
@@ -63,12 +67,14 @@ async function cargarKategoriak() {
             mostrarKategoriak(resultado);
         }
     } catch (err) {
+        // Erroreak kudeatu
         console.error('Error al cargar kategoriak:', err);
         const tbody = document.getElementById('kategoria-body');
         if (tbody) tbody.innerHTML = `<tr><td colspan="8">Error al cargar datos: ${err.message}</td></tr>`;
     }
 }
 
+// Kategoriak taulan erakutsi
 function mostrarKategoriak(kategoriak) {
     // Taularen gorputza garbitu
     const tbody = document.getElementById('kategoria-body');
@@ -96,6 +102,7 @@ function mostrarKategoriak(kategoriak) {
     });
 }
 
+// Editatu dialogoa prestatu
 async function dialogPrepared(id) {
 
     const current = await llamarAPI('GET', { id });
@@ -113,6 +120,7 @@ async function dialogPrepared(id) {
         document.getElementById('editatuKategoria').showModal()
 }
 
+// Kategoria aldatu
 async function aldatuKategoria(id) {
     try {
         let izena = document.getElementById('kategoriaIzenaEditatu').value;
@@ -123,6 +131,7 @@ async function aldatuKategoria(id) {
             id,
             izena,
         });
+        // Emaitza baliozkoa bada, kategoriak berriro kargatu
         if (result.success) {
             alert('Kategoria aldatu da');
             const dialog = document.getElementById('editatuKategoria');
@@ -136,26 +145,29 @@ async function aldatuKategoria(id) {
     }
 }
 
+// Kategoria ezabatu
 async function ezabatuKategoria(id) {
     try {
+        // API deia egin DEL metodoarekin
         const result = await llamarAPI('DEL', { id });
-        if (result.success) {
+        if (result.success) { // Emaitza baliozkoa bada, kategoriak berriro kargatu
             alert('Kategoria ezabatuta');
             await cargarKategoriak();
         }
         return result;
-    } catch (err) {
+    } catch (err) { // Erroreak ateratzen badira, kudeatu
         console.error('Error al eliminar:', err);
         alert('Error al eliminar el equipo: ' + err.message);
         return null;
     }
 }
 
+// Kategoria sortu
 async function crearKategoria() {
     try {
         const izena = document.getElementById('kategoriaIzenaSortu')?.value ?? '';
 
-        // Validar campos obligatorios
+        // Baliodun eremuak egiaztatu
         if (!izena.trim()) {
             alert('Izena derrigorrezkoa da');
             return;
@@ -166,7 +178,7 @@ async function crearKategoria() {
         });
         console.log('Resultado de crearKategoria:', result);
         if (result && result.success) {
-            // Cerrar modal si existe
+            // Modal itxi eta kategoriak berriro kargatu
             const dialog = document.getElementById('sortuKategoria');
             try { dialog.close(); } catch (e) { /* ignore */ }
             alert('Kategoria sortuta');

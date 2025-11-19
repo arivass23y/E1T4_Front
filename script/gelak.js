@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarGelak();
 });
 
+// Funtzio orokorra APIra deitzeko
 async function llamarAPI(metodo, datos = {}) {
     //Bidaliko parametroak prestatu
     const params = new URLSearchParams(); 
@@ -54,6 +55,7 @@ async function llamarAPI(metodo, datos = {}) {
     return resultado;
 }
 
+// Gelak kargatu eta erakutsi
 async function cargarGelak() {
     try {
         //APIra deitu eta emaitza jaso
@@ -69,6 +71,7 @@ async function cargarGelak() {
     }
 }
 
+// Gelak taulan erakutsi
 function mostrarGelak(gelak) {
     // Taularen gorputza garbitu
     const tbody = document.getElementById('gela-body');
@@ -97,38 +100,44 @@ function mostrarGelak(gelak) {
     });
 }
 
+// Gela aldatu dialogoa prestatu
 async function dialogPrepared(id) {
 
+    // Lortu gela aktuala APItik GET bidez
     const current = await llamarAPI('GET', { id });
 
-        // Obtener referencias a los campos del dialog
+        // Lortu elementuak dialogoan
         const dialog = document.getElementById('aldatuGela');
         const izenaInput = document.getElementById('gelaIzenaAldatu');
         const taldeaInput = document.getElementById('taldeaAldatu');
 
-        // Rellenar campos con los datos del equipo
+        // Kanpoak balioak ezarri
         izenaInput.value = current.izena || '';
         taldeaInput.value = current.taldea || '';
 
+        // Botoiaren event listener berria ezarri
         botonEditar.addEventListener('click', () => { 
             aldatuGela(id);
         });
         document.getElementById('aldatuGela').showModal()
 }
 
+// Gela aldatu funtzioa
 async function aldatuGela(id) {
     try {
+        // Datuak lortu formularioatik
         let izena = document.getElementById('gelaIzenaAldatu').value;
         let taldea = document.getElementById('taldeaAldatu').value;
 
         console.log('ID aldatugela funtzioan:', id, izena, taldea);
         
+        // Datuak bidali APIra PUT bidez
         result = await llamarAPI('PUT', {
             id,
             izena,
             taldea,
         });
-        if (result.success) {
+        if (result.success) { // Egiaztatu eragiketa arrakastatsua izan dela
             alert('Gela aldatu da');
             const dialog = document.getElementById('aldatuGela');
             dialog.close();
@@ -136,50 +145,54 @@ async function aldatuGela(id) {
             const data = await result.json();
         }
 
-    } catch (err) {
+    } catch (err) { // Erroreak kudeatu
         console.error('Error:', err);
     }
 }
 
+// Gela ezabatu funtzioa
 async function ezabatuGela(id) {
-    try {
+    try { // APIra deitu DELETE bidez
         const result = await llamarAPI('DEL', { id });
         if (result.success) {
             alert('Gela ezabatuta');
             await cargarGelak();
         }
         return result;
-    } catch (err) {
+    } catch (err) { // Erroreak kudeatu
         console.error('Error al eliminar:', err);
         alert('Error al eliminar la clase: ' + err.message);
         return null;
     }
 }
 
+// Gela sortu funtzioa
 async function crearGela() {
     try {
+        // Datuak lortu formularioatik
         const izena = document.getElementById('gelaIzenaSortu')?.value ?? '';
         const taldea = document.getElementById('taldeaSortu')?.value ?? '';
 
-        // Validar campos obligatorios
+        // Datuak balidatu
         if (!izena.trim()) {
             alert('Izena derrigorrezkoa da');
             return;
         }
 
+        // Datuak bidali APIra POST bidez
         const result = await llamarAPI('POST', {
             izena,
             taldea
         });
         console.log('Resultado de creargela:', result);
         if (result && result.success) {
-            // Cerrar modal si existe
+            // Modala itxi eta gelak berriro kargatu
             const dialog = document.getElementById('sortuGela');
             try { dialog.close(); } catch (e) { /* ignore */ }
             alert('gela sortuta');
             await cargarGelak();
         }
-    } catch (err) {
+    } catch (err) { // Erroreak kudeatu
         console.error('Error al crear gela:', err);
         alert('Error al crear el gela: ' + err.message);
     }

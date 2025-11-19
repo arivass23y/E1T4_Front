@@ -3,6 +3,7 @@ let API_KEY = '9f1c2e5a8b3d4f6a7b8c9d0e1f2a3b4c5d6e7f8090a1b2c3d4e5f6a7b8c9d0e1'
 const botonEditar = document.getElementById('botoiaEditatu');
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Saioa dagoen egiaztatu
     const apiKey = sessionStorage.getItem('apiKey');
     if (!apiKey) {
         alert('Ez dago saio aktiborik, hasi saioa berriro.');
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else{
         API_KEY = apiKey;
     }
+    // Erabiltzaileak kargatu
     cargarErabiltzaileak();
 });
 
@@ -54,6 +56,7 @@ async function llamarAPI(metodo, datos = {}) {
     return resultado;
 }
 
+// Erabiltzaileak kargatu
 async function cargarErabiltzaileak() {
     try {
         //APIra deitu eta emaitza jaso
@@ -69,6 +72,7 @@ async function cargarErabiltzaileak() {
     }
 }
 
+// Erabiltzaileak taulan erakutsi
 function mostrarErabiltzaileak(erabiltzaileak) {
     // Taularen gorputza garbitu
     const tbody = document.getElementById('erabiltzaileak-body');
@@ -106,6 +110,7 @@ function mostrarErabiltzaileak(erabiltzaileak) {
         tbody.appendChild(tr);
         });
 
+    // Errorea erabiltzaileak erakustean, kasu honetan, baimen falta
     } catch (err) {
         console.error('Errorea erabiltzaileak erakusten:', err);
         alert('Ez daukazu erabiltzaileak kudeatzeko baimenik.');
@@ -119,11 +124,12 @@ function mostrarErabiltzaileak(erabiltzaileak) {
     }
 }
 
+// Erabiltzailea editatzeko dialogoa prestatu
 async function dialogPrepared(nan) {
 
     const current = await llamarAPI('GET', { nan });
 
-        // Obtener referencias a los campos del dialog
+        // Dialog erreferentziak lortu
         const dialog = document.getElementById('aldatuErabiltzailea');
         const izenaInput = document.getElementById('izenaEditatu');
         const abizenaInput = document.getElementById('abizenaEditatu');
@@ -131,11 +137,13 @@ async function dialogPrepared(nan) {
         const pasahitzaInput = document.getElementById('pasahitzaEditatu');
         const rolaInput = document.getElementById('rolaEditatu');
 
-        // Rellenar campos con los datos del equipo
+        // Kanpoak bete erabiltzailearen datuekin
         izenaInput.value = current.izena || '';
         abizenaInput.value = current.abizena || '';
         erabiltzaileaInput.value = current.erabiltzailea || '';
         pasahitzaInput.value = '';
+
+        // Rola bihurtu testu irakurgarri batean
         const rolak = { "A": "Admin", "U": "User" };
         rolaInput.value = rolak[current.rola] || '';
 
@@ -145,6 +153,7 @@ async function dialogPrepared(nan) {
         dialog.showModal()
 }
 
+// Erabiltzailea aldatu metodoa
 async function aldatuErabiltzailea(nan) {
     try {
         let izena = document.getElementById('izenaEditatu').value;
@@ -153,6 +162,7 @@ async function aldatuErabiltzailea(nan) {
         let pasahitza = document.getElementById('pasahitzaEditatu').value;
         let rola = document.getElementById('rolaEditatu').value;
 
+        // Rola itzuli kode batera
         if (rola == "Admin"){
             rola = "A"
         } else if (rola == "User"){
@@ -161,6 +171,7 @@ async function aldatuErabiltzailea(nan) {
 
         console.log('ID aldatuErabiltzailea funtzioan:', nan, izena, abizena, erabiltzailea, pasahitza, rola);
         
+        // API deia egin PUT metodoarekin
         result = await llamarAPI('PUT', {
             nan,
             izena,
@@ -178,6 +189,7 @@ async function aldatuErabiltzailea(nan) {
     }
 }
 
+// Erabiltzailea ezabatu metodoa
 async function ezabatuErabiltzailea(nan) {
     try {
         const result = await llamarAPI('DEL', { nan });
@@ -193,8 +205,10 @@ async function ezabatuErabiltzailea(nan) {
     }
 }
 
+// Erabiltzailea sortu metodoa
 async function crearErabiltzailea() {
     try {
+        // Datuak jaso formularioatik
         const nan = document.getElementById('NANSortu')?.value ?? '';
         const izena = document.getElementById('izenaSortu')?.value ?? '';
         const abizena = document.getElementById('abizenaSortu')?.value ?? '';
@@ -202,12 +216,12 @@ async function crearErabiltzailea() {
         const pasahitza = document.getElementById('pasahitzaSortu')?.value ?? '';
         let rola = document.getElementById('rolaSortu')?.value ?? '';
         console.log(nan,izena,abizena,erabiltzailea,pasahitza,rola);
-        // Validar campos obligatorios
+        // Balidazioak egin datu derrigorrezkoentzat
         if (!nan.trim() || !izena.trim() || !abizena.trim() || !erabiltzailea.trim() || !pasahitza.trim() || !rola.trim()) {
             alert('NAN, izena, abizena, erabiltzailea, pasahitza eta rola derrigorrezkoak dira');
             return;
         }
-
+        // NAN balidatu
         if (!validarNAN(nan)){
             alert('NAN inválido');
             return;
@@ -229,7 +243,7 @@ async function crearErabiltzailea() {
         });
         console.log('Resultado de crearErabiltzailea:', result);
         if (result && result.success) {
-            // Cerrar modal si existe
+            // Modala itxi eta erabiltzaileak berriro kargatu
             const dialog = document.getElementById('sortuErabiltzailea');
             try { dialog.close(); } catch (e) { /* ignore */ }
             alert('erabiltzailea sortuta');
@@ -240,7 +254,9 @@ async function crearErabiltzailea() {
     }
 }
 
+// NAN balidazio funtzioa
 function validarNAN(nan) {
+    // Nan formatua egiaztatu
     nan = nan.toUpperCase().trim();
     if (!/^\d{8}[A-Z]$/.test(nan)) return false;
 
